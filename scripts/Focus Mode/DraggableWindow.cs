@@ -1,0 +1,47 @@
+using Godot;
+
+public partial class DraggableWindow : Window {
+	
+	// Called when the node enters the scene tree for the first time.
+	bool mouseWithinArea = false;
+
+	public override void _Ready() {
+		if (Main.Instance is null) {
+			ProcessMode = ProcessModeEnum.Disabled;
+			return;
+		}
+
+		MouseEntered += () => mouseWithinArea = true;
+		MouseExited += () => mouseWithinArea = false;
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	Vector2 lastMousePosition;
+	Vector2 MousePosition => Main.Instance.GetGlobalMousePosition();
+
+	// Required to eliminate issue with moving mouse too fast.
+	bool mouseWithinAreaCache = false;
+	public override void _Process(double delta){
+
+		if (Input.IsActionJustPressed("Click")) {
+			lastMousePosition = MousePosition;
+			mouseWithinAreaCache = mouseWithinArea;
+		}
+
+		if (Input.IsActionJustReleased("Click")) {
+			mouseWithinAreaCache = false;
+		}
+
+		if (mouseWithinAreaCache && Input.IsMouseButtonPressed(MouseButton.Left)) {
+			Vector2 currentMousePosition = MousePosition;
+
+			if (lastMousePosition != currentMousePosition) {
+				Vector2 difference = currentMousePosition - lastMousePosition;
+
+				Position = new((int) (Position.X + difference.X), (int) (Position.Y + difference.Y));
+			}
+
+			lastMousePosition = currentMousePosition;
+		}
+	}
+}

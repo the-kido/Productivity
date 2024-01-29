@@ -1,0 +1,144 @@
+[gd_scene load_steps=4 format=3 uid="uid://cevkyhtoqr7r3"]
+
+[ext_resource type="Script" path="res://scripts/Focus Mode/FocusMode.cs" id="1_1gi87"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2yoyv"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 0.933333)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_qp77s"]
+Label/colors/font_color = Color(0.929412, 1, 0.984314, 1)
+Panel/styles/panel = SubResource("StyleBoxFlat_2yoyv")
+
+[node name="Focus Mode" type="Panel" node_paths=PackedStringArray("pause", "settings", "timer", "reasonLabel", "settingsControl")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1720.0
+offset_bottom = -930.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qp77s")
+script = ExtResource("1_1gi87")
+pause = NodePath("Pause")
+settings = NodePath("Open Settings Button")
+timer = NodePath("Time")
+reasonLabel = NodePath("Reason")
+settingsControl = NodePath("Settings")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Pause" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -40.0
+offset_right = -54.0
+offset_bottom = -8.00003
+grow_horizontal = 2
+grow_vertical = 0
+text = "||"
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = -3.0
+offset_right = 80.0
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 41
+text = "10:10:10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reason" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -10.5
+offset_right = 98.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6, 0.701961, 0.764706, 1)
+text = "Work and do things."
+horizontal_alignment = 1
+
+[node name="Settings" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings panel" type="Panel" parent="Settings"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Top bar" type="Panel" parent="Settings"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 72.0
+grow_horizontal = 2
+
+[node name="Close" type="Button" parent="Settings/Top bar"]
+modulate = Color(1, 0.580392, 0.580392, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -184.0
+offset_top = 110.0
+offset_right = -134.0
+offset_bottom = 142.0
+grow_horizontal = 0
+pivot_offset = Vector2(25, 16)
+text = "x"
+
+[node name="Opaque mode" type="CheckBox" parent="Settings/Top bar"]
+layout_mode = 0
+offset_right = 138.0
+offset_bottom = 31.0
+text = "Opaque mode"
+
+[node name="Open Settings Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = -40.0
+offset_right = 86.0
+offset_bottom = -8.00003
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(16, 16)
+text = "O
+"

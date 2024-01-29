@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bkgvqaxaa0nku" path="res://scenes/gas_animation.tscn" id="3_p2uf3"]
 [ext_resource type="PackedScene" uid="uid://da1t8w0h2nn04" path="res://scenes/routine.tscn" id="4_xqec0"]
 [ext_resource type="Script" path="res://scripts/RoutineReminder.cs" id="5_bsiff"]
-[ext_resource type="PackedScene" uid="uid://diqga3piorj3q" path="res://scenes/focus_mode.tscn" id="6_70wn8"]
+[ext_resource type="PackedScene" uid="uid://c1ldyweujjmt2" path="res://scenes/focus_mode_creator.tscn" id="7_trlnb"]
 
 [sub_resource type="Gradient" id="Gradient_titnr"]
 offsets = PackedFloat32Array(0, 0.0759494, 0.510127, 0.852459, 1)
@@ -44,7 +44,7 @@ color_ramp = SubResource("GradientTexture1D_2q2mr")
 
 [sub_resource type="Gradient" id="Gradient_2mron"]
 offsets = PackedFloat32Array(0, 0.214286, 1)
-colors = PackedColorArray(0.0470588, 0.0588235, 0.14902, 0.34902, 0.154393, 0.17513, 0.332143, 0.206443, 0.55, 0.6025, 1, 0)
+colors = PackedColorArray(0.048, 0.1058, 0.15, 0.34902, 0.1518, 0.29139, 0.33, 0.207843, 0.55, 0.6025, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kj3wq"]
 gradient = SubResource("Gradient_2mron")
@@ -155,7 +155,6 @@ minimize = NodePath("Minimize")
 animationPlayer = NodePath("AnimationPlayer")
 
 [node name="Ambience" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,13 +166,14 @@ grow_vertical = 2
 layout_mode = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Ambience"]
-modulate = Color(2, 1.9, 2, 1)
+modulate = Color(1, 1, 0.901961, 1)
 position = Vector2(960, 540)
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_atcny")
 texture = ExtResource("3_o45xj")
 lifetime = 10.0
 speed_scale = 2.0
+explosiveness = 0.5
 
 [node name="Fog" type="TextureRect" parent="Ambience"]
 layout_mode = 1
@@ -182,7 +182,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 545.0
 offset_right = 24.0
-offset_bottom = 569.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_kj3wq")
@@ -213,18 +213,17 @@ visible = false
 open = NodePath("../TempOpenroutine")
 
 [node name="Main background" type="TextureRect" parent="."]
-modulate = Color(1, 1.1, 1.2, 1)
+modulate = Color(0.65098, 0.670588, 0.701961, 1)
 texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 165.0
-offset_top = 93.0
-offset_right = -166.0
-offset_bottom = -93.0
+offset_top = 90.0
+offset_bottom = -90.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(800, 450)
 texture = ExtResource("1_fgmo7")
 expand_mode = 3
 stretch_mode = 5
@@ -243,8 +242,11 @@ libraries = {
 "": SubResource("AnimationLibrary_nklnb")
 }
 
-[node name="Focus Mode" parent="." instance=ExtResource("6_70wn8")]
-visible = false
+[node name="Focus Mode" parent="." instance=ExtResource("7_trlnb")]
+offset_left = 473.0
+offset_top = 379.0
+offset_right = 513.0
+offset_bottom = 419.0
 
 [node name="Routine Check" type="Panel" parent="." node_paths=PackedStringArray("routineLabel")]
 layout_mode = 0
