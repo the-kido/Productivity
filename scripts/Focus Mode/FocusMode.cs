@@ -97,7 +97,7 @@ public partial class FocusMode : Control {
 	}
 
 	private void CountDown(double delta) {
-		if (timerPaused) return;
+		if (timerPaused || seconds <= 0) return;
 		time += delta;
 
 		if (time >= 0.99999) {
@@ -106,6 +106,7 @@ public partial class FocusMode : Control {
 			time = 0;
 		}
 	}
+
 
 	double time = 0;
     public override void _Process(double delta) {

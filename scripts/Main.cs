@@ -32,4 +32,10 @@ public partial class Main : Control {
 	public static void Minimize() {
 		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Minimized);
 	}
+
+	public override void _Notification(int what) {
+        if (what == MainLoop.NotificationApplicationFocusIn) {
+			animationPlayer.Play("Open");
+		}
+    }
 }

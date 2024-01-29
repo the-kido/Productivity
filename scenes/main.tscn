@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=20 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://da1t8w0h2nn04" path="res://scenes/routine.tscn" id="4_xqec0"]
 [ext_resource type="Script" path="res://scripts/RoutineReminder.cs" id="5_bsiff"]
 [ext_resource type="PackedScene" uid="uid://c1ldyweujjmt2" path="res://scenes/focus_mode_creator.tscn" id="7_trlnb"]
+[ext_resource type="PackedScene" uid="uid://bfrs3ougqipp6" path="res://reminders.tscn" id="9_u8pnu"]
 
 [sub_resource type="Gradient" id="Gradient_titnr"]
 offsets = PackedFloat32Array(0, 0.0759494, 0.510127, 0.852459, 1)
@@ -62,10 +63,10 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -74,10 +75,10 @@ tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(0.5, 0.5), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(0.5, 0.5)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -100,10 +101,10 @@ tracks/3/path = NodePath("Ambience/Fog:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_wri2s"]
@@ -176,6 +177,7 @@ speed_scale = 2.0
 explosiveness = 0.5
 
 [node name="Fog" type="TextureRect" parent="Ambience"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -245,8 +247,8 @@ libraries = {
 [node name="Focus Mode" parent="." instance=ExtResource("7_trlnb")]
 offset_left = 473.0
 offset_top = 379.0
-offset_right = 513.0
-offset_bottom = 419.0
+offset_right = 473.0
+offset_bottom = 379.0
 
 [node name="Routine Check" type="Panel" parent="." node_paths=PackedStringArray("routineLabel")]
 layout_mode = 0
@@ -270,3 +272,11 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
 text = "Finished Morning Routine"
+
+[node name="Task Reminder" parent="." instance=ExtResource("9_u8pnu")]
+layout_mode = 1
+offset_left = 529.0
+offset_top = 651.0
+offset_right = 529.64
+offset_bottom = 651.04
+tasks = Array[String](["Work on art", "Program", "Study", "Write", "Relax", "Turn your brain off", "Create something", "Go outside"])
