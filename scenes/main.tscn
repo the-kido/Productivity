@@ -1,0 +1,277 @@
+[gd_scene load_steps=19 format=3 uid="uid://cgrhei5yvp5dj"]
+
+[ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
+[ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_txb0g"]
+[ext_resource type="Texture2D" uid="uid://dsfeq2oovdbae" path="res://assets/twinkle.png" id="3_o45xj"]
+[ext_resource type="PackedScene" uid="uid://bkgvqaxaa0nku" path="res://scenes/gas_animation.tscn" id="3_p2uf3"]
+[ext_resource type="PackedScene" uid="uid://da1t8w0h2nn04" path="res://scenes/routine.tscn" id="4_xqec0"]
+[ext_resource type="Script" path="res://scripts/RoutineReminder.cs" id="5_bsiff"]
+[ext_resource type="PackedScene" uid="uid://diqga3piorj3q" path="res://scenes/focus_mode.tscn" id="6_70wn8"]
+
+[sub_resource type="Gradient" id="Gradient_titnr"]
+offsets = PackedFloat32Array(0, 0.0759494, 0.510127, 0.852459, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1.3, 1.3, 1.1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2q2mr"]
+gradient = SubResource("Gradient_titnr")
+
+[sub_resource type="Curve" id="Curve_1fa23"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.114914, 1), 0.0, 0.0, 0, 0, Vector2(0.547677, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.604348), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ylrwc"]
+curve = SubResource("Curve_1fa23")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_atcny"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(768, 432, 1)
+angle_max = 360.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.1
+angular_velocity_min = -174.45
+angular_velocity_max = 69.15
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 10.0
+tangential_accel_max = 20.0
+scale_min = 2.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_ylrwc")
+color_ramp = SubResource("GradientTexture1D_2q2mr")
+
+[sub_resource type="Gradient" id="Gradient_2mron"]
+offsets = PackedFloat32Array(0, 0.214286, 1)
+colors = PackedColorArray(0.0470588, 0.0588235, 0.14902, 0.34902, 0.154393, 0.17513, 0.332143, 0.206443, 0.55, 0.6025, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kj3wq"]
+gradient = SubResource("Gradient_2mron")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Animation" id="Animation_vxf55"]
+resource_name = "Minimize"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Minimize"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Ambience/Fog:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wri2s"]
+resource_name = "Open"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.627451), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nklnb"]
+_data = {
+"Minimize": SubResource("Animation_vxf55"),
+"Open": SubResource("Animation_wri2s")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+theme = ExtResource("1_pdcsv")
+script = ExtResource("1_txb0g")
+closeButton = Object(Button,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":115.0,"offset_bottom":103.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":2,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","disabled":false,"toggle_mode":false,"button_pressed":false,"action_mode":1,"button_mask":1,"keep_pressed_outside":false,"button_group":null,"shortcut":null,"shortcut_feedback":true,"shortcut_in_tooltip":true,"text":"Debug close
+button (delte)","icon":null,"flat":false,"alignment":1,"text_overrun_behavior":0,"clip_text":false,"icon_alignment":0,"vertical_icon_alignment":1,"expand_icon":false,"text_direction":0,"language":"","script":null)
+
+minimize = Object(Button,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":1783.0,"offset_top":8.0,"offset_right":1886.0,"offset_bottom":111.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":2,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","disabled":false,"toggle_mode":false,"button_pressed":false,"action_mode":1,"button_mask":1,"keep_pressed_outside":false,"button_group":null,"shortcut":null,"shortcut_feedback":true,"shortcut_in_tooltip":true,"text":"Debug Minimize
+button","icon":null,"flat":false,"alignment":1,"text_overrun_behavior":0,"clip_text":false,"icon_alignment":0,"vertical_icon_alignment":1,"expand_icon":false,"text_direction":0,"language":"","script":null)
+
+animationPlayer = Object(AnimationPlayer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","active":true,"deterministic":false,"reset_on_save":true,"root_node":NodePath(".."),"root_motion_track":NodePath(""),"audio_max_polyphony":32,"callback_mode_process":1,"callback_mode_method":0,"libraries":{
+"": SubResource("AnimationLibrary_nklnb")
+},"autoplay":"","playback_default_blend_time":0.0,"speed_scale":1.0,"movie_quit_on_finish":false,"blend_times":[],"script":null)
+
+
+[node name="Ambience" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Animation" parent="Ambience" instance=ExtResource("3_p2uf3")]
+layout_mode = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Ambience"]
+modulate = Color(2, 1.9, 2, 1)
+position = Vector2(960, 540)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_atcny")
+texture = ExtResource("3_o45xj")
+lifetime = 10.0
+speed_scale = 2.0
+
+[node name="Fog" type="TextureRect" parent="Ambience"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 545.0
+offset_right = 24.0
+offset_bottom = 569.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kj3wq")
+
+[node name="Temporary" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Temporary close button" type="Button" parent="Temporary"]
+layout_mode = 0
+offset_right = 115.0
+offset_bottom = 103.0
+text = "Debug close
+button (delte)"
+
+[node name="TempOpenroutine" type="Button" parent="Temporary"]
+visible = false
+layout_mode = 0
+offset_left = 380.0
+offset_top = 332.0
+offset_right = 492.0
+offset_bottom = 435.0
+text = "Open routine"
+
+[node name="Routine" parent="Temporary" node_paths=PackedStringArray("open") instance=ExtResource("4_xqec0")]
+visible = false
+open = NodePath("../TempOpenroutine")
+
+[node name="Main background" type="TextureRect" parent="."]
+modulate = Color(1, 1.1, 1.2, 1)
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 165.0
+offset_top = 93.0
+offset_right = -166.0
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fgmo7")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Minimize" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1783.0
+offset_top = 8.0
+offset_right = 1886.0
+offset_bottom = 111.0
+text = "Debug Minimize
+button"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nklnb")
+}
+
+[node name="Focus Mode" parent="." instance=ExtResource("6_70wn8")]
+visible = false
+
+[node name="Routine Check" type="Panel" parent="." node_paths=PackedStringArray("routineLabel")]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 287.0
+offset_right = 734.0
+offset_bottom = 328.0
+scale = Vector2(1.5, 1.5)
+script = ExtResource("5_bsiff")
+disableApp = true
+afternoonHour = 16
+routineLabel = NodePath("Label")
+
+[node name="Label" type="CheckBox" parent="Routine Check"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Finished Morning Routine"

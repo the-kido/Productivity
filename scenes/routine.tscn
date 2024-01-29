@@ -1,0 +1,208 @@
+[gd_scene load_steps=6 format=3 uid="uid://da1t8w0h2nn04"]
+
+[ext_resource type="Script" path="res://scripts/Routine.cs" id="1_fm1tr"]
+[ext_resource type="Theme" uid="uid://br3tn5nq6mqu2" path="res://assets/decorativebar.tres" id="1_xhxa3"]
+
+[sub_resource type="Animation" id="Animation_qw571"]
+resource_name = "Minimize"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(0.5, 0.5), Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Minimize"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tewyq"]
+resource_name = "Open"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj3f4"]
+_data = {
+"Minimize": SubResource("Animation_qw571"),
+"Open": SubResource("Animation_tewyq")
+}
+
+[node name="Routine" type="Window" node_paths=PackedStringArray("close", "animationPlayer")]
+transparent_bg = true
+mode = 2
+size = Vector2i(500, 800)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("1_fm1tr")
+close = NodePath("ColorRect/Close")
+animationPlayer = NodePath("ColorRect/AnimationPlayer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 400)
+theme = ExtResource("1_xhxa3")
+color = Color(0.901961, 0.847059, 0.701961, 1)
+
+[node name="Shadow" type="ColorRect" parent="ColorRect"]
+z_index = -1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -700.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0.258824, 0.101961, 0.101961, 0.278431)
+
+[node name="Panel" type="Panel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="Close" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_right = -0.000183105
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 46
+text = "×"
+
+[node name="Checklist" type="BoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.95, 0.95)
+pivot_offset = Vector2(250, 400)
+vertical = true
+
+[node name="Energized" type="CheckBox" parent="ColorRect/Checklist"]
+layout_mode = 2
+text = "⚡Wake up Energised! Convince yourself that 
+doing this routine is not that big of a deal 
+"
+
+[node name="Have a water supply" type="CheckBox" parent="ColorRect/Checklist"]
+layout_mode = 2
+text = "💧Water ! 
+"
+expand_icon = true
+
+[node name="Medication" type="CheckBox" parent="ColorRect/Checklist"]
+layout_mode = 2
+text = "💊 Medication: Puffer, Vitamin D, & Nose-spray 
+daily. Ketoconazole shampoo twice a week.
+↪Use SPF 30 unless you’re never going outside
+"
+
+[node name="Routine" type="CheckBox" parent="ColorRect/Checklist"]
+layout_mode = 2
+text = " 🏃‍♂️ Work out routine 
+(start with a on-the-spot jog every day)
+"
+
+[node name="Label" type="Label" parent="ColorRect/Checklist"]
+layout_mode = 2
+text = "Optionals (check ☑️ even if you won't do it)"
+
+[node name="Clean up" type="CheckBox" parent="ColorRect/Checklist"]
+layout_mode = 2
+text = "🧹Clean-up my room (make bed, etc)"
+
+[node name="Meditate" type="CheckBox" parent="ColorRect/Checklist"]
+layout_mode = 2
+text = "Meditate"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_jj3f4")
+}
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Streak:"

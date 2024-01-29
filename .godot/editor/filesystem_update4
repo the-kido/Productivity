@@ -1,0 +1,17 @@
+res://main.tscn
+res://MainMenu.tres
+res://decorativebar.tres
+res://FocusMode.cs
+res://Routine.tscn
+res://focus_mode.tscn
+res://Main.cs
+res://OpenRoutine.cs
+res://Routine.cs
+res://RoutineReminder.cs
+res://Temp.cs
+res://Scenes/main.tscn
+res://Scenes/routine.tscn
+res://assets/MainMenu.tres
+res://Scenes/focus_mode.tscn
+res://Scenes/gas_animation.tscn
+res://scenes/main.tscn

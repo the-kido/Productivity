@@ -1,0 +1,17 @@
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\bin\Debug\Prod.deps.json
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\bin\Debug\Prod.runtimeconfig.json
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\bin\Debug\Prod.dll
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\bin\Debug\Prod.pdb
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.csproj.AssemblyReference.cache
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.AssemblyInfoInputs.cache
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.AssemblyInfo.cs
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.csproj.CoreCompileInputs.cache
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.csproj.CopyComplete
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.dll
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\refint\Prod.dll
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.pdb
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\Prod.genruntimeconfig.cache
+C:\Users\alpit\OneDrive\Documents\Krish\Other Godot\Prod\.godot\mono\temp\obj\Debug\ref\Prod.dll

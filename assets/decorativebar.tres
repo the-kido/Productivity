@@ -1,0 +1,51 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://br3tn5nq6mqu2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukf7r"]
+bg_color = Color(0.901961, 0.568627, 0.235294, 0.690196)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6firr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grhhp"]
+bg_color = Color(0.901961, 0.694118, 0.403922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lbw3"]
+bg_color = Color(0.321569, 0.192157, 0.0784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6oobp"]
+bg_color = Color(0.341176, 0.231373, 0.0666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc042"]
+bg_color = Color(0.6, 0.6, 0.6, 0.184314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_as4h1"]
+bg_color = Color(0.552941, 0.596078, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d18om"]
+bg_color = Color(0.792157, 0.576471, 0.34902, 1)
+border_color = Color(0.792157, 0.576471, 0.34902, 0.313726)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0v02u"]
+bg_color = Color(0.552941, 0.596078, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bdu0"]
+bg_color = Color(0.792157, 0.576471, 0.34902, 0)
+border_width_right = 35
+border_color = Color(0.792157, 0.576471, 0.34902, 0.313726)
+
+[resource]
+Button/colors/font_color = Color(0.239216, 0, 0, 1)
+Button/font_sizes/font_size = 18
+Button/styles/normal = SubResource("StyleBoxFlat_ukf7r")
+CheckBox/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_pressed_color = Color(1, 1, 1, 0.501961)
+CheckBox/styles/disabled = SubResource("StyleBoxEmpty_6firr")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_grhhp")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_6lbw3")
+CheckBox/styles/pressed = SubResource("StyleBoxFlat_6oobp")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_fc042")
+Label/colors/font_color = Color(0.0588235, 0.0431373, 0, 1)
+Panel/styles/panel = SubResource("StyleBoxFlat_as4h1")
+RichTextLabel/colors/default_color = Color(0.239216, 0.0941176, 0, 1)
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_d18om")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_0v02u")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_4bdu0")

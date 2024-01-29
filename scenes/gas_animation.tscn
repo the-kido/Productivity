@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkgvqaxaa0nku"]
+
+[ext_resource type="Script" path="res://scripts/Temp.cs" id="1_qtame"]
+
+[sub_resource type="Gradient" id="Gradient_omk0o"]
+colors = PackedColorArray(0.2702, 0.217, 0.35, 1, 0.05258, 0.0143, 0.11, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d8vmm"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_slcvg"]
+seamless = true
+seamless_blend_skirt = 0.675
+normalize = false
+color_ramp = SubResource("Gradient_omk0o")
+noise = SubResource("FastNoiseLite_d8vmm")
+
+[node name="Animation" type="Control" node_paths=PackedStringArray("_1", "_2")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qtame")
+_1 = NodePath("_1")
+_2 = NodePath("_2")
+
+[node name="_1" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.278431)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_slcvg")
+
+[node name="_2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.278431)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1920.0
+offset_right = -1920.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_slcvg")
