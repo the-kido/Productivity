@@ -15,7 +15,7 @@ public partial class FocusModeCreator : Control {
 	LineEdit reason;
 
 
-	const string DisabledText = "Cannot create timer yet!";
+	const string DisabledText = "Cannot create a new timer";
 	const string EnabledText = "Create timer";
 
 	public override void _Ready() {
@@ -30,7 +30,7 @@ public partial class FocusModeCreator : Control {
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
-		bool sufficientInfo = minutes.Value > 0 && !string.IsNullOrEmpty(reason.Text);
+		bool sufficientInfo = minutes.Value > 0 && !string.IsNullOrEmpty(reason.Text) && !focusMode.IsOpened;
 		
 		if (sufficientInfo) {
 			createTimerButton.Disabled = false;

@@ -1,10 +1,10 @@
-using System.Security.Principal;
+using System;
 using Godot;
 
 public partial class FocusMode : Control {
 
 	[Export]
-	Button pause, settings;
+	Button pause, settings, close;
 	
 	[Export]
 	Label timer, reasonLabel;
@@ -12,11 +12,42 @@ public partial class FocusMode : Control {
 	[Export]
 	Control settingsControl;
 	
+	[ExportGroup("Settings requirements")]
 	[Export]
-	Window window;
+	CheckBox toggleOpaqueMode;
+	[Export]
+	Godot.Collections.Array<Control> opaqueControls;
+
+	[ExportGroup("For focus mode window scene")]
+	[Export] Window window;
+
 	[Export]
 	AnimationPlayer animationPlayer;
 
+	public bool IsOpened => window.Visible;
+
+
+
+	private void Open() {
+		ProcessMode = ProcessModeEnum.Always;
+        window.Visible = true;
+		animationPlayer.Play("open");
+		TogglePause(true);
+	}
+
+	private void Close() {
+		animationPlayer.AnimationFinished += HideOnAnimationFinished;
+		animationPlayer.PlayBackwards("open");
+		
+				
+		void HideOnAnimationFinished(StringName _) {
+			animationPlayer.AnimationFinished -= HideOnAnimationFinished;
+			settingsControl.Visible = false;
+			window.Visible = false;
+			ProcessMode = ProcessModeEnum.Disabled;
+		}
+	}
+	
 
     static string Clockify(int number) => (number <= 9 ? "0" : "") + number.ToString();
     static string TimerText(int hours, int minutes, int seconds) =>
@@ -26,14 +57,12 @@ public partial class FocusMode : Control {
 		$"{Clockify(minutes)}:{Clockify(seconds)} ";
 
 	public void StartTimer(int minutes, string reason) {
-        window.Visible = true;
-
+		Open();
 		seconds = minutes * 60;
-
 		reasonLabel.Text = reason;
-		
 		UpdateText();
 	}
+
 	void UpdateText() {
 		timer.Text = TimerText(seconds / 3600, seconds/60  % 60, seconds % 60);
 	}
@@ -42,7 +71,19 @@ public partial class FocusMode : Control {
 
     public override void _Ready() {
 		settings.Pressed += OpenSettingsPanel;
+		toggleOpaqueMode.Toggled += ToggleOpaqueMode;
+		close.Pressed += Close;
+		pause.Pressed += () => TogglePause(!timerPaused);
     }
+
+	
+	private bool timerPaused = false;
+	const string PlayText = "▶";
+	const string PauseText = "||";
+	private void TogglePause(bool paused) {
+		timerPaused = paused;
+		pause.Text = timerPaused ? PlayText : PauseText;
+	}
 
 	bool IsSettingsOpen => settingsControl.Visible;
 	private void OpenSettingsPanel() {
@@ -55,9 +96,8 @@ public partial class FocusMode : Control {
 		}
 	}
 
-	double time = 0;
-    public override void _Process(double delta) {
-		ControlSize();
+	private void CountDown(double delta) {
+		if (timerPaused) return;
 		time += delta;
 
 		if (time >= 0.99999) {
@@ -65,6 +105,12 @@ public partial class FocusMode : Control {
 			UpdateText();
 			time = 0;
 		}
+	}
+
+	double time = 0;
+    public override void _Process(double delta) {
+		ControlSize();
+		CountDown(delta);
 	}
 
 	private void ControlSize() {
@@ -76,6 +122,12 @@ public partial class FocusMode : Control {
 				animationPlayer.Play("size_down");
 			}
 		}
+	}
+
+	readonly Color normal = new(1,1,1,1), opaque = new(1,1,1,0.6f);
+	
+	private void ToggleOpaqueMode(bool toggle){
+		foreach (Control item in opaqueControls) {item.SelfModulate = toggle ? opaque : normal; }
 	}
 
 }

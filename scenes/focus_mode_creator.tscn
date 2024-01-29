@@ -27,8 +27,6 @@ Panel/styles/panel = SubResource("StyleBoxFlat_ug0by")
 [node name="Focus Mode" type="Control" node_paths=PackedStringArray("focusMode", "createTimerButton", "minutes", "reason")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 theme = ExtResource("1_kdbow")
 script = ExtResource("2_5d70y")
 focusMode = NodePath("Window/Control")
