@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmalt25c4c46j"]
+
+[ext_resource type="Script" path="res://scenes/HourlyCheckup.cs" id="1_eljvw"]
+[ext_resource type="AudioStream" uid="uid://bnpni55husejl" path="res://assets/jumpscare.mp3" id="2_bu543"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kelh"]
+bg_color = Color(0.819608, 0.811765, 0.682353, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkqx0"]
+bg_color = Color(0.572549, 0.372549, 0.372549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgc1b"]
+bg_color = Color(0.45098, 0.243137, 0.243137, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_denev"]
+
+[sub_resource type="Animation" id="Animation_vjuw3"]
+resource_name = "Quiet"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -25.32, -33.6]
+}
+
+[sub_resource type="Animation" id="Animation_kg2nq"]
+resource_name = "Play"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3lbn"]
+_data = {
+"Play": SubResource("Animation_kg2nq"),
+"Quiet": SubResource("Animation_vjuw3")
+}
+
+[node name="Hourly Checkup Gui" type="Control" node_paths=PackedStringArray("button", "animationPlayer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1620.0
+offset_bottom = -780.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eljvw")
+button = NodePath("Button")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3kelh")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 76.0
+offset_right = 219.0
+offset_bottom = 108.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hkqx0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hkqx0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rgc1b")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_denev")
+text = "a"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bu543")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r3lbn")
+}

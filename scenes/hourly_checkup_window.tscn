@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgsiu5bxxrmso"]
+
+[ext_resource type="PackedScene" uid="uid://bmalt25c4c46j" path="res://scenes/hourly_checkup_gui.tscn" id="1_ynh6p"]
+
+[node name="Hourly Checkup" type="Window"]
+transparent_bg = true
+audio_listener_enable_2d = true
+mode = 2
+size = Vector2i(300, 300)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+
+[node name="Hourly Checkup Gui" parent="." instance=ExtResource("1_ynh6p")]
+offset_right = 0.0
+offset_bottom = 0.0
+
+[editable path="Hourly Checkup Gui"]

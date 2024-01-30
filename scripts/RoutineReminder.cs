@@ -18,9 +18,7 @@ public partial class RoutineReminder : Panel {
 		OpenApp();
 
 		routineLabel.Pressed += ChangeColor;
-
 	} 
-
 
 	// Required for timing when to give the next prompt.
 	readonly int minuteOpened;
@@ -54,7 +52,6 @@ public partial class RoutineReminder : Panel {
 		if (!routineLabel.ButtonPressed) System.Diagnostics.Process.Start(RoutineAppLocation);
 	}
 
-	
 	Color defaultColor = new(1, 1, 1);
 	Color pressedColor = new(1.0f, 1.15f, 1.2f);
 	private void ChangeColor() {
