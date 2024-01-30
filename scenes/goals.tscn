@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://j0rxcfb5vhhx"]
+
+[ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_7l5fi"]
+
+[node name="Goals" type="Panel"]
+offset_right = 261.0
+offset_bottom = 41.0
+scale = Vector2(1.5, 1.5)
+theme = ExtResource("1_7l5fi")

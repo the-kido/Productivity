@@ -16,7 +16,8 @@ public partial class HourlyCheckup : Control {
 		new string[] {"Make sure I am using my time effectively",
 		"Don't be a silly goober",
 		"Hopefully you are actually doing something USEFUL right now, right!?",
-		"I can count on you to be responsible with your time :)"}
+		"I can count on you to be responsible with your time :)",
+		"No hits of dopamine for you!"}
 	);
 
 	string[] currentWords;

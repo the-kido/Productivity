@@ -17,6 +17,8 @@ public partial class RoutineReminder : Panel {
 		Update();
 		OpenApp();
 
+		if (DateTime.Now.TimeOfDay.Hours >= afternoonHour) UpdateToAfternoon();
+
 		routineLabel.Pressed += ChangeColor;
 	} 
 

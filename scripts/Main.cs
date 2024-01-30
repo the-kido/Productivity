@@ -22,6 +22,8 @@ public partial class Main : Control {
 		GetTree().AutoAcceptQuit = false;
 		closeButton.Pressed += () => GetTree().Quit();
 		minimize.Pressed += () =>  animationPlayer.Play("Minimize");
+
+		FindChild("Main background").GetChild<AnimationPlayer>(0).Play("spin");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -125,7 +125,7 @@ grow_vertical = 2
 pivot_offset = Vector2(0, 15)
 clip_text = true
 script = ExtResource("4_pxvh8")
-speed = 0.3
+speed = 0.4
 
 [node name="Top" type="Label" parent="Ideas"]
 layout_mode = 1
@@ -143,7 +143,7 @@ grow_vertical = 2
 pivot_offset = Vector2(0, 15)
 clip_text = true
 script = ExtResource("4_pxvh8")
-speed = 0.25
+speed = 0.3
 
 [node name="Left Fog" type="TextureRect" parent="Ideas"]
 layout_mode = 1
