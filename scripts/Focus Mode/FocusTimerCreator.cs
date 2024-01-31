@@ -15,8 +15,8 @@ public partial class FocusTimerCreator : Control {
 	LineEdit reason;
 
 
-	const string DisabledText = "Cannot create a new timer";
-	const string EnabledText = "Create timer";
+	const string DISABLE_TEXT = "Cannot create a new timer";
+	const string ENABLE_TEXT = "Create timer";
 
 	public override void _Ready() {
 		createTimerButton.Pressed += OnButtonPressed;
@@ -34,10 +34,10 @@ public partial class FocusTimerCreator : Control {
 		
 		if (sufficientInfo) {
 			createTimerButton.Disabled = false;
-			createTimerButton.Text = EnabledText;
+			createTimerButton.Text = ENABLE_TEXT;
 		} else {
 			createTimerButton.Disabled = true;
-			createTimerButton.Text = DisabledText;
+			createTimerButton.Text = DISABLE_TEXT;
 		}
 	}
 }

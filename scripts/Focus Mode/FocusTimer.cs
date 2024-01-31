@@ -78,11 +78,11 @@ public partial class FocusTimer : Control {
 
 	
 	private bool timerPaused = false;
-	const string PlayText = "▶";
-	const string PauseText = "||";
+	const string PLAY_TEXT = "▶";
+	const string PAUSE_TEXT = "||";
 	private void TogglePause(bool paused) {
 		timerPaused = paused;
-		pause.Text = timerPaused ? PlayText : PauseText;
+		pause.Text = timerPaused ? PLAY_TEXT : PAUSE_TEXT;
 	}
 
 	bool IsSettingsOpen => settingsControl.Visible;

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Godot;
 
 public partial class RoutineReminder : Panel {
-	const string RoutineAppLocation = "C:\\Users\\alpit\\OneDrive\\Documents\\Krish\\Other Godot\\POC\\Exports\\export.exe";
+	const string ROUTINE_APP_LOCATION = "C:\\Users\\alpit\\OneDrive\\Documents\\Krish\\Other Godot\\POC\\Exports\\export.exe";
 	[Export]
 	bool disableApp = false;
 
@@ -51,7 +51,7 @@ public partial class RoutineReminder : Panel {
 	// the given time in "afternoonHour" is passed
 	private void OpenApp() {
 		if (disableApp) return;
-		if (!routineLabel.ButtonPressed) System.Diagnostics.Process.Start(RoutineAppLocation);
+		if (!routineLabel.ButtonPressed) System.Diagnostics.Process.Start(ROUTINE_APP_LOCATION);
 	}
 
 	Color defaultColor = new(1, 1, 1);

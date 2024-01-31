@@ -1,7 +1,7 @@
 using Godot;
 
 public partial class TextScroller : Label {
-	const int maxCharsInLine = 22;
+	const int LINE_SIZE = 22;
 	
 	[Export]
     private double speed = 0.2;
@@ -26,7 +26,7 @@ public partial class TextScroller : Label {
 		time += delta;
 		
 		// Once we need to add another task, increase:
-		if (text.Length <= maxCharsInLine){
+		if (text.Length <= LINE_SIZE){
 			text += GetNewLine();
 		}
 
