@@ -1,10 +1,8 @@
 using Godot;
-using Godot.Collections;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class Gallary : Control {
+public partial class Gallery : Control {
 	
 	[Export]
 	TextureRect largeLeft, mediumRight, smallBottom;

@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://j0rxcfb5vhhx" path="res://scenes/goals.tscn" id="9_i1xnj"]
 [ext_resource type="PackedScene" uid="uid://bfrs3ougqipp6" path="res://scenes/activity_idea_creator.tscn" id="9_u8pnu"]
 [ext_resource type="PackedScene" uid="uid://dgsiu5bxxrmso" path="res://scenes/hourly_checkup_window.tscn" id="10_wjskc"]
-[ext_resource type="PackedScene" uid="uid://botrlvedgdb40" path="res://scenes/gallary.tscn" id="11_2wshd"]
+[ext_resource type="PackedScene" uid="uid://botrlvedgdb40" path="res://scenes/gallery.tscn" id="11_2wshd"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"

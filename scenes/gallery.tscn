@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://botrlvedgdb40"]
 
-[ext_resource type="Script" path="res://scenes/Gallary.cs" id="1_ep7i6"]
-[ext_resource type="StyleBox" uid="uid://cb8h48hocce4g" path="res://assets/gallary_panel.tres" id="2_g7mtc"]
+[ext_resource type="Script" path="res://scenes/Gallery.cs" id="1_ep7i6"]
+[ext_resource type="StyleBox" uid="uid://cb8h48hocce4g" path="res://assets/gallery_panel.tres" id="2_g7mtc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bw6h"]
 bg_color = Color(0.0862745, 0.129412, 0.113725, 1)
