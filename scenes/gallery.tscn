@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://botrlvedgdb40"]
+[gd_scene load_steps=4 format=3 uid="uid://botrlvedgdb40"]
 
-[ext_resource type="Script" path="res://scenes/Gallery.cs" id="1_ep7i6"]
-[ext_resource type="StyleBox" uid="uid://cb8h48hocce4g" path="res://assets/gallery_panel.tres" id="2_g7mtc"]
+[ext_resource type="Script" path="res://scripts/Gallery.cs" id="1_ep7i6"]
+[ext_resource type="PackedScene" uid="uid://04f2et1o0vn7" path="res://scenes/photo.tscn" id="2_keei2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bw6h"]
 bg_color = Color(0.0862745, 0.129412, 0.113725, 1)
@@ -10,90 +10,43 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_1cf4u"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_agyob"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_u38gq"]
-
 [node name="Gallary" type="Control" node_paths=PackedStringArray("largeLeft", "mediumRight", "smallBottom", "panel")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 400.0
 offset_bottom = 398.0
 script = ExtResource("1_ep7i6")
-largeLeft = NodePath("Panel 2/Large")
-mediumRight = NodePath("Panel 1/Medium")
-smallBottom = NodePath("Panel 3/Small")
+largeLeft = NodePath("large")
+mediumRight = NodePath("medium")
+smallBottom = NodePath("small")
 panel = NodePath("BG Panel")
 
 [node name="BG Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.380392)
 layout_mode = 0
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 348.0
-offset_bottom = 280.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 309.0
+offset_bottom = 252.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3bw6h")
 
-[node name="Panel 1" type="Panel" parent="."]
-clip_children = 1
-clip_contents = true
+[node name="medium" parent="." instance=ExtResource("2_keei2")]
 layout_mode = 0
-offset_left = 166.0
-offset_right = 338.0
-offset_bottom = 172.0
-theme_override_styles/panel = ExtResource("2_g7mtc")
+offset_left = 180.0
+offset_top = 49.0
+offset_right = 327.0
+offset_bottom = 196.0
+relativeSize = 2
 
-[node name="Medium" type="TextureRect" parent="Panel 1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_1cf4u")
-expand_mode = 1
-stretch_mode = 4
-metadata/_edit_lock_ = true
-
-[node name="Panel 2" type="Panel" parent="."]
-clip_children = 1
-clip_contents = true
+[node name="large" parent="." instance=ExtResource("2_keei2")]
 layout_mode = 0
-offset_right = 154.0
-offset_bottom = 150.0
-theme_override_styles/panel = ExtResource("2_g7mtc")
+offset_right = 133.0
+offset_bottom = 133.0
+relativeSize = 3
 
-[node name="Large" type="TextureRect" parent="Panel 2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_agyob")
-expand_mode = 1
-stretch_mode = 4
-metadata/_edit_lock_ = true
-
-[node name="Panel 3" type="Panel" parent="."]
-clip_children = 1
-clip_contents = true
+[node name="small" parent="." instance=ExtResource("2_keei2")]
 layout_mode = 0
-offset_left = 61.0
-offset_top = 167.0
+offset_left = 51.0
+offset_top = 162.0
 offset_right = 157.0
-offset_bottom = 266.0
-theme_override_styles/panel = ExtResource("2_g7mtc")
-
-[node name="Small" type="TextureRect" parent="Panel 3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_u38gq")
-expand_mode = 1
-stretch_mode = 4
-metadata/_edit_lock_ = true
+offset_bottom = 268.0

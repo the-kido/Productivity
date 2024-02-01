@@ -15,18 +15,33 @@ public partial class RoutineReminder : Panel {
 
 	// In minutes
 	const int CHECKUP_PERIOD = 30;
-
-	public override void _Ready() {
-		Update();
-
-		if (DateTime.Now.TimeOfDay.Hours >= afternoonHour) UpdateToAfternoon();
-
-		routineLabel.Pressed += ChangeColor;
-	} 
+	const string SAVE_FILE_LOCATION = "user://routine.json";
 
 	// Required for timing when to give the next prompt.
 	readonly int minuteOpened;
 	RoutineReminder() => minuteOpened = DateTime.Now.TimeOfDay.Minutes;
+
+	public override void _Ready() {
+		if (!routineLabel.ButtonPressed) Update();
+		if (DateTime.Now.TimeOfDay.Hours >= afternoonHour) UpdateToAfternoon();
+
+		routineLabel.Pressed += OnPressed;
+		// Do last in case we update to afternoon.
+		routineLabel.ButtonPressed = LoadIfPressed();
+		// it's gotta be pressed!
+		GD.Print(routineLabel.ButtonPressed);
+	} 
+	private bool LoadIfPressed() {
+		using FileAccess saveFile = FileAccess.Open(SAVE_FILE_LOCATION, FileAccess.ModeFlags.Read);
+		if (saveFile is null) return false;
+
+        return saveFile.GetLine() == "true";
+	}
+
+	private void Save() {
+		using FileAccess saveFile = FileAccess.Open(SAVE_FILE_LOCATION, FileAccess.ModeFlags.Write);
+        saveFile.StoreLine(Json.Stringify(routineLabel.ButtonPressed));
+	}
 
 	int currentHour = 0;
 
@@ -45,7 +60,7 @@ public partial class RoutineReminder : Panel {
 	}
 
 	private void UpdateToAfternoon() {
-		routineLabel.Text = "Finish Afternoon Routine";
+		routineLabel.Text = "Finished Afternoon Routine";
 		routineLabel.ButtonPressed = false;
 	}
 
@@ -58,6 +73,11 @@ public partial class RoutineReminder : Panel {
 
 	Color defaultColor = new(1, 1, 1);
 	Color pressedColor = new(1.0f, 1.15f, 1.2f);
+	private void OnPressed() {
+		Save();
+		ChangeColor();
+	}
+
 	private void ChangeColor() {
 		if (routineLabel.ButtonPressed) Modulate = pressedColor;
         else Modulate = defaultColor;

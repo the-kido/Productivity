@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_7l5fi"]
 [ext_resource type="Script" path="res://scripts/GoalTracker.cs" id="2_he07q"]
 [ext_resource type="Texture2D" uid="uid://c7sjve08b32t5" path="res://assets/star.png" id="3_vpa68"]
-[ext_resource type="AudioStream" uid="uid://qiasaxe2bpmm" path="res://assets/soinc.mp3" id="4_6ului"]
+[ext_resource type="AudioStream" uid="uid://c8j3vnsvvr1ik" path="res://assets/soinc.mp3" id="4_6ului"]
 
 [sub_resource type="Gradient" id="Gradient_xqobh"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 0.886333, 0.69, 1)

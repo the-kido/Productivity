@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=3 uid="uid://04f2et1o0vn7"]
+
+[ext_resource type="StyleBox" uid="uid://cb8h48hocce4g" path="res://assets/gallery_panel.tres" id="1_x24ue"]
+[ext_resource type="Script" path="res://scripts/Photo.cs" id="2_34cv1"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1cf4u"]
+
+[sub_resource type="Animation" id="Animation_lepac"]
+resource_name = "grow"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.45, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1.8, 1.8), Vector2(2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_56edh"]
+_data = {
+"grow": SubResource("Animation_lepac")
+}
+
+[sub_resource type="Animation" id="Animation_ktoj3"]
+resource_name = "wiggle"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.1, 3.1, 4, 5.1, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(10, -20), Vector2(20, 0), Vector2(10, 20), Vector2(0, 0), Vector2(-10, -20), Vector2(-20, 0), Vector2(-10, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_orefb"]
+_data = {
+"wiggle": SubResource("Animation_ktoj3")
+}
+
+[node name="Photo" type="Control" node_paths=PackedStringArray("wobble", "grow", "panel", "textureRect")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 175.0
+offset_bottom = 175.0
+script = ExtResource("2_34cv1")
+wobble = NodePath("Wobble")
+grow = NodePath("Grow")
+panel = NodePath("Panel")
+textureRect = NodePath("Panel/Medium")
+
+[node name="Panel" type="Panel" parent="."]
+clip_children = 1
+clip_contents = true
+layout_mode = 1
+offset_right = 175.0
+offset_bottom = 175.0
+theme_override_styles/panel = ExtResource("1_x24ue")
+metadata/_edit_lock_ = true
+
+[node name="Medium" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_1cf4u")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_lock_ = true
+
+[node name="Grow" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_56edh")
+}
+
+[node name="Wobble" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Panel")
+libraries = {
+"": SubResource("AnimationLibrary_orefb")
+}
