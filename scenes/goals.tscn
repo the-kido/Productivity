@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://j0rxcfb5vhhx"]
+[gd_scene load_steps=13 format=3 uid="uid://j0rxcfb5vhhx"]
 
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_7l5fi"]
-[ext_resource type="Script" path="res://scenes/GoalTracker.cs" id="2_2c76c"]
+[ext_resource type="Script" path="res://scripts/GoalTracker.cs" id="2_he07q"]
 [ext_resource type="Texture2D" uid="uid://c7sjve08b32t5" path="res://assets/star.png" id="3_vpa68"]
+[ext_resource type="AudioStream" uid="uid://qiasaxe2bpmm" path="res://assets/soinc.mp3" id="4_6ului"]
 
 [sub_resource type="Gradient" id="Gradient_xqobh"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 0.886333, 0.69, 1)
@@ -45,14 +46,15 @@ bg_color = Color(0.0862745, 0.129412, 0.113725, 1)
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Goals" type="Panel" node_paths=PackedStringArray("goalsContainer", "prototype")]
+[node name="Goals" type="Panel" node_paths=PackedStringArray("goalsContainer", "prototype", "goalCompletedAudioPlayer")]
 offset_right = 260.0
 offset_bottom = 200.0
 scale = Vector2(1.5, 1.5)
 theme = ExtResource("1_7l5fi")
-script = ExtResource("2_2c76c")
+script = ExtResource("2_he07q")
 goalsContainer = NodePath("Creation Panel/VBoxContainer")
 prototype = NodePath("Default box")
+goalCompletedAudioPlayer = NodePath("Completed Goal")
 
 [node name="Default box" type="CheckBox" parent="."]
 visible = false
@@ -106,3 +108,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Completed Goal" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6ului")

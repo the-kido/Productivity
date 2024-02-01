@@ -13,9 +13,11 @@ public partial class RoutineReminder : Panel {
 	[Export]
 	CheckBox routineLabel;
 
+	// In minutes
+	const int CHECKUP_PERIOD = 30;
+
 	public override void _Ready() {
 		Update();
-		OpenApp();
 
 		if (DateTime.Now.TimeOfDay.Hours >= afternoonHour) UpdateToAfternoon();
 
@@ -33,12 +35,12 @@ public partial class RoutineReminder : Panel {
 	async void Update() {
 		if (HourChanged && DateTime.Now.TimeOfDay.Hours == afternoonHour) UpdateToAfternoon();
 
-		if ((DateTime.Now.TimeOfDay.Minutes + minuteOpened) % 30 == 0) OpenApp();
+		if ((DateTime.Now.TimeOfDay.Minutes + minuteOpened) % CHECKUP_PERIOD == 0) OpenApp();
 
 		currentHour = DateTime.Now.TimeOfDay.Hours;
 		
 		// Waits 1 minute to loop for performance gains
-		await Task.Delay(1*1000*60);
+		await Task.Delay(1000*60);
 		Update();
 	}
 

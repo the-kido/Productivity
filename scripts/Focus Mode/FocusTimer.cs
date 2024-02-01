@@ -11,6 +11,9 @@ public partial class FocusTimer : Control {
 
 	[Export]
 	Control settingsControl;
+
+	[Export]
+	AnimationPlayer audioPlayer;
 	
 	[ExportGroup("Settings requirements")]
 	[Export]
@@ -102,11 +105,17 @@ public partial class FocusTimer : Control {
 
 		if (time >= 0.99999) {
 			seconds--;
+			PlaySounds(); 
 			UpdateText();
 			time = 0;
 		}
 	}
 
+	private void PlaySounds() {
+		// Every 5 minut
+		if (seconds % 10 == 0) audioPlayer.Play("reminder");
+		if (seconds == 0) audioPlayer.Play("alarm");
+	}
 
 	double time = 0;
     public override void _Process(double delta) {

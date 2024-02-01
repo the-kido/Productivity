@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bmalt25c4c46j"]
 
-[ext_resource type="Script" path="res://scenes/HourlyCheckup.cs" id="1_eljvw"]
+[ext_resource type="Script" path="res://scripts/HourlyCheckup.cs" id="1_eljvw"]
 [ext_resource type="AudioStream" uid="uid://bnpni55husejl" path="res://assets/jumpscare.mp3" id="2_bu543"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kelh"]

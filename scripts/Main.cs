@@ -7,9 +7,6 @@ public partial class Main : Control {
 	public static Main Instance {get; private set;}
 
 	[Export]
-	Button closeButton;
-
-	[Export]
 	Button minimize;
 
 
@@ -20,7 +17,6 @@ public partial class Main : Control {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		GetTree().AutoAcceptQuit = false;
-		closeButton.Pressed += () => GetTree().Quit();
 		minimize.Pressed += () =>  animationPlayer.Play("Minimize");
 
 		FindChild("Main background").GetChild<AnimationPlayer>(0).Play("spin");

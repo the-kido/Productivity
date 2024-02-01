@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cevkyhtoqr7r3"]
+[gd_scene load_steps=11 format=3 uid="uid://cevkyhtoqr7r3"]
 
 [ext_resource type="Script" path="res://scripts/Focus Mode/FocusTimer.cs" id="1_kf7wm"]
+[ext_resource type="AudioStream" uid="uid://c7h4c7cp3cbl0" path="res://assets/clock_ticking.mp3" id="2_l0iyg"]
+[ext_resource type="AudioStream" uid="uid://xq4kkp0f30ss" path="res://assets/alarm_go_off.mp3" id="3_unrh5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7wtn"]
 
@@ -22,7 +24,56 @@ bg_color = Color(0.501961, 0.501961, 0.501961, 0.211765)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 
-[node name="Focus Mode" type="Panel" node_paths=PackedStringArray("pause", "settings", "close", "timer", "reasonLabel", "settingsControl", "toggleOpaqueMode", "opaqueControls")]
+[sub_resource type="Animation" id="Animation_q1o7d"]
+resource_name = "alarm"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Alarm:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ubmgr"]
+resource_name = "reminder"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tick Sound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tick Sound:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 4.2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -15.0, -20.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f3qwb"]
+_data = {
+"alarm": SubResource("Animation_q1o7d"),
+"reminder": SubResource("Animation_ubmgr")
+}
+
+[node name="Focus Mode" type="Panel" node_paths=PackedStringArray("pause", "settings", "close", "timer", "reasonLabel", "settingsControl", "audioPlayer", "toggleOpaqueMode", "opaqueControls")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,6 +90,7 @@ close = NodePath("Settings/Close")
 timer = NodePath("Time")
 reasonLabel = NodePath("Reason")
 settingsControl = NodePath("Settings")
+audioPlayer = NodePath("AnimationPlayer")
 toggleOpaqueMode = NodePath("Settings/Top bar/Opaque mode")
 opaqueControls = [NodePath("."), NodePath("Time"), NodePath("Reason")]
 
@@ -176,3 +228,15 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Tick Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_l0iyg")
+
+[node name="Alarm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_unrh5")
+volume_db = -20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f3qwb")
+}
