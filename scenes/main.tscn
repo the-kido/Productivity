@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=28 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bfrs3ougqipp6" path="res://scenes/activity_idea_creator.tscn" id="9_u8pnu"]
 [ext_resource type="PackedScene" uid="uid://dgsiu5bxxrmso" path="res://scenes/hourly_checkup_window.tscn" id="10_wjskc"]
 [ext_resource type="PackedScene" uid="uid://botrlvedgdb40" path="res://scenes/gallery.tscn" id="11_2wshd"]
+[ext_resource type="Script" path="res://scenes/Settings.cs" id="12_84nml"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -224,7 +225,7 @@ grow_vertical = 2
 layout_mode = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Ambience"]
-modulate = Color(1, 1, 0.901961, 1)
+modulate = Color(1, 1, 0.901961, 0.431373)
 position = Vector2(960, 540)
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_atcny")
@@ -313,38 +314,63 @@ tasks = Array[String](["Work on art", "Program", "Study", "Write", "Relax", "Tur
 [node name="Hourly Checkup" parent="." instance=ExtResource("10_wjskc")]
 visible = false
 
-[node name="TODO_ Settings" type="Control" parent="."]
+[node name="Gallary" parent="." instance=ExtResource("11_2wshd")]
+offset_left = 959.0
+offset_top = 696.0
+offset_right = 999.0
+offset_bottom = 736.0
+
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("routineReminder", "hourlyCheckup", "animationPlayer", "settingsButton", "showAnimations")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -760.0
-offset_top = -456.0
-offset_right = 760.0
-offset_bottom = 456.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -100.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
-pivot_offset = Vector2(760, 456)
+pivot_offset = Vector2(860, 440)
+script = ExtResource("12_84nml")
+routineReminder = NodePath("../Routine Check")
+hourlyCheckup = NodePath("../Hourly Checkup/Hourly Checkup Gui")
+animationPlayer = NodePath("Settings Animations")
+settingsButton = NodePath("../Open Settings")
+showAnimations = NodePath("Panel/CheckBox")
 
-[node name="Background" type="ColorRect" parent="TODO_ Settings"]
+[node name="Settings Animations" type="AnimationPlayer" parent="Settings"]
+libraries = {
+"": SubResource("AnimationLibrary_furii")
+}
+
+[node name="Panel" type="Panel" parent="Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.172549, 0.172549, 0.172549, 0.941176)
 
-[node name="Settings Animations" type="AnimationPlayer" parent="TODO_ Settings"]
-libraries = {
-"": SubResource("AnimationLibrary_furii")
-}
+[node name="CheckBox" type="CheckBox" parent="Settings/Panel"]
+layout_mode = 0
+offset_right = 219.0
+offset_bottom = 100.0
+text = "Allow Reminders"
 
-[node name="Gallary" parent="." instance=ExtResource("11_2wshd")]
-offset_left = 959.0
-offset_top = 696.0
-offset_right = 999.0
-offset_bottom = 736.0
+[node name="Open Settings" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -78.0
+offset_top = -78.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Settings"
+
+[editable path="Hourly Checkup"]
+[editable path="Hourly Checkup/Hourly Checkup Gui"]

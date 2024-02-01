@@ -6,6 +6,7 @@ using Godot.Collections;
 public partial class GoalTracker : Panel {
 
 	readonly string[] goals = {
+		"Routine",
 		"Cardio",
 		"Art",
 		"Productivity"
@@ -28,7 +29,7 @@ public partial class GoalTracker : Panel {
 
 	public override void _Ready() {
 		data = GetData();
-		AddTodayToStreak();
+        AddTodayToStreak();
 
 		foreach (string goal in goals) { 
 			CheckBox duplicate = prototype.Duplicate() as CheckBox;
@@ -46,7 +47,7 @@ public partial class GoalTracker : Panel {
 		}
 	}
 
-	private void AddTodayToStreak() {
+	private static void AddTodayToStreak() {
 		string date = DateToString(CurrentDate);
 		if (!data.ContainsKey(date)) data.Add(date, new());
 	}
@@ -59,7 +60,7 @@ public partial class GoalTracker : Panel {
 		} else {
 			if (data.ContainsKey(date) && !data[date].Contains(goalName)) data[date].Add(goalName);
 			else data.Add(date, new() {goalName});
-			goalCompletedAudioPlayer.Play();
+			goalCompletedAudioPlayer.Play(0.1f);
 		}
 
         Save();
@@ -70,7 +71,7 @@ public partial class GoalTracker : Panel {
 	static void Save() {
 		using FileAccess saveFile = FileAccess.Open(SAVE_FILE_LOCATION, FileAccess.ModeFlags.Write);
 
-		var stringifiedData = Json.Stringify(data);
+		var stringifiedData = Json.Stringify(data, sortKeys: false);
 		saveFile.StoreLine(stringifiedData);
 	}    
 	

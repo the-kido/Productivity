@@ -1,45 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://j0rxcfb5vhhx"]
+[gd_scene load_steps=6 format=3 uid="uid://j0rxcfb5vhhx"]
 
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_7l5fi"]
 [ext_resource type="Script" path="res://scripts/GoalTracker.cs" id="2_he07q"]
-[ext_resource type="Texture2D" uid="uid://c7sjve08b32t5" path="res://assets/star.png" id="3_vpa68"]
+[ext_resource type="PackedScene" uid="uid://btevyts8u5i0b" path="res://scenes/achievement_particles.tscn" id="3_l8rdt"]
 [ext_resource type="AudioStream" uid="uid://c8j3vnsvvr1ik" path="res://assets/soinc.mp3" id="4_6ului"]
-
-[sub_resource type="Gradient" id="Gradient_xqobh"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.886333, 0.69, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ttvb7"]
-gradient = SubResource("Gradient_xqobh")
-
-[sub_resource type="Gradient" id="Gradient_pyhqt"]
-offsets = PackedFloat32Array(0, 0.55625, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.969333, 0.77, 0.694118, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_130bk"]
-gradient = SubResource("Gradient_pyhqt")
-
-[sub_resource type="Curve" id="Curve_cub8c"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.585106, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_y6ua3"]
-curve = SubResource("Curve_cub8c")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dcr8b"]
-particle_flag_disable_z = true
-angle_max = 360.0
-spread = 180.0
-initial_velocity_min = -100.0
-initial_velocity_max = 100.0
-angular_velocity_min = -110.0
-angular_velocity_max = 110.0
-gravity = Vector3(0, 98, 0)
-scale_min = 0.3
-scale_max = 0.5
-scale_curve = SubResource("CurveTexture_y6ua3")
-color = Color(1, 0.988235, 0.929412, 1)
-color_ramp = SubResource("GradientTexture1D_130bk")
-color_initial_ramp = SubResource("GradientTexture1D_ttvb7")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apevt"]
 bg_color = Color(0.0862745, 0.129412, 0.113725, 1)
@@ -65,16 +29,8 @@ offset_bottom = 64.0
 grow_vertical = 2
 text = "fwafwaawgawg "
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Default box"]
-emitting = false
-amount = 30
-process_material = SubResource("ParticleProcessMaterial_dcr8b")
-texture = ExtResource("3_vpa68")
-lifetime = 1.5
-one_shot = true
-speed_scale = 1.5
-explosiveness = 1.0
-randomness = 1.0
+[node name="Achievement Particles" parent="Default box" instance=ExtResource("3_l8rdt")]
+position = Vector2(12, 15.6667)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

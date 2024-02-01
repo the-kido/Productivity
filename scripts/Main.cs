@@ -31,9 +31,16 @@ public partial class Main : Control {
 		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Minimized);
 	}
 
+	private void temp() {
+		if (GetTree().Root.HasFocus()) animationPlayer.Play("Open");
+	}
+	
 	public override void _Notification(int what) {
         if (what == MainLoop.NotificationApplicationFocusIn) {
-			animationPlayer.Play("Open");
+			CallDeferred("temp");
+		}
+		if (what == MainLoop.NotificationApplicationFocusOut) {
+
 		}
     }
 }

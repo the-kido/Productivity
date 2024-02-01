@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Godot;
 
@@ -41,14 +42,19 @@ public partial class HourlyCheckup : Control {
 
 		return string1.Split(" ").Concat(string2.Split(" ")).ToArray();
 	} 
-	
+
+	bool enabled = false;
+	public void ToggleCheckup(bool toggle) => enabled = toggle;
+
 	public override void _Ready() {
 		window = GetParent<Window>();
 		button.Pressed += UpdateButton;
 		ShowEveryHour();
 	}
 
-	private void Start() {
+	private void OpenJumpscare() {
+		if (!enabled) return;
+
 		currentWords = GetNewWords();
 		window.Visible = true;
 		UpdateButton();
@@ -59,7 +65,7 @@ public partial class HourlyCheckup : Control {
 
 	async void ShowEveryHour() {
 		await Task.Delay(HOUR);
-		Start();
+		OpenJumpscare();
 		ShowEveryHour();
 	}
 
@@ -81,7 +87,7 @@ public partial class HourlyCheckup : Control {
 		CallDeferred("UpdateButton2");
 
 	}
-	// I don't know a better way of doing this.
+
 	private static float PossibleShift(int max, float axisSize) => new Random().NextSingle() * (max - axisSize);
 
 	private void UpdateButton2() {
