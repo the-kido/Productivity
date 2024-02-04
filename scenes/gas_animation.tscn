@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/Parallax.cs" id="1_nuc4s"]
 
 [sub_resource type="Gradient" id="Gradient_omk0o"]
-colors = PackedColorArray(0.2892, 0.1485, 0.45, 1, 0.022, 0, 0.22, 1)
+colors = PackedColorArray(0.198, 0.45, 0.3576, 1, 0.022, 0, 0.22, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_d8vmm"]
 
@@ -18,7 +18,7 @@ noise = SubResource("FastNoiseLite_d8vmm")
 script = ExtResource("1_nuc4s")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-modulate = Color(0.74902, 0.858824, 1, 0.501961)
+modulate = Color(0.74902, 1, 0.984314, 0.219608)
 motion_mirroring = Vector2(1920, 0)
 
 [node name="bg" type="TextureRect" parent="ParallaxLayer"]
