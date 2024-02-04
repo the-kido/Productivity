@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkgvqaxaa0nku"]
 
-[ext_resource type="Script" path="res://scripts/Temp.cs" id="1_qtame"]
+[ext_resource type="Script" path="res://scenes/Parallax.cs" id="1_nuc4s"]
 
 [sub_resource type="Gradient" id="Gradient_omk0o"]
 colors = PackedColorArray(0.2892, 0.1485, 0.45, 1, 0.022, 0, 0.22, 1)
@@ -14,34 +14,19 @@ normalize = false
 color_ramp = SubResource("Gradient_omk0o")
 noise = SubResource("FastNoiseLite_d8vmm")
 
-[node name="Animation" type="Control" node_paths=PackedStringArray("_1", "_2")]
-modulate = Color(0, 1, 0.556863, 0.313726)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_qtame")
-_1 = NodePath("_1")
-_2 = NodePath("_2")
+[node name="Animation" type="ParallaxBackground"]
+script = ExtResource("1_nuc4s")
 
-[node name="_1" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("NoiseTexture2D_slcvg")
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+modulate = Color(0.74902, 0.858824, 1, 0.501961)
+motion_mirroring = Vector2(1920, 0)
 
-[node name="_2" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="bg" type="TextureRect" parent="ParallaxLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1920.0
-offset_right = -1920.0
+offset_right = 1920.0
+offset_bottom = 1089.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("NoiseTexture2D_slcvg")
