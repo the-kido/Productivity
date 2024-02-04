@@ -108,7 +108,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.35, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2i(220, 150), Vector2i(230, 155), Vector2i(224, 152), Vector2i(200, 110), Vector2i(180, 100), Vector2i(200, 110)]
+"values": [Vector2i(220, 150), Vector2i(230, 155), Vector2i(224, 152), Vector2i(200, 110), Vector2i(180, 100), Vector2i(210, 135)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xwp8w"]
@@ -125,7 +137,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.2, 0.3, 0.45, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2i(200, 110), Vector2i(190, 105), Vector2i(190, 105), Vector2i(213, 139), Vector2i(230, 157), Vector2i(220, 150)]
+"values": [Vector2i(210, 135), Vector2i(190, 105), Vector2i(190, 105), Vector2i(213, 139), Vector2i(230, 157), Vector2i(220, 150)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gajjj"]
@@ -140,7 +152,7 @@ _data = {
 transparent_bg = true
 audio_listener_enable_2d = true
 mode = 2
-size = Vector2i(220, 150)
+size = Vector2i(210, 135)
 unresizable = true
 borderless = true
 always_on_top = true
@@ -149,11 +161,9 @@ theme = ExtResource("1_wy21r")
 script = ExtResource("2_vqvet")
 
 [node name="Control" parent="." node_paths=PackedStringArray("window", "animationPlayer") instance=ExtResource("3_txtwn")]
-modulate = Color(1, 1, 1, 0)
 offset_right = 0.0
 offset_bottom = 0.0
-rotation = 0.174533
-scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(110, 75)
 window = NodePath("..")
 animationPlayer = NodePath("../AnimationPlayer")
 

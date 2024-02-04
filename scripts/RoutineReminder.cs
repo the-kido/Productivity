@@ -78,7 +78,7 @@ public partial class RoutineReminder : Panel {
 	}
 
 	private void UpdateToAfternoon() {
-		routineLabel.Text = "Finished Afternoon Routine";
+		routineLabel.Text = "Finished Night Routine";
 		routineLabel.ButtonPressed = false;
 	}
 

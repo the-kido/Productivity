@@ -1,6 +1,9 @@
+// Decprecated
+
 using Godot;
 
 public partial class Routine : Window {
+	/*
 	[Export]
 	Button open, close;
 	[Export]
@@ -40,4 +43,5 @@ public partial class Routine : Window {
 			lastMousePosition = currentMousePosition;
 		}
 	}
+	*/
 }

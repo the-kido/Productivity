@@ -20,24 +20,27 @@ public partial class HourlyCheckup : Control {
 		new string[] {"Make sure I am using my time effectively",
 		"Don't be a silly goober",
 		"Hopefully you are actually doing something USEFUL right now, right!?",
-		"I can count on you to be responsible with your time :)",
+		"I can count on you to be responsible with your time!",
 		"No hits of dopamine for you!"}
 	);
 
 	string[] currentWords;
-	int getRandomIndex(int range) => (int) (new Random().NextSingle() * range);
+
+    static int GetRandomIndex(int range) => (int) (new Random().NextSingle() * range);
 	private string[] GetNewWords() {
 		
 		List<string> duplicateArray = possibleMessages.ToList();
 		string string1, string2;
 		
 		// Get item 1
-		int index1 = getRandomIndex(duplicateArray.Count);
+		int index1 = GetRandomIndex(duplicateArray.Count);
 		string1 = duplicateArray[index1];
 		duplicateArray.RemoveAt(index1);
 		
+		string1 += " ..."; // Add this to seperate words b/c yes. Spacing is specific to avoid splitting wierdly
+
 		// Get item 2
-		int index2 = getRandomIndex(duplicateArray.Count);
+		int index2 = GetRandomIndex(duplicateArray.Count);
 		string2 = duplicateArray[index2];
 
 		return string1.Split(" ").Concat(string2.Split(" ")).ToArray();
@@ -48,6 +51,7 @@ public partial class HourlyCheckup : Control {
 
 	public override void _Ready() {
 		window = GetParent<Window>();
+		OpenJumpscare();
 		button.Pressed += UpdateButton;
 		ShowEveryHour();
 	}
@@ -76,16 +80,26 @@ public partial class HourlyCheckup : Control {
 		animationPlayer.Play("Quiet");
 	}
 
+	int alternate = 0;
+	readonly Color OTHER = new("d6e6ff");
+	private void SwitchBGColor() {
+		alternate++;
+		Modulate = alternate == 0 ? Colors.White : OTHER;
+	}
+
 	private void UpdateButton() {
 		if (wordIndex >= currentWords.Length) {
 			Close();
+			SwitchBGColor();
 			return;
 		}
+		
+		if (currentWords[wordIndex] == "...") SwitchBGColor();
+		
 
 		button.Text = currentWords[wordIndex];
 		wordIndex++;
 		CallDeferred("UpdateButton2");
-
 	}
 
 	private static float PossibleShift(int max, float axisSize) => new Random().NextSingle() * (max - axisSize);

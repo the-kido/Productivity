@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=29 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -175,7 +175,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_7a0tl"]
 resource_name = "open"
-length = 1.5
+length = 0.8
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -184,15 +184,79 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5, 0.6, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.35, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1.1, 0.1), Vector2(0.95, 0.075), Vector2(1, 0.15), Vector2(0.9, 1.05), Vector2(1, 0.95), Vector2(1, 1)]
+"values": [Vector2(0, 0), Vector2(1.05, 0.1), Vector2(0.95, 0.075), Vector2(0.975, 1.05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Open Settings:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.55, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Open Settings:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(1818, 978), Vector2(1818, 18)]
+}
+
+[sub_resource type="Animation" id="Animation_oroq6"]
+resource_name = "reset"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Open Settings:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Open Settings:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(1818, 978)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_furii"]
 _data = {
-"open": SubResource("Animation_7a0tl")
+"open": SubResource("Animation_7a0tl"),
+"reset": SubResource("Animation_oroq6")
 }
 
 [node name="Main" type="Control" node_paths=PackedStringArray("minimize", "animationPlayer")]
@@ -223,6 +287,10 @@ grow_vertical = 2
 
 [node name="Animation" parent="Ambience" instance=ExtResource("3_p2uf3")]
 layout_mode = 1
+_1 = Object(TextureRect,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":15,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":1.0,"anchor_bottom":1.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":2,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","texture":null,"expand_mode":0,"stretch_mode":0,"flip_h":false,"flip_v":false,"script":null)
+
+_2 = Object(TextureRect,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":15,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":1.0,"anchor_bottom":1.0,"offset_left":-1920.0,"offset_top":0.0,"offset_right":-1920.0,"offset_bottom":0.0,"grow_horizontal":2,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","texture":null,"expand_mode":0,"stretch_mode":0,"flip_h":false,"flip_v":false,"script":null)
+
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Ambience"]
 modulate = Color(1, 1, 0.901961, 0.431373)
@@ -250,9 +318,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -102.0
-offset_top = 17.0
-offset_right = -17.0
-offset_bottom = 101.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = 102.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 61
 theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
@@ -320,7 +388,7 @@ offset_top = 603.0
 offset_right = 999.0
 offset_bottom = 643.0
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("routineReminder", "hourlyCheckup", "animationPlayer", "settingsButton", "showAnimations")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("routineReminder", "hourlyCheckup", "globalMinimizeButton", "animationPlayer", "settingsButton", "showAnimations", "forceExit")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -336,9 +404,11 @@ pivot_offset = Vector2(860, 440)
 script = ExtResource("12_84nml")
 routineReminder = NodePath("../Routine Check")
 hourlyCheckup = NodePath("../Hourly Checkup/Hourly Checkup Gui")
+globalMinimizeButton = NodePath("../Minimize Button")
 animationPlayer = NodePath("Settings Animations")
 settingsButton = NodePath("../Open Settings")
 showAnimations = NodePath("Panel/CheckBox")
+forceExit = NodePath("Panel/Force Exit")
 
 [node name="Settings Animations" type="AnimationPlayer" parent="Settings"]
 libraries = {
@@ -359,6 +429,20 @@ offset_right = 219.0
 offset_bottom = 100.0
 text = "Allow Reminders"
 
+[node name="Force Exit" type="Button" parent="Settings/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Force 
+Exit"
+
 [node name="Open Settings" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -366,16 +450,17 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -95.0
-offset_top = -95.0
-offset_right = -17.0
-offset_bottom = -17.0
+offset_left = -102.0
+offset_top = -102.0
+offset_right = -18.0
+offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2ashe")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2ashe")
-text = "Settings"
+text = "Open
+Settings"
 
 [editable path="Hourly Checkup"]
 [editable path="Hourly Checkup/Hourly Checkup Gui"]

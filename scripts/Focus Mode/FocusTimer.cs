@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class FocusTimer : Control {
@@ -62,11 +64,31 @@ public partial class FocusTimer : Control {
 	public void StartTimer(int minutes, string reason) {
 		Open();
 		seconds = minutes * 60;
-		reasonLabel.Text = reason;
-		UpdateText();
+		reasonLabel.Text = FormatText(reason);
+		UpdateTimer();
 	}
 
-	void UpdateText() {
+    private const int LINE_LEAK_SIZE = 24;
+
+    private string FormatText(string @string) {
+		List<string> array = @string.Split(" ").ToList();
+		int size = 0;
+
+        for (int i = 0; i < array.Count; i++) {
+            string item = array[i];
+
+            if (size + item.Length >= LINE_LEAK_SIZE) {
+				array.Insert(i, "\n");
+				size = -1000;
+			}
+			size += item.Length + 1; // adding 1 for the space  
+		}
+		string combined = "";
+		foreach (var item in array) combined += item + " ";
+		return combined;
+	}
+
+	void UpdateTimer() {
 		timer.Text = TimerText(seconds / 3600, seconds/60  % 60, seconds % 60);
 	}
 
@@ -106,14 +128,14 @@ public partial class FocusTimer : Control {
 		if (time >= 0.99999) {
 			seconds--;
 			PlaySounds(); 
-			UpdateText();
+			UpdateTimer();
 			time = 0;
 		}
 	}
 
 	private void PlaySounds() {
 		// Every 5 minut
-		if (seconds % 10 == 0) audioPlayer.Play("reminder");
+		if (seconds % (5*60) == 0) audioPlayer.Play("reminder");
 		if (seconds == 0) audioPlayer.Play("alarm");
 	}
 
