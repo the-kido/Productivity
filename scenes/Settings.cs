@@ -36,6 +36,8 @@ public partial class Settings : Control {
 		animationPlayer.Play("reset"); // in case of reasons
 
 		showAnimations.Toggled += ToggleShowAnimations;
+		ToggleShowAnimations(true); // Default them to be on.
+
 		settingsButton.Pressed += ToggleSettings;
 		// If settings is opened while minimizing, settings should close too
 		globalMinimizeButton.Pressed += () => { if (opened) ToggleSettings();};

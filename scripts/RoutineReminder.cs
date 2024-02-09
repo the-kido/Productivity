@@ -41,7 +41,7 @@ public partial class RoutineReminder : Panel {
 	}
 
 	private async void OpenOnLoadup() {
-		await Task.Delay(1000*60); // Remind 10 seconds after booting up
+		await Task.Delay(1000*60); // Remind 1 minute after booting up
 		OpenApp();
 	}
 

@@ -61,6 +61,7 @@ public partial class HourlyCheckup : Control {
 
 		currentWords = GetNewWords();
 		window.Visible = true;
+		SwitchBGColor(false);
 		UpdateButton();
 		animationPlayer.Play("Play");
 
@@ -80,21 +81,16 @@ public partial class HourlyCheckup : Control {
 		animationPlayer.Play("Quiet");
 	}
 
-	int alternate = 0;
 	readonly Color OTHER = new("d6e6ff");
-	private void SwitchBGColor() {
-		alternate++;
-		Modulate = alternate == 0 ? Colors.White : OTHER;
-	}
+	private void SwitchBGColor(bool @bool) => Modulate = @bool ? OTHER : Colors.White;
 
 	private void UpdateButton() {
 		if (wordIndex >= currentWords.Length) {
 			Close();
-			SwitchBGColor();
 			return;
 		}
 		
-		if (currentWords[wordIndex] == "...") SwitchBGColor();
+		if (currentWords[wordIndex] == "...") SwitchBGColor(true);
 		
 
 		button.Text = currentWords[wordIndex];
