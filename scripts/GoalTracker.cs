@@ -5,11 +5,17 @@ using Godot.Collections;
 
 public partial class GoalTracker : Panel {
 
-	readonly string[] goals = {
+	static readonly string[] goals = {
 		"Routine",
 		"Cardio",
 		"Art",
 		"Productivity"
+	};
+	static Dictionary<string, string> goalDescription = new() {
+		{goals[0], "Read and did Routine"},
+		{goals[1], "Did my daily workout"},
+		{goals[2], "Did art sometime today"},
+		{goals[3], "Was overall productive"},
 	};
 
 	[Export]
@@ -23,7 +29,7 @@ public partial class GoalTracker : Panel {
 	static Dictionary<string, Array<string>> data = new(); // Key is day, Value is goals
 
 	
-	static private void UpdateCheckBox(CheckBox checkBox, string goal) => checkBox.Text = $"{goal} (Streak: {GetStreak(goal)})"; 
+	static private void UpdateCheckBox(CheckBox checkBox, string goal) => checkBox.Text = $"{goalDescription[goal]} ({GetStreak(goal)})"; 
     static DateTime CurrentDate => DateTime.Now;
     static string DateToString(DateTime dateTime) => $"{dateTime.Day}/{dateTime.Month}/{dateTime.Year}";
 
@@ -36,7 +42,8 @@ public partial class GoalTracker : Panel {
 
 			goalsContainer.AddChild(duplicate);
 
-			duplicate.Text = $"{goal} (Streak: {GetStreak(goal)})";
+			UpdateCheckBox(duplicate, goal);
+
 			duplicate.Visible = true;
 			duplicate.ButtonPressed = data[DateToString(CurrentDate)].Contains(goal);
 			duplicate.Toggled += (toggled) => {

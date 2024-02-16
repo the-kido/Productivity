@@ -26,10 +26,8 @@ public partial class RoutineReminder : Panel {
 	readonly int minuteOpened;
 	RoutineReminder() => minuteOpened = DateTime.Now.TimeOfDay.Minutes;
 
-	public void ToggleNotifications(bool toggle) {
-		enabled = toggle;
-	}
-
+	public void ToggleNotifications(bool toggle) => enabled = toggle;
+	
 	public override void _Ready() {
 		if (!routineLabel.ButtonPressed) Update();
 		if (DateTime.Now.TimeOfDay.Hours >= afternoonHour) UpdateToAfternoon();
@@ -50,7 +48,6 @@ public partial class RoutineReminder : Panel {
 		if (saveFile is null) return false;
 
         string[] info = saveFile.GetLine().Split(",");
-		foreach (var a in info) GD.Print(a);
 		
 		// The second check is to make sure is false if the day is different (new day)
 		return info[0] == "True" && info[1] == DateTime.Now.Day.ToString();

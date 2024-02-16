@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Godot;
 
 public partial class HourlyCheckup : Control {
 	[Export]
-	Button button;
+	// The actual button is slightly larger so that the game isn't frustrating.
+	Button visual, actual;
 
 	Window window; 
 	[Export]
@@ -16,13 +16,14 @@ public partial class HourlyCheckup : Control {
 	// in milliseconds
 	const int HOUR = 1000 * 60 * 60;
 
-    readonly List<string> possibleMessages = new(
-		new string[] {"Make sure I am using my time effectively",
-		"Don't be a silly goober",
-		"Hopefully you are actually doing something USEFUL right now, right!?",
-		"I can count on you to be responsible with your time!",
-		"No hits of dopamine for you!"}
-	);
+    readonly List<string> possibleMessages = new(new string[] {
+		"Relax in real life",
+		"Youtube is bad for health",
+		"Is there something more healthy I could be doing?",
+		"Get off of the screen",
+		"No short hits of dopamine for you!",
+		"What are you gaining by doing this right now!?",
+	});
 
 	string[] currentWords;
 
@@ -46,13 +47,12 @@ public partial class HourlyCheckup : Control {
 		return string1.Split(" ").Concat(string2.Split(" ")).ToArray();
 	} 
 
-	bool enabled = false;
+	bool enabled = true;
 	public void ToggleCheckup(bool toggle) => enabled = toggle;
 
 	public override void _Ready() {
 		window = GetParent<Window>();
-		OpenJumpscare();
-		button.Pressed += UpdateButton;
+		actual.Pressed += UpdateButton;
 		ShowEveryHour();
 	}
 
@@ -67,7 +67,6 @@ public partial class HourlyCheckup : Control {
 
 		window.Position = new((int) PossibleShift(1920, Size.X), (int) PossibleShift(1080, Size.Y));
 	}
-
 	async void ShowEveryHour() {
 		await Task.Delay(HOUR);
 		OpenJumpscare();
@@ -79,6 +78,7 @@ public partial class HourlyCheckup : Control {
 		window.Visible = false;
 		wordIndex = 0;
 		animationPlayer.Play("Quiet");
+		afkTimer = 0;
 	}
 
 	readonly Color OTHER = new("d6e6ff");
@@ -93,7 +93,7 @@ public partial class HourlyCheckup : Control {
 		if (currentWords[wordIndex] == "...") SwitchBGColor(true);
 		
 
-		button.Text = currentWords[wordIndex];
+		visual.Text = currentWords[wordIndex];
 		wordIndex++;
 		CallDeferred("UpdateButton2");
 	}
@@ -101,10 +101,17 @@ public partial class HourlyCheckup : Control {
 	private static float PossibleShift(int max, float axisSize) => new Random().NextSingle() * (max - axisSize);
 
 	private void UpdateButton2() {
-		button.Position = new(PossibleShift(300, button.Size.X), PossibleShift(300, button.Size.Y));
+		visual.Position = new(PossibleShift(300, visual.Size.X), PossibleShift(300, visual.Size.Y));
 	}
 
+	double afkTimer = 0;
     public override void _Process(double delta) {
 		if (Input.IsActionJustPressed("Escape") && Input.IsActionPressed("Shift")) Close();
+
+		if (window.Visible) {
+			afkTimer += delta;
+			if (Input.IsActionPressed("Click")) afkTimer = 0;
+			if (afkTimer >= 30) Close();
+		} 
     }
 }

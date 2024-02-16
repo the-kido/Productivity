@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=30 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dgsiu5bxxrmso" path="res://scenes/hourly_checkup_window.tscn" id="10_wjskc"]
 [ext_resource type="PackedScene" uid="uid://botrlvedgdb40" path="res://scenes/gallery.tscn" id="11_2wshd"]
 [ext_resource type="Script" path="res://scenes/Settings.cs" id="12_84nml"]
+[ext_resource type="PackedScene" uid="uid://581g53n48oh" path="res://scenes/notification.tscn" id="13_5yrco"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -358,6 +359,8 @@ offset_left = 473.0
 offset_top = 287.0
 offset_right = 734.0
 offset_bottom = 328.0
+enabled = true
+afternoonHour = 21
 
 [node name="Goals" parent="." instance=ExtResource("9_i1xnj")]
 layout_mode = 0
@@ -383,7 +386,8 @@ offset_top = 603.0
 offset_right = 999.0
 offset_bottom = 643.0
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("routineReminder", "hourlyCheckup", "globalMinimizeButton", "animationPlayer", "settingsButton", "showAnimations", "forceExit")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("routineReminder", "hourlyCheckup", "globalMinimizeButton", "notification", "animationPlayer", "settingsButton", "gallery", "showAnimations", "showGallery", "forceExit")]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -400,9 +404,12 @@ script = ExtResource("12_84nml")
 routineReminder = NodePath("../Routine Check")
 hourlyCheckup = NodePath("../Hourly Checkup/Hourly Checkup Gui")
 globalMinimizeButton = NodePath("../Minimize Button")
+notification = NodePath("../Notification/Notification")
 animationPlayer = NodePath("Settings Animations")
 settingsButton = NodePath("../Open Settings")
-showAnimations = NodePath("Panel/CheckBox")
+gallery = NodePath("../Gallary")
+showAnimations = NodePath("Panel/Toggles VBox/Allow Reminders")
+showGallery = NodePath("Panel/Toggles VBox/Show Gallery")
 forceExit = NodePath("Panel/Force Exit")
 
 [node name="Settings Animations" type="AnimationPlayer" parent="Settings"]
@@ -418,14 +425,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CheckBox" type="CheckBox" parent="Settings/Panel"]
-layout_mode = 0
-offset_right = 158.0
-offset_bottom = 31.0
-scale = Vector2(2, 2)
-button_pressed = true
-text = "Allow Reminders"
-
 [node name="Force Exit" type="Button" parent="Settings/Panel"]
 layout_mode = 1
 anchors_preset = 3
@@ -439,6 +438,22 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Force 
 Exit"
+
+[node name="Toggles VBox" type="VBoxContainer" parent="Settings/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+
+[node name="Allow Reminders" type="CheckBox" parent="Settings/Panel/Toggles VBox"]
+layout_mode = 2
+button_pressed = true
+text = "Allow Reminders"
+
+[node name="Show Gallery" type="CheckBox" parent="Settings/Panel/Toggles VBox"]
+layout_mode = 2
+button_pressed = true
+text = "Show Gallery"
 
 [node name="Open Settings" type="Button" parent="."]
 layout_mode = 1
@@ -458,6 +473,20 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_2ashe")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2ashe")
 text = "Open
 Settings"
+
+[node name="Notification" type="Window" parent="."]
+transparent_bg = true
+position = Vector2i(1700, 910)
+size = Vector2i(200, 150)
+visible = false
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+
+[node name="Notification" parent="Notification" instance=ExtResource("13_5yrco")]
+offset_right = 0.0
+offset_bottom = 0.0
 
 [editable path="Hourly Checkup"]
 [editable path="Hourly Checkup/Hourly Checkup Gui"]
