@@ -76,7 +76,7 @@ public partial class Settings : Control {
 
 	const int HALF_HOUR = 1000 * 60 * 30;
 	private async void AnimationReminder() {
-		if (!showAnimations.ToggleMode) notification.Play();
+		if (!showAnimations.ButtonPressed) notification.Play();
 		await Task.Delay(HALF_HOUR);
 		AnimationReminder();
 	}
