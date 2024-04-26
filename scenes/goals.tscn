@@ -4,11 +4,7 @@
 [ext_resource type="Script" path="res://scripts/GoalTracker.cs" id="2_he07q"]
 [ext_resource type="PackedScene" uid="uid://btevyts8u5i0b" path="res://scenes/achievement_particles.tscn" id="3_l8rdt"]
 [ext_resource type="AudioStream" uid="uid://c8j3vnsvvr1ik" path="res://assets/soinc.mp3" id="4_6ului"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apevt"]
-bg_color = Color(0.0862745, 0.129412, 0.113725, 1)
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+[ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="4_sh8df"]
 
 [node name="Goals" type="Panel" node_paths=PackedStringArray("goalsContainer", "prototype", "goalCompletedAudioPlayer")]
 offset_right = 260.0
@@ -55,7 +51,7 @@ offset_top = -167.0
 offset_right = 130.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_apevt")
+theme_override_styles/panel = ExtResource("4_sh8df")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Creation Panel"]
 layout_mode = 1

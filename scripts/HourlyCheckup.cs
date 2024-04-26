@@ -15,6 +15,8 @@ public partial class HourlyCheckup : Control {
 
 	// in milliseconds
 	const int HOUR = 1000 * 60 * 60;
+	// I do not want the audio playing tbh
+	const bool PLAY_AUDIO = false;
 
     readonly List<string> possibleMessages = new(new string[] {
 		"Relax in real life",
@@ -63,7 +65,8 @@ public partial class HourlyCheckup : Control {
 		window.Visible = true;
 		SwitchBGColor(false);
 		UpdateButton();
-		animationPlayer.Play("Play");
+
+		if (PLAY_AUDIO) animationPlayer.Play("Play");
 
 		window.Position = new((int) PossibleShift(1920, Size.X), (int) PossibleShift(1080, Size.Y));
 	}
@@ -77,7 +80,7 @@ public partial class HourlyCheckup : Control {
 	private void Close() {
 		window.Visible = false;
 		wordIndex = 0;
-		animationPlayer.Play("Quiet");
+		if (PLAY_AUDIO) animationPlayer.Play("Quiet");
 		afkTimer = 0;
 	}
 

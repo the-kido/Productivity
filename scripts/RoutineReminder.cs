@@ -34,13 +34,6 @@ public partial class RoutineReminder : Panel {
 
 		routineLabel.Pressed += OnPressed;
 		routineLabel.ButtonPressed = LoadIfPressed(); // Do last in case we update to afternoon.
-		
-		OpenOnLoadup();
-	}
-
-	private async void OpenOnLoadup() {
-		await Task.Delay(1000*60); // Remind 1 minute after booting up
-		OpenApp();
 	}
 
 	private static bool LoadIfPressed() {

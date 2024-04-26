@@ -13,8 +13,11 @@ borderless = true
 always_on_top = true
 transparent = true
 
-[node name="Hourly Checkup Gui" parent="." instance=ExtResource("1_ynh6p")]
+[node name="Hourly Checkup Gui" parent="." node_paths=PackedStringArray("visual", "actual", "animationPlayer") instance=ExtResource("1_ynh6p")]
 offset_right = 0.0
 offset_bottom = 0.0
+visual = NodePath("Visual")
+actual = NodePath("Visual/Actual")
+animationPlayer = NodePath("AnimationPlayer")
 
 [editable path="Hourly Checkup Gui"]

@@ -3,11 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://diqga3piorj3q" path="res://scenes/focus_timer_window.tscn" id="1_0lcee"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_kdbow"]
 [ext_resource type="Script" path="res://scripts/Focus Mode/FocusTimerCreator.cs" id="2_5d70y"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ff6pb"]
-bg_color = Color(0.0862745, 0.129412, 0.113725, 1)
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+[ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="3_n650j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ug0by"]
 content_margin_left = 0.0
@@ -63,7 +59,7 @@ offset_top = -127.0
 offset_right = 196.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ff6pb")
+theme_override_styles/panel = ExtResource("3_n650j")
 
 [node name="Time2" type="Control" parent="Panel/Creation Panel"]
 layout_mode = 1
@@ -96,6 +92,7 @@ offset_right = 155.0
 offset_bottom = 20.5
 grow_horizontal = 2
 grow_vertical = 2
+max_value = 720.0
 update_on_text_changed = true
 suffix = "minutes"
 
@@ -150,5 +147,18 @@ disabled = true
 position = Vector2i(995, 185)
 visible = false
 theme = SubResource("Theme_jrfkj")
+
+[node name="Control" parent="Window" index="0" node_paths=PackedStringArray("pause", "settings", "close", "timer", "reasonLabel", "settingsControl", "audioPlayer", "toggleOpaqueMode", "opaqueControls", "window", "animationPlayer")]
+pause = NodePath("Pause")
+settings = NodePath("Open Settings Button")
+close = NodePath("Settings/Close")
+timer = NodePath("Time")
+reasonLabel = NodePath("Reason")
+settingsControl = NodePath("Settings")
+audioPlayer = NodePath("AnimationPlayer")
+toggleOpaqueMode = NodePath("Settings/Top bar/Opaque mode")
+opaqueControls = [NodePath("."), NodePath("Time"), NodePath("Reason")]
+window = NodePath("..")
+animationPlayer = NodePath("../AnimationPlayer")
 
 [editable path="Window"]

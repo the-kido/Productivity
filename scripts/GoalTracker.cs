@@ -9,13 +9,13 @@ public partial class GoalTracker : Panel {
 		"Routine",
 		"Cardio",
 		"Art",
-		"Productivity"
+		// "Productivity"
 	};
 	static Dictionary<string, string> goalDescription = new() {
 		{goals[0], "Read and did Routine"},
 		{goals[1], "Did my daily workout"},
-		{goals[2], "Did art sometime today"},
-		{goals[3], "Was overall productive"},
+		{goals[2], "Drew today"},
+		// {goals[3], "Was overall productive"},
 	};
 
 	[Export]

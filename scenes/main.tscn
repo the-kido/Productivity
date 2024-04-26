@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=31 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c1ldyweujjmt2" path="res://scenes/focus_timer_creator.tscn" id="7_trlnb"]
 [ext_resource type="PackedScene" uid="uid://j0rxcfb5vhhx" path="res://scenes/goals.tscn" id="9_i1xnj"]
 [ext_resource type="PackedScene" uid="uid://bfrs3ougqipp6" path="res://scenes/activity_idea_creator.tscn" id="9_u8pnu"]
+[ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="9_yh4i7"]
 [ext_resource type="PackedScene" uid="uid://dgsiu5bxxrmso" path="res://scenes/hourly_checkup_window.tscn" id="10_wjskc"]
 [ext_resource type="PackedScene" uid="uid://botrlvedgdb40" path="res://scenes/gallery.tscn" id="11_2wshd"]
 [ext_resource type="Script" path="res://scenes/Settings.cs" id="12_84nml"]
@@ -68,6 +69,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ambience/Animation/ParallaxLayer/bg:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_wri2s"]
 resource_name = "Open"
@@ -96,6 +109,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.5, 0.5), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ambience/Animation/ParallaxLayer/bg:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Ambience/Fog:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nklnb"]
@@ -319,9 +356,9 @@ offset_right = -18.0
 offset_bottom = 102.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 61
-theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2ashe")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2ashe")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 text = "–"
 
 [node name="Main background" type="TextureRect" parent="."]
@@ -347,13 +384,17 @@ libraries = {
 }
 speed_scale = 0.05
 
-[node name="Focus Timer" parent="." instance=ExtResource("7_trlnb")]
+[node name="Focus Timer" parent="." node_paths=PackedStringArray("focusMode", "createTimerButton", "minutes", "reason") instance=ExtResource("7_trlnb")]
 offset_left = 473.0
 offset_top = 379.0
 offset_right = 473.0
 offset_bottom = 379.0
+focusMode = NodePath("Window/Control")
+createTimerButton = NodePath("Panel/Button")
+minutes = NodePath("Panel/Creation Panel/Time2/Minutes")
+reason = NodePath("Panel/Creation Panel/Reason2/Reason Box")
 
-[node name="Routine Check" parent="." instance=ExtResource("7_lb3v0")]
+[node name="Routine Check" parent="." node_paths=PackedStringArray("routineLabel", "particles", "audioPlayer") instance=ExtResource("7_lb3v0")]
 layout_mode = 0
 offset_left = 473.0
 offset_top = 287.0
@@ -361,30 +402,93 @@ offset_right = 734.0
 offset_bottom = 328.0
 enabled = true
 afternoonHour = 21
+routineLabel = NodePath("Label")
+particles = NodePath("Label/GPUParticles2D")
+audioPlayer = NodePath("Completed Goal")
 
-[node name="Goals" parent="." instance=ExtResource("9_i1xnj")]
+[node name="Goals" parent="." node_paths=PackedStringArray("goalsContainer", "prototype", "goalCompletedAudioPlayer") instance=ExtResource("9_i1xnj")]
 layout_mode = 0
 offset_left = 938.0
 offset_top = 152.0
 offset_right = 1198.0
 offset_bottom = 352.0
+goalsContainer = NodePath("Creation Panel/VBoxContainer")
+prototype = NodePath("Default box")
+goalCompletedAudioPlayer = NodePath("Completed Goal")
 
-[node name="Activity Ideas" parent="." instance=ExtResource("9_u8pnu")]
+[node name="Things i can do" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 938.0
+offset_top = 554.0
+offset_right = 1225.0
+offset_bottom = 890.0
+
+[node name="Header" type="Label" parent="Things i can do"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 37.0
+grow_horizontal = 2
+text = "Things I can do"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Things i can do"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("9_yh4i7")
+
+[node name="Ideas" type="RichTextLabel" parent="Things i can do/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[ul]Doodle
+[ul]Copy, study, or draw what’s on your mind. [/ul]
+Lazy around off your computer
+Exercise more
+[/ul]"
+
+[node name="Activity Ideas" parent="." node_paths=PackedStringArray("animationPlayer") instance=ExtResource("9_u8pnu")]
 layout_mode = 1
 offset_left = 600.0
 offset_top = 657.0
 offset_right = 600.64
 offset_bottom = 657.04
+animationPlayer = NodePath("AnimationPlayer")
 tasks = Array[String](["Work on art", "Program", "Study", "Write", "Relax", "Turn your brain off", "Create something", "Go outside", "Don't watch youtube", "o(*^▽^*)┛"])
 
 [node name="Hourly Checkup" parent="." instance=ExtResource("10_wjskc")]
 visible = false
 
-[node name="Gallary" parent="." instance=ExtResource("11_2wshd")]
-offset_left = 959.0
-offset_top = 603.0
-offset_right = 999.0
-offset_bottom = 643.0
+[node name="Hourly Checkup Gui" parent="Hourly Checkup" index="0" node_paths=PackedStringArray("visual", "actual", "animationPlayer")]
+visual = NodePath("Visual")
+actual = NodePath("Visual/Actual")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="Gallary" parent="." node_paths=PackedStringArray("largeLeft", "mediumRight", "smallBottom", "panel") instance=ExtResource("11_2wshd")]
+visible = false
+offset_left = 1537.0
+offset_top = 377.0
+offset_right = 1577.0
+offset_bottom = 417.0
+largeLeft = NodePath("large")
+mediumRight = NodePath("medium")
+smallBottom = NodePath("small")
+panel = NodePath("BG Panel")
 
 [node name="Settings" type="Control" parent="." node_paths=PackedStringArray("routineReminder", "hourlyCheckup", "globalMinimizeButton", "notification", "animationPlayer", "settingsButton", "gallery", "showAnimations", "showGallery", "forceExit")]
 z_index = 10
@@ -451,8 +555,8 @@ button_pressed = true
 text = "Allow Reminders"
 
 [node name="Show Gallery" type="CheckBox" parent="Settings/Panel/Toggles VBox"]
+visible = false
 layout_mode = 2
-button_pressed = true
 text = "Show Gallery"
 
 [node name="Open Settings" type="Button" parent="."]
@@ -468,9 +572,9 @@ offset_right = -18.0
 offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2ashe")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2ashe")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 text = "Open
 Settings"
 
@@ -484,9 +588,11 @@ borderless = true
 always_on_top = true
 transparent = true
 
-[node name="Notification" parent="Notification" instance=ExtResource("13_5yrco")]
+[node name="Notification" parent="Notification" node_paths=PackedStringArray("animationPlayer") instance=ExtResource("13_5yrco")]
 offset_right = 0.0
 offset_bottom = 0.0
+animationPlayer = NodePath("AnimationPlayer")
 
+[editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]
 [editable path="Hourly Checkup/Hourly Checkup Gui"]

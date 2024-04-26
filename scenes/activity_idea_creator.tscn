@@ -34,7 +34,7 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_clyju"]
-colors = PackedColorArray(0.807843, 0.839216, 0.839216, 1, 0.807843, 0.839216, 0.839216, 0)
+colors = PackedColorArray(0.72549, 0.768627, 0.760784, 1, 0.725, 0.769, 0.761, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_mtht8"]
 gradient = SubResource("Gradient_clyju")
@@ -50,7 +50,7 @@ script = ExtResource("1_4mlcr")
 animationPlayer = NodePath("AnimationPlayer")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0.807843, 0.839216, 0.839216, 1)
+modulate = Color(0.7238, 0.77, 0.76076, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.722222
