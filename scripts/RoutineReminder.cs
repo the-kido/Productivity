@@ -19,7 +19,7 @@ public partial class RoutineReminder : Panel {
 	AudioStreamPlayer2D audioPlayer;
 
 	// In minutes
-	const int CHECKUP_PERIOD = 15;
+	const int CHECKUP_PERIOD = 25;
 	const string SAVE_FILE_LOCATION = "user://routine.txt";
 
 	// Required for timing when to give the next prompt.

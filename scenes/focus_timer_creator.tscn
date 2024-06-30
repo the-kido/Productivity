@@ -145,6 +145,7 @@ disabled = true
 
 [node name="Window" parent="." instance=ExtResource("1_0lcee")]
 position = Vector2i(995, 185)
+size = Vector2i(220, 150)
 visible = false
 theme = SubResource("Theme_jrfkj")
 

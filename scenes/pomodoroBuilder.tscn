@@ -1,0 +1,293 @@
+[gd_scene load_steps=8 format=3 uid="uid://owrdrgxs20h7"]
+
+[ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="1_1oqdn"]
+[ext_resource type="Script" path="res://scenes/PomodoroBuilder.cs" id="1_mha8w"]
+[ext_resource type="PackedScene" uid="uid://r5q1gq7lqg6r" path="res://scenes/pomodoro.tscn" id="3_0yjk4"]
+[ext_resource type="Script" path="res://scripts/Focus Mode/DraggableWindow.cs" id="3_tymrl"]
+
+[sub_resource type="Animation" id="Animation_o66qh"]
+resource_name = "close"
+length = 0.5333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pomodoro:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2997, 0.5328),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pomodoro:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2997, 0.5328),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.887387, 0.887387), Vector2(0.7, 0.7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pomodoro:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333, 0.2997, 0.5328),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.666266), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pomodoro:rotation")
+tracks/3/interp = 3
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333, 0.2997, 0.5328),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0582475, 0.174533]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5328),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_p8wx5"]
+resource_name = "open"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pomodoro:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pomodoro:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1998, 0.7992),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(0.940787, 0.940787), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pomodoro:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1998, 0.7992),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.174533, -0.0344486, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pomodoro:modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0333, 0.1665, 0.7992),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.775221), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4krlb"]
+_data = {
+"close": SubResource("Animation_o66qh"),
+"open": SubResource("Animation_p8wx5")
+}
+
+[node name="Pomodoro" type="Panel" node_paths=PackedStringArray("start", "workTime", "breakTime", "pomodoro")]
+offset_right = 327.0
+offset_bottom = 230.0
+script = ExtResource("1_mha8w")
+start = NodePath("Button")
+workTime = NodePath("Params/Work Period/SpinBox")
+breakTime = NodePath("Params/Break Period/SpinBox2")
+pomodoro = NodePath("Window/Pomodoro")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Pomodoro"
+
+[node name="Params" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -133.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("1_1oqdn")
+
+[node name="Work Period" type="Control" parent="Params"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="SpinBox" type="SpinBox" parent="Params/Work Period"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -17.0
+offset_right = -20.0
+offset_bottom = 17.0
+grow_horizontal = 0
+grow_vertical = 2
+min_value = 1.0
+max_value = 60.0
+value = 30.0
+suffix = "minutes"
+
+[node name="Label" type="Label" parent="Params/Work Period"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -13.0
+offset_right = 108.0
+offset_bottom = 13.0
+grow_vertical = 2
+text = "Work Time"
+
+[node name="Break Period" type="Control" parent="Params"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 74.0
+offset_bottom = 124.0
+grow_horizontal = 2
+
+[node name="SpinBox2" type="SpinBox" parent="Params/Break Period"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -25.0
+offset_right = -20.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 2
+min_value = 1.0
+max_value = 15.0
+value = 5.0
+suffix = "minutes"
+
+[node name="Label2" type="Label" parent="Params/Break Period"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -21.0
+offset_right = 128.0
+offset_bottom = 5.0
+grow_vertical = 2
+text = "Break Time"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = -79.0
+offset_right = 65.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Pomodoro"
+
+[node name="Window" type="Window" parent="."]
+transparent_bg = true
+audio_listener_enable_2d = true
+size = Vector2i(257, 154)
+visible = false
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("3_tymrl")
+
+[node name="Pomodoro" parent="Window" node_paths=PackedStringArray("pause", "close", "time", "switchBetweenPeriods", "openCloseAnimations", "shrinkExpandAnimations", "progress") instance=ExtResource("3_0yjk4")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+rotation = 0.174533
+scale = Vector2(0.7, 0.7)
+pause = NodePath("Control Rack/Pause")
+close = NodePath("Control Rack/Close")
+time = NodePath("Time")
+switchBetweenPeriods = NodePath("Control Rack/Switch")
+openCloseAnimations = NodePath("../AnimationPlayer")
+shrinkExpandAnimations = NodePath("Switch Modes")
+progress = NodePath("HSlider")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Window"]
+libraries = {
+"": SubResource("AnimationLibrary_4krlb")
+}
+
+[editable path="Window/Pomodoro"]

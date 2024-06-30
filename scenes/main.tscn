@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=34 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bkgvqaxaa0nku" path="res://scenes/gas_animation.tscn" id="3_p2uf3"]
 [ext_resource type="PackedScene" uid="uid://cjsy1mrersesy" path="res://scenes/routine_check.tscn" id="7_lb3v0"]
 [ext_resource type="PackedScene" uid="uid://c1ldyweujjmt2" path="res://scenes/focus_timer_creator.tscn" id="7_trlnb"]
+[ext_resource type="PackedScene" uid="uid://owrdrgxs20h7" path="res://scenes/pomodoroBuilder.tscn" id="9_26jp5"]
 [ext_resource type="PackedScene" uid="uid://j0rxcfb5vhhx" path="res://scenes/goals.tscn" id="9_i1xnj"]
 [ext_resource type="PackedScene" uid="uid://bfrs3ougqipp6" path="res://scenes/activity_idea_creator.tscn" id="9_u8pnu"]
 [ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="9_yh4i7"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://botrlvedgdb40" path="res://scenes/gallery.tscn" id="11_2wshd"]
 [ext_resource type="Script" path="res://scenes/Settings.cs" id="12_84nml"]
 [ext_resource type="PackedScene" uid="uid://581g53n48oh" path="res://scenes/notification.tscn" id="13_5yrco"]
+[ext_resource type="Shader" path="res://scenes/blur.gdshader" id="16_8uasd"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -84,7 +86,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_wri2s"]
 resource_name = "Open"
-length = 0.4
+length = 0.8
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -117,10 +119,10 @@ tracks/2/path = NodePath("Ambience/Animation/ParallaxLayer/bg:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0.45, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.459)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -129,7 +131,7 @@ tracks/3/path = NodePath("Ambience/Fog:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3, 0.4),
+"times": PackedFloat32Array(0.45, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -297,6 +299,9 @@ _data = {
 "reset": SubResource("Animation_oroq6")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0decr"]
+shader = ExtResource("16_8uasd")
+
 [node name="Main" type="Control" node_paths=PackedStringArray("minimize", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
@@ -324,6 +329,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Animation" parent="Ambience" instance=ExtResource("3_p2uf3")]
+
+[node name="bg" parent="Ambience/Animation/ParallaxLayer" index="0"]
+modulate = Color(1, 1, 1, 0.459)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Ambience"]
 modulate = Color(1, 1, 0.901961, 0.431373)
@@ -416,7 +424,19 @@ goalsContainer = NodePath("Creation Panel/VBoxContainer")
 prototype = NodePath("Default box")
 goalCompletedAudioPlayer = NodePath("Completed Goal")
 
+[node name="Pomodoro" parent="." node_paths=PackedStringArray("start", "workTime", "breakTime", "pomodoro") instance=ExtResource("9_26jp5")]
+layout_mode = 0
+offset_left = 938.0
+offset_top = 566.0
+offset_right = 1265.0
+offset_bottom = 796.0
+start = NodePath("Button")
+workTime = NodePath("Params/Work Period/SpinBox")
+breakTime = NodePath("Params/Break Period/SpinBox2")
+pomodoro = NodePath("Window/Pomodoro")
+
 [node name="Things i can do" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 938.0
 offset_top = 554.0
@@ -592,6 +612,16 @@ transparent = true
 offset_right = 0.0
 offset_bottom = 0.0
 animationPlayer = NodePath("AnimationPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_0decr")
+offset_left = 936.0
+offset_top = 89.0
+offset_right = 1708.0
+offset_bottom = 1108.0
 
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]

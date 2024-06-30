@@ -53,14 +53,6 @@ public partial class FocusTimer : Control {
 		}
 	}
 	
-
-    static string Clockify(int number) => (number <= 9 ? "0" : "") + number.ToString();
-    static string TimerText(int hours, int minutes, int seconds) =>
-		// Include hours if they're there 
-		(hours == 0 ? "" : $"{Clockify(hours)}:") +
-		// always show minutes and seconds 
-		$"{Clockify(minutes)}:{Clockify(seconds)} ";
-
 	public void StartTimer(int minutes, string reason) {
 		Open();
 		seconds = minutes * 60;
@@ -89,7 +81,7 @@ public partial class FocusTimer : Control {
 	}
 
 	void UpdateTimer() {
-		timer.Text = TimerText(seconds / 3600, seconds/60  % 60, seconds % 60);
+		timer.Text = Utils.TimerText(seconds / 3600, seconds/60  % 60, seconds % 60);
 	}
 
 	int seconds = 0;

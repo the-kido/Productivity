@@ -1,0 +1,176 @@
+[gd_scene load_steps=7 format=3 uid="uid://r5q1gq7lqg6r"]
+
+[ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_5bho3"]
+[ext_resource type="Script" path="res://Pomodoro.cs" id="1_d8475"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dhrd1"]
+font_size = 30
+
+[sub_resource type="Animation" id="Animation_ijgsk"]
+resource_name = "bigToSmall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HSlider:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(220, 16), Vector2(0, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HSlider:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1665, 0.333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:size")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0666, 0.4, 0.5661, 0.9324),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(260, 150), Vector2(260, 150), Vector2(217, 95), Vector2(220, 100)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control Rack:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t3kq1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control Rack:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6alaa"]
+_data = {
+"RESET": SubResource("Animation_t3kq1"),
+"bigToSmall": SubResource("Animation_ijgsk")
+}
+
+[node name="Panel" type="Panel" node_paths=PackedStringArray("pause", "close", "time", "switchBetweenPeriods", "shrinkExpandAnimations", "progress")]
+offset_right = 260.0
+offset_bottom = 150.0
+pivot_offset = Vector2(130, 75)
+theme = ExtResource("1_5bho3")
+script = ExtResource("1_d8475")
+pause = NodePath("Control Rack/Pause")
+close = NodePath("Control Rack/Close")
+time = NodePath("Time")
+switchBetweenPeriods = NodePath("Control Rack/Switch")
+shrinkExpandAnimations = NodePath("Switch Modes")
+progress = NodePath("HSlider")
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "23:55"
+label_settings = SubResource("LabelSettings_dhrd1")
+
+[node name="Switch Modes" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6alaa")
+}
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 61.0
+offset_right = 240.0
+offset_bottom = 77.0
+max_value = 1.0
+step = 0.001
+value = 0.23
+editable = false
+
+[node name="Control Rack" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.765
+offset_top = -26.8409
+offset_right = 109.235
+offset_bottom = -26.8409
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(107, 0)
+
+[node name="Switch" type="Button" parent="Control Rack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+text = "Switch to break"
+
+[node name="Pause" type="Button" parent="Control Rack"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 31.0
+offset_bottom = 15.5
+grow_vertical = 2
+text = "||"
+
+[node name="Close" type="Button" parent="Control Rack"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "X"
