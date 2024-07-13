@@ -617,6 +617,7 @@ animationPlayer = NodePath("AnimationPlayer")
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource("ShaderMaterial_0decr")
 offset_left = 936.0
 offset_top = 89.0

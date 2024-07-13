@@ -14,7 +14,7 @@ public partial class HourlyCheckup : Control {
 	AnimationPlayer animationPlayer;
 
 	// in milliseconds
-	const int HOUR = 1000 * 60 * 60;
+	const int HOUR = 1000 * 60;
 	// I do not want the audio playing tbh
 	const bool PLAY_AUDIO = false;
 
@@ -49,7 +49,7 @@ public partial class HourlyCheckup : Control {
 		return string1.Split(" ").Concat(string2.Split(" ")).ToArray();
 	} 
 
-	bool enabled = true;
+	bool enabled = false;
 	public void ToggleCheckup(bool toggle) => enabled = toggle;
 
 	public override void _Ready() {
@@ -59,7 +59,8 @@ public partial class HourlyCheckup : Control {
 	}
 
 	private void OpenJumpscare() {
-		if (!enabled) return;
+		/*if (!enabled)*/ return;
+		GD.Print("JUMP!");
 
 		currentWords = GetNewWords();
 		window.Visible = true;

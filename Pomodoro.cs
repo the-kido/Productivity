@@ -9,7 +9,7 @@ public partial class Pomodoro : Panel
 	[Export]
 	Button switchBetweenPeriods;
 	[Export]
-	AnimationPlayer openCloseAnimations, shrinkExpandAnimations;
+	AnimationPlayer openCloseAnimations, shrinkExpandAnimations, fade;
 	[Export]
 	HSlider progress;
 
@@ -23,7 +23,7 @@ public partial class Pomodoro : Panel
 	int workTimeMinutes, breakTimeMinutes;
 
 	public void Open(int workTime, int breakTime) {
-		progress.Value = 1f;
+		progress.Value = 0f;
 		
 		openCloseAnimations.Play("open");
 		
@@ -41,7 +41,11 @@ public partial class Pomodoro : Panel
     }
 
 	public override void _Ready() {
-		
+		openCloseAnimations.AnimationFinished += (_) => fade.PlayBackwards("fadeIn");
+
+		MouseEntered += () => fade.Play("fadeIn");
+		MouseExited += () => fade.PlayBackwards("fadeIn");
+
 		switchBetweenPeriods.Pressed += OnSwitchedPressed;
 		close.Pressed += Close;
 		pause.Pressed += Pause;
@@ -57,7 +61,7 @@ public partial class Pomodoro : Panel
 	}
 
 	private void OnSwitchedPressed() {
-		progress.Value = 1f;
+		progress.Value = 0f;
 
 		inWorkPeriod = !inWorkPeriod;
 		// Do not allow skipping during break
@@ -76,7 +80,9 @@ public partial class Pomodoro : Panel
 
 	bool isBig = true;
 
+	bool isHovering = false;
 	public override void _Process(double delta) {
+		
 		if (Input.IsActionPressed("Shift") && Input.IsActionJustPressed("Click")) {
 			if (isBig) shrinkExpandAnimations.Play("bigToSmall");
 			else shrinkExpandAnimations.PlayBackwards("bigToSmall");
@@ -96,7 +102,7 @@ public partial class Pomodoro : Panel
 		if (loopTime > 1) {
 			loopTime = 0;
 			timeLeftSeconds--;
-			float newValue = (float) timeLeftSeconds / (inWorkPeriod ? workTimeMinutes : breakTimeMinutes) / 60f - 1f;
+			float newValue = 1f - (float) timeLeftSeconds / (inWorkPeriod ? workTimeMinutes : breakTimeMinutes) / 60f;
 			progress.Value = newValue;
 		}
 
