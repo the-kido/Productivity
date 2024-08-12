@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=42 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://581g53n48oh" path="res://scenes/notification.tscn" id="13_5yrco"]
 [ext_resource type="Script" path="res://scripts/Focus Mode/DraggableWindow.cs" id="16_ro2jh"]
 [ext_resource type="PackedScene" uid="uid://ylvd6jbj0yfk" path="res://scenes/sleep_reminder.tscn" id="17_j5ifa"]
+[ext_resource type="PackedScene" uid="uid://cj7sqr2f0k56x" path="res://scenes/take_a_break.tscn" id="18_2j8ep"]
+[ext_resource type="Script" path="res://scenes/TakeABreak.cs" id="18_s6xs5"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -298,6 +300,79 @@ tracks/2/keys = {
 _data = {
 "open": SubResource("Animation_7a0tl"),
 "reset": SubResource("Animation_oroq6")
+}
+
+[sub_resource type="Animation" id="Animation_hohl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(231, 140)]
+}
+
+[sub_resource type="Animation" id="Animation_t5oau"]
+resource_name = "bigify"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2i(231, 140), Vector2i(462, 280)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xbaxw"]
+_data = {
+"RESET": SubResource("Animation_hohl7"),
+"bigify": SubResource("Animation_t5oau")
+}
+
+[sub_resource type="Animation" id="Animation_1t82l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3861, 45)]
+}
+
+[sub_resource type="Animation" id="Animation_tfnp1"]
+resource_name = "fly"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.5, 5.5, 8.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2i(3861, 45), Vector2i(1258, 45), Vector2i(1128, 45), Vector2i(-1144, 45)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3hvp"]
+_data = {
+"RESET": SubResource("Animation_1t82l"),
+"fly": SubResource("Animation_tfnp1")
 }
 
 [node name="Main" type="Control" node_paths=PackedStringArray("minimize", "animationPlayer")]
@@ -635,9 +710,36 @@ always_on_top = true
 transparent = true
 script = ExtResource("16_ro2jh")
 
-[node name="Control" parent="Sleep Reminder" instance=ExtResource("17_j5ifa")]
-self_modulate = Color(1, 1, 1, 0.431373)
+[node name="Control" parent="Sleep Reminder" node_paths=PackedStringArray("bigify") instance=ExtResource("17_j5ifa")]
+bigify = NodePath("../Scale up")
+
+[node name="Scale up" type="AnimationPlayer" parent="Sleep Reminder"]
+libraries = {
+"": SubResource("AnimationLibrary_xbaxw")
+}
+
+[node name="Take a Break" type="Window" parent="." node_paths=PackedStringArray("animationPlayer")]
+auto_translate_mode = 1
+transparent_bg = true
+handle_input_locally = false
+position = Vector2i(3861, 45)
+size = Vector2i(1035, 300)
+visible = false
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("18_s6xs5")
+animationPlayer = NodePath("Hey Hey Hey")
+
+[node name="Control" parent="Take a Break" instance=ExtResource("18_2j8ep")]
+
+[node name="Hey Hey Hey" type="AnimationPlayer" parent="Take a Break"]
+libraries = {
+"": SubResource("AnimationLibrary_r3hvp")
+}
 
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]
 [editable path="Hourly Checkup/Hourly Checkup Gui"]
+[editable path="Sleep Reminder/Control"]

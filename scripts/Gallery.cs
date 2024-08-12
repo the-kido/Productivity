@@ -31,6 +31,8 @@ public partial class Gallery : Control {
 	}
 
 	public override void _Ready() {
+		return;
+		
 		photos = new Photo[3] {largeLeft, mediumRight, smallBottom};
 		
 		UpdateImages(0);
