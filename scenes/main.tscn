@@ -15,7 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://botrlvedgdb40" path="res://scenes/gallery.tscn" id="11_2wshd"]
 [ext_resource type="Script" path="res://scenes/Settings.cs" id="12_84nml"]
 [ext_resource type="PackedScene" uid="uid://581g53n48oh" path="res://scenes/notification.tscn" id="13_5yrco"]
-[ext_resource type="Shader" path="res://scenes/blur.gdshader" id="16_8uasd"]
+[ext_resource type="Script" path="res://scripts/Focus Mode/DraggableWindow.cs" id="16_ro2jh"]
+[ext_resource type="PackedScene" uid="uid://ylvd6jbj0yfk" path="res://scenes/sleep_reminder.tscn" id="17_j5ifa"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -251,7 +252,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.35, 0.45),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(1818, 978), Vector2(1818, 18)]
+"values": [Vector2(3738, 2056), Vector2(3738, 18)]
 }
 
 [sub_resource type="Animation" id="Animation_oroq6"]
@@ -290,7 +291,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(1818, 978)]
+"values": [Vector2(3738, 2056)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_furii"]
@@ -299,9 +300,6 @@ _data = {
 "reset": SubResource("Animation_oroq6")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0decr"]
-shader = ExtResource("16_8uasd")
-
 [node name="Main" type="Control" node_paths=PackedStringArray("minimize", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
@@ -309,7 +307,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(960, 540)
+pivot_offset = Vector2(1920, 1080)
 theme = ExtResource("1_pdcsv")
 script = ExtResource("1_txb0g")
 minimize = NodePath("Minimize Button")
@@ -330,12 +328,9 @@ grow_vertical = 2
 
 [node name="Animation" parent="Ambience" instance=ExtResource("3_p2uf3")]
 
-[node name="bg" parent="Ambience/Animation/ParallaxLayer" index="0"]
-modulate = Color(1, 1, 1, 0.459)
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Ambience"]
 modulate = Color(1, 1, 0.901961, 0.431373)
-position = Vector2(960, 540)
+position = Vector2(1920, 1093)
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_atcny")
 texture = ExtResource("3_o45xj")
@@ -373,14 +368,17 @@ text = "–"
 modulate = Color(0.65098, 0.670588, 0.701961, 1)
 texture_filter = 2
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 90.0
-offset_bottom = -90.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -450.0
+offset_right = 960.0
+offset_bottom = 450.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.523599
 pivot_offset = Vector2(960, 450)
 texture = ExtResource("1_fgmo7")
 expand_mode = 3
@@ -392,48 +390,63 @@ libraries = {
 }
 speed_scale = 0.05
 
-[node name="Focus Timer" parent="." node_paths=PackedStringArray("focusMode", "createTimerButton", "minutes", "reason") instance=ExtResource("7_trlnb")]
-offset_left = 473.0
-offset_top = 379.0
-offset_right = 473.0
-offset_bottom = 379.0
-focusMode = NodePath("Window/Control")
-createTimerButton = NodePath("Panel/Button")
-minutes = NodePath("Panel/Creation Panel/Time2/Minutes")
-reason = NodePath("Panel/Creation Panel/Reason2/Reason Box")
+[node name="Focus Timer" parent="." instance=ExtResource("7_trlnb")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -487.0
+offset_top = -161.0
+offset_right = -487.0
+offset_bottom = -161.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Routine Check" parent="." node_paths=PackedStringArray("routineLabel", "particles", "audioPlayer") instance=ExtResource("7_lb3v0")]
-layout_mode = 0
-offset_left = 473.0
-offset_top = 287.0
-offset_right = 734.0
-offset_bottom = 328.0
+[node name="Routine Check" parent="." instance=ExtResource("7_lb3v0")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -487.0
+offset_top = -253.0
+offset_right = -226.0
+offset_bottom = -212.0
+grow_horizontal = 2
+grow_vertical = 2
 enabled = true
 afternoonHour = 21
-routineLabel = NodePath("Label")
-particles = NodePath("Label/GPUParticles2D")
-audioPlayer = NodePath("Completed Goal")
 
-[node name="Goals" parent="." node_paths=PackedStringArray("goalsContainer", "prototype", "goalCompletedAudioPlayer") instance=ExtResource("9_i1xnj")]
-layout_mode = 0
-offset_left = 938.0
-offset_top = 152.0
-offset_right = 1198.0
-offset_bottom = 352.0
-goalsContainer = NodePath("Creation Panel/VBoxContainer")
-prototype = NodePath("Default box")
-goalCompletedAudioPlayer = NodePath("Completed Goal")
+[node name="Goals" parent="." instance=ExtResource("9_i1xnj")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -388.0
+offset_right = 238.0
+offset_bottom = -188.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Pomodoro" parent="." node_paths=PackedStringArray("start", "workTime", "breakTime", "pomodoro") instance=ExtResource("9_26jp5")]
-layout_mode = 0
-offset_left = 938.0
-offset_top = 566.0
-offset_right = 1265.0
-offset_bottom = 796.0
-start = NodePath("Button")
-workTime = NodePath("Params/Work Period/SpinBox")
-breakTime = NodePath("Params/Break Period/SpinBox2")
-pomodoro = NodePath("Window/Pomodoro")
+[node name="Pomodoro" parent="." instance=ExtResource("9_26jp5")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = 26.0
+offset_right = 305.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Things i can do" type="Panel" parent="."]
 visible = false
@@ -482,33 +495,30 @@ Lazy around off your computer
 Exercise more
 [/ul]"
 
-[node name="Activity Ideas" parent="." node_paths=PackedStringArray("animationPlayer") instance=ExtResource("9_u8pnu")]
+[node name="Activity Ideas" parent="." instance=ExtResource("9_u8pnu")]
 layout_mode = 1
-offset_left = 600.0
-offset_top = 657.0
-offset_right = 600.64
-offset_bottom = 657.04
-animationPlayer = NodePath("AnimationPlayer")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = 117.0
+offset_right = -104.0
+offset_bottom = 373.0
+grow_horizontal = 2
+grow_vertical = 2
 tasks = Array[String](["Work on art", "Program", "Study", "Write", "Relax", "Turn your brain off", "Create something", "Go outside", "Don't watch youtube", "o(*^▽^*)┛"])
 
 [node name="Hourly Checkup" parent="." instance=ExtResource("10_wjskc")]
 visible = false
 
-[node name="Hourly Checkup Gui" parent="Hourly Checkup" index="0" node_paths=PackedStringArray("visual", "actual", "animationPlayer")]
-visual = NodePath("Visual")
-actual = NodePath("Visual/Actual")
-animationPlayer = NodePath("AnimationPlayer")
-
-[node name="Gallary" parent="." node_paths=PackedStringArray("largeLeft", "mediumRight", "smallBottom", "panel") instance=ExtResource("11_2wshd")]
+[node name="Gallary" parent="." instance=ExtResource("11_2wshd")]
 visible = false
 offset_left = 1537.0
 offset_top = 377.0
 offset_right = 1577.0
 offset_bottom = 417.0
-largeLeft = NodePath("large")
-mediumRight = NodePath("medium")
-smallBottom = NodePath("small")
-panel = NodePath("BG Panel")
 
 [node name="Settings" type="Control" parent="." node_paths=PackedStringArray("routineReminder", "hourlyCheckup", "globalMinimizeButton", "notification", "animationPlayer", "settingsButton", "gallery", "showAnimations", "showGallery", "forceExit")]
 z_index = 10
@@ -587,9 +597,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -102.0
-offset_top = -102.0
+offset_top = -104.0
 offset_right = -18.0
-offset_bottom = -18.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/hover = SubResource("StyleBoxFlat_2ashe")
@@ -608,21 +618,25 @@ borderless = true
 always_on_top = true
 transparent = true
 
-[node name="Notification" parent="Notification" node_paths=PackedStringArray("animationPlayer") instance=ExtResource("13_5yrco")]
+[node name="Notification" parent="Notification" instance=ExtResource("13_5yrco")]
 offset_right = 0.0
 offset_bottom = 0.0
-animationPlayer = NodePath("AnimationPlayer")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Sleep Reminder" type="Window" parent="."]
+auto_translate_mode = 1
+transparent_bg = true
+handle_input_locally = false
+position = Vector2i(3311, 45)
+size = Vector2i(231, 140)
 visible = false
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("16_ro2jh")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
-material = SubResource("ShaderMaterial_0decr")
-offset_left = 936.0
-offset_top = 89.0
-offset_right = 1708.0
-offset_bottom = 1108.0
+[node name="Control" parent="Sleep Reminder" instance=ExtResource("17_j5ifa")]
+self_modulate = Color(1, 1, 1, 0.431373)
 
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]

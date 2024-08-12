@@ -19,14 +19,16 @@ script = ExtResource("1_nuc4s")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 modulate = Color(0.74902, 1, 0.984314, 0.219608)
-motion_mirroring = Vector2(1920, 0)
+motion_mirroring = Vector2(3840, 0)
 
 [node name="bg" type="TextureRect" parent="ParallaxLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1920.0
-offset_bottom = 1089.0
+offset_right = 3840.0
+offset_bottom = 2160.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("NoiseTexture2D_slcvg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ParallaxLayer"]

@@ -21,6 +21,7 @@ public partial class Gallery : Control {
 	readonly ImageTexture[] images;
 
 	Gallery() {
+		return;
 		directories = System.IO.Directory
 			.GetFiles(FOLDER_DIRECTORY)
 			.Select((path) => path.Replace('\\', '/'))

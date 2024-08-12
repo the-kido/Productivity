@@ -149,17 +149,4 @@ size = Vector2i(220, 150)
 visible = false
 theme = SubResource("Theme_jrfkj")
 
-[node name="Control" parent="Window" index="0" node_paths=PackedStringArray("pause", "settings", "close", "timer", "reasonLabel", "settingsControl", "audioPlayer", "toggleOpaqueMode", "opaqueControls", "window", "animationPlayer")]
-pause = NodePath("Pause")
-settings = NodePath("Open Settings Button")
-close = NodePath("Settings/Close")
-timer = NodePath("Time")
-reasonLabel = NodePath("Reason")
-settingsControl = NodePath("Settings")
-audioPlayer = NodePath("AnimationPlayer")
-toggleOpaqueMode = NodePath("Settings/Top bar/Opaque mode")
-opaqueControls = [NodePath("."), NodePath("Time"), NodePath("Reason")]
-window = NodePath("..")
-animationPlayer = NodePath("../AnimationPlayer")
-
 [editable path="Window"]
