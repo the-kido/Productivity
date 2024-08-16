@@ -1,0 +1,192 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch0gd7852i2e4"]
+
+[ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_rctof"]
+[ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="2_5y2tw"]
+[ext_resource type="Script" path="res://scripts/HeyNoYoutube.cs" id="2_24sim"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("slider", "time", "commitTime", "customCommitedTime", "btnUp", "btnDown", "btnLeft", "btnRight")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rctof")
+script = ExtResource("2_24sim")
+slider = NodePath("HSlider")
+time = NodePath("Dark Panel/Panel/Time")
+commitTime = NodePath("Dark Panel/Panel2/Commit Time")
+customCommitedTime = NodePath("Dark Panel/Panel2/Custom Commited Time")
+btnUp = NodePath("Dark Panel/Gimble/Up")
+btnDown = NodePath("Dark Panel/Gimble/Down")
+btnLeft = NodePath("Dark Panel/Gimble/Left")
+btnRight = NodePath("Dark Panel/Gimble/Right")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 21.0
+offset_top = 12.0
+offset_right = -21.0
+offset_bottom = 35.0
+grow_horizontal = 2
+max_value = 1.0
+step = 0.01
+editable = false
+scrollable = false
+
+[node name="Dark Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("2_5y2tw")
+
+[node name="Panel" type="Panel" parent="Dark Panel"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 280.0
+offset_bottom = 74.0
+
+[node name="Time" type="Label" parent="Dark Panel/Panel"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "00:10:13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="Dark Panel"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+offset_left = 20.0
+offset_top = 87.0
+offset_right = 280.0
+offset_bottom = 147.0
+
+[node name="Label" type="Label" parent="Dark Panel/Panel2"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Custom Commited Time" type="SpinBox" parent="Dark Panel/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -15.0
+offset_right = 42.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 3.0
+step = 0.1
+value = 1.5
+suffix = "hour limit"
+
+[node name="Commit Time" type="Button" parent="Dark Panel/Panel2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -15.0
+offset_right = -14.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Commit"
+
+[node name="Gimble" type="Panel" parent="Dark Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -92.0
+offset_right = 41.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Up" type="Button" parent="Dark Panel/Gimble"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -11.5
+offset_top = 4.0
+offset_right = 11.5
+offset_bottom = 27.0
+grow_horizontal = 2
+
+[node name="Right" type="Button" parent="Dark Panel/Gimble"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -11.5
+offset_right = -4.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Down" type="Button" parent="Dark Panel/Gimble"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.5
+offset_top = -27.0
+offset_right = 11.5
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Left" type="Button" parent="Dark Panel/Gimble"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -11.5
+offset_right = 27.0
+offset_bottom = 11.5
+grow_vertical = 2

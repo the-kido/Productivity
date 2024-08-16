@@ -31,8 +31,7 @@ s l e e p ! !",
 		REMINDER_4_TEXT = @"[shake][center][rainbow freq=3 sat=0.9 val=3][tornado radius=10.0 freq=10.0 connected=0]G o   t o 
 s l e e p ! !"; 
 
-	// const int SLEEP_HOUR = 20, SLEEP_MIN = 30; // 8:30
-	const int SLEEP_HOUR = 7, SLEEP_MIN = 14; // 8:30
+	const int SLEEP_HOUR = 20, SLEEP_MIN = 30; // 8:30
 
 	const int 
 		REMINDER_1_MINS = SLEEP_HOUR * 60 + SLEEP_MIN,
