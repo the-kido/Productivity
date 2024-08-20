@@ -1,14 +1,150 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch0gd7852i2e4"]
+[gd_scene load_steps=14 format=3 uid="uid://ch0gd7852i2e4"]
 
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_rctof"]
 [ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="2_5y2tw"]
 [ext_resource type="Script" path="res://scripts/HeyNoYoutube.cs" id="2_24sim"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("slider", "time", "commitTime", "customCommitedTime", "btnUp", "btnDown", "btnLeft", "btnRight")]
+[sub_resource type="FontVariation" id="FontVariation_6monv"]
+spacing_glyph = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_3jss7"]
+font = SubResource("FontVariation_6monv")
+font_size = 44
+shadow_size = 11
+shadow_color = Color(0.117647, 0.172549, 0.152941, 1)
+shadow_offset = Vector2(0, 5.36)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2eykc"]
+font_size = 17
+font_color = Color(3, 3, 3, 1)
+shadow_size = 11
+shadow_color = Color(0.027451, 0.054902, 0.0431373, 0.301961)
+shadow_offset = Vector2(1, 4.675)
+
+[sub_resource type="Animation" id="Animation_dlikt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HSlider:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2wi5s"]
+resource_name = "pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.51, 0.51, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8r7sn"]
+resource_name = "warn"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HSlider:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.4, 0.4, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7v4l2"]
+_data = {
+"RESET": SubResource("Animation_dlikt"),
+"pulse": SubResource("Animation_2wi5s"),
+"warn": SubResource("Animation_8r7sn")
+}
+
+[sub_resource type="Animation" id="Animation_hiu4x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dark Panel/Suggestions:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hoa40"]
+resource_name = "suggest"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dark Panel/Suggestions:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ChooseNewText"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_42jaf"]
+_data = {
+"RESET": SubResource("Animation_hiu4x"),
+"suggest": SubResource("Animation_hoa40")
+}
+
+[node name="Control" type="Control" node_paths=PackedStringArray("slider", "time", "commitTime", "customCommitedTime", "btnUp", "btnDown", "btnLeft", "btnRight", "angryAnimation", "cycleThroughSuggestions", "suggestionText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -3540.0
+offset_bottom = -1860.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_rctof")
@@ -21,6 +157,9 @@ btnUp = NodePath("Dark Panel/Gimble/Up")
 btnDown = NodePath("Dark Panel/Gimble/Down")
 btnLeft = NodePath("Dark Panel/Gimble/Left")
 btnRight = NodePath("Dark Panel/Gimble/Right")
+angryAnimation = NodePath("Angry")
+cycleThroughSuggestions = NodePath("Cycle Through Suggestions")
+suggestionText = NodePath("Dark Panel/Suggestions")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -72,6 +211,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "00:10:13"
+label_settings = SubResource("LabelSettings_3jss7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -109,7 +249,7 @@ grow_horizontal = 2
 grow_vertical = 2
 max_value = 3.0
 step = 0.1
-value = 1.5
+value = 1.0
 suffix = "hour limit"
 
 [node name="Commit Time" type="Button" parent="Dark Panel/Panel2"]
@@ -134,9 +274,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -41.0
+offset_left = -130.0
 offset_top = -92.0
-offset_right = 41.0
+offset_right = -48.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -190,3 +330,28 @@ offset_top = -11.5
 offset_right = 27.0
 offset_bottom = 11.5
 grow_vertical = 2
+
+[node name="Suggestions" type="Label" parent="Dark Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 115.0
+offset_top = 158.0
+offset_right = -21.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ⓘ Did you finish everything in your QMB?"
+label_settings = SubResource("LabelSettings_2eykc")
+autowrap_mode = 3
+
+[node name="Angry" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7v4l2")
+}
+
+[node name="Cycle Through Suggestions" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_42jaf")
+}

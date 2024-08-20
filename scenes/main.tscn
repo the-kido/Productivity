@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=48 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cj7sqr2f0k56x" path="res://scenes/take_a_break.tscn" id="18_2j8ep"]
 [ext_resource type="Script" path="res://scenes/TakeABreak.cs" id="18_s6xs5"]
 [ext_resource type="PackedScene" uid="uid://ch0gd7852i2e4" path="res://scenes/no_youtube.tscn" id="21_s4qdw"]
+[ext_resource type="PackedScene" uid="uid://msfr2g3i6l3s" path="res://scenes/do_routine.tscn" id="22_tkxvv"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -452,7 +453,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -895,6 +896,7 @@ transparent_bg = true
 handle_input_locally = false
 position = Vector2i(1770, 30)
 size = Vector2i(300, 300)
+visible = false
 unresizable = true
 borderless = true
 always_on_top = true
@@ -907,8 +909,25 @@ libraries = {
 }
 
 [node name="Control" parent="Hey no youtube" node_paths=PackedStringArray("animationPlayer") instance=ExtResource("21_s4qdw")]
+offset_right = 0.0
+offset_bottom = 0.0
 pivot_offset = Vector2(150, 150)
 animationPlayer = NodePath("../AnimationPlayer")
+
+[node name="Routine Do" type="Window" parent="."]
+auto_translate_mode = 1
+transparent_bg = true
+handle_input_locally = false
+position = Vector2i(3330, 810)
+size = Vector2i(450, 540)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+
+[node name="Control" parent="Routine Do" instance=ExtResource("22_tkxvv")]
+offset_right = 0.0
+offset_bottom = 0.0
 
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]

@@ -12,11 +12,16 @@ partial class ChromeTabDetector
         server = new("ws://0.0.0.0:8080");
 
         server.Start(
-            connection => {
-            connection.OnMessage = OnMessage;
+            connection => 
+            {
+                connection.OnMessage = OnMessage;
             }
         );
     }
 
-    private void OnMessage(string msg) => OnYoutube = msg.Substr(0,23) == "https://www.youtube.com";
+    private void OnMessage(string msg) {
+        GD.Print(msg);
+        OnYoutube = msg.Substr(0,23) == "https://www.youtube.com";
+    }
+
 }

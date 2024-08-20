@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://msfr2g3i6l3s"]
+
+[ext_resource type="Script" path="res://scenes/DoRoutine.cs" id="1_q7ryg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bvdpl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pl7wl"]
+font_size = 30
+
+[node name="Do Routine" type="Control" node_paths=PackedStringArray("progress", "checkboxParent")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -3390.0
+offset_bottom = -1620.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q7ryg")
+progress = NodePath("Panel/Panel/All things to do/HSlider")
+checkboxParent = NodePath("Panel/Panel/All things to do")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bvdpl")
+
+[node name="All things to do" type="VBoxContainer" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Explaination" type="Label" parent="Panel/Panel/All things to do"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+text = "Fill these out and 
+you'll be good ✅"
+label_settings = SubResource("LabelSettings_pl7wl")
+horizontal_alignment = 1
+
+[node name="1" type="CheckBox" parent="Panel/Panel/All things to do"]
+custom_minimum_size = Vector2(195.745, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_font_sizes/font_size = 26
+text = "Agreement to not waste time doing useless things"
+autowrap_mode = 3
+
+[node name="2" type="CheckBox" parent="Panel/Panel/All things to do"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_font_sizes/font_size = 26
+text = "Worked out"
+
+[node name="3" type="CheckBox" parent="Panel/Panel/All things to do"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_font_sizes/font_size = 26
+text = "Read Through Routine"
+
+[node name="4" type="CheckBox" parent="Panel/Panel/All things to do"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_font_sizes/font_size = 26
+text = "Confirm you've done 
+every morning thing"
+
+[node name="HSlider" type="HSlider" parent="Panel/Panel/All things to do"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+max_value = 4.0

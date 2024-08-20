@@ -1,4 +1,5 @@
 using Godot;
+using System.Linq;
 using System.Threading.Tasks;
 
 public partial class HeyNoYoutube : Control
@@ -15,8 +16,9 @@ public partial class HeyNoYoutube : Control
 	[Export]
 	Button btnUp, btnDown, btnLeft, btnRight;
 	[Export]
-
-	AnimationPlayer animationPlayer;
+	AnimationPlayer animationPlayer, angryAnimation, cycleThroughSuggestions;
+	[Export]
+	Label suggestionText;
 
 	Window parent;
 
@@ -56,6 +58,8 @@ public partial class HeyNoYoutube : Control
 	}
 
 	public override async void _Ready() {
+		ChooseNewText();
+		
 		parent = GetParent<Window>();
 		
 		Associate(btnLeft, left);
@@ -72,6 +76,11 @@ public partial class HeyNoYoutube : Control
 			commitedTimeSeconds = (int) (customCommitedTime.Value * 3600);
 			commitTime.Disabled = true;
 			customCommitedTime.Editable = false;
+
+			// In case we change the time when it goes into danger zone
+			angryIsPlaying = false; 
+			angryAnimation.Stop();
+			warnIsPlaying = false;
 		};
 	}
 
@@ -89,6 +98,41 @@ public partial class HeyNoYoutube : Control
 
 		time.Text = Utils.TimerText(timeSpentSeconds / 3600, timeSpentSeconds % 3600 / 60, timeSpentSeconds % 60);
 		slider.Value = 1.0 * timeSpent / commitedTimeSeconds;
+		
+		// Switch text every 10 seconds
+		if (timeSpentSeconds % 10 == 0)
+		{
+			cycleThroughSuggestions.Play("suggest");
+		}
+
+		if (slider.Value >= 0.85 && !warnIsPlaying)
+		{
+			warnIsPlaying = true;
+			angryAnimation.Play("warn");
+		}
+		
+		if (timeSpentSeconds >= commitedTimeSeconds && !angryIsPlaying) 
+		{
+			angryIsPlaying = true;
+			angryAnimation.Play("pulse");
+		}
+	}
+	bool angryIsPlaying = false, warnIsPlaying = false;
+
+	static readonly string[] thingsToDo = {
+		"Go through your QMB",
+		"Get some rest instead",
+		"Go outside",
+		"Did you finish everything in your QMB?",
+		"Progress your career",
+		"Develop your experience",
+	};
+	int index = 0;
+
+	public void ChooseNewText()
+	{
+		suggestionText.Text = $"ⓘ {thingsToDo[index]}";
+		index = (index + 1) % thingsToDo.Length;
 	}
 }
 
