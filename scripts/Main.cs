@@ -21,7 +21,6 @@ public partial class Main : Control {
 		FindChild("Main background").GetChild<AnimationPlayer>(0).Play("spin");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		if (Input.IsActionJustPressed("Escape")) PlayMinimizeAnimation();
 	}
@@ -36,7 +35,7 @@ public partial class Main : Control {
 	}
 
 	private void temp() {
-		if (GetTree().Root.HasFocus() && !focused) {
+		if (GetTree().Root.HasFocus() || !focused) {
 			animationPlayer.Play("Open");
 			focused = true;
 		}

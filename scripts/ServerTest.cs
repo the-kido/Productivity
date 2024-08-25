@@ -19,8 +19,8 @@ partial class ChromeTabDetector
         );
     }
 
-    private void OnMessage(string msg) {
-        GD.Print(msg);
+    private void OnMessage(string msg) 
+    {
         OnYoutube = msg.Substr(0,23) == "https://www.youtube.com";
     }
 

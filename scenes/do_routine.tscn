@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://msfr2g3i6l3s"]
+[gd_scene load_steps=12 format=3 uid="uid://msfr2g3i6l3s"]
 
 [ext_resource type="Script" path="res://scenes/DoRoutine.cs" id="1_q7ryg"]
 
@@ -7,7 +7,190 @@
 [sub_resource type="LabelSettings" id="LabelSettings_pl7wl"]
 font_size = 30
 
-[node name="Do Routine" type="Control" node_paths=PackedStringArray("progress", "checkboxParent")]
+[sub_resource type="FontVariation" id="FontVariation_ujnos"]
+spacing_glyph = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_agax6"]
+line_spacing = 50.0
+font = SubResource("FontVariation_ujnos")
+font_size = 26
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="Animation" id="Animation_rse2r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Panel/All things to do/HSlider:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_laj1c"]
+resource_name = "slide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Panel/All things to do/HSlider:value")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tq1de"]
+_data = {
+"RESET": SubResource("Animation_rse2r"),
+"slide": SubResource("Animation_laj1c")
+}
+
+[sub_resource type="Animation" id="Animation_fcojs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:shadow_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:font:baseline_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:shadow_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:shadow_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:font_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f08q2"]
+resource_name = "increase"
+length = 0.7
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:font_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.93, 0.6417, 0.704165, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:shadow_offset")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, 15.42), Vector2(0, 5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:font:baseline_offset")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.3, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:shadow_size")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [5, 7, 5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/Panel/All things to do/Progress:label_settings:shadow_color")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0.733333), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1226s"]
+_data = {
+"RESET": SubResource("Animation_fcojs"),
+"increase": SubResource("Animation_f08q2")
+}
+
+[node name="Do Routine" type="Control" node_paths=PackedStringArray("progress", "checkboxParent", "progressText", "barAnimation", "textAnimation")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +202,9 @@ grow_vertical = 2
 script = ExtResource("1_q7ryg")
 progress = NodePath("Panel/Panel/All things to do/HSlider")
 checkboxParent = NodePath("Panel/Panel/All things to do")
+progressText = NodePath("Panel/Panel/All things to do/Progress")
+barAnimation = NodePath("Bar Animation")
+textAnimation = NodePath("Text Animation")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -89,3 +275,23 @@ every morning thing"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 max_value = 4.0
+step = 0.01
+editable = false
+scrollable = false
+
+[node name="Progress" type="Label" parent="Panel/Panel/All things to do"]
+layout_mode = 2
+text = "0/4"
+label_settings = SubResource("LabelSettings_agax6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bar Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tq1de")
+}
+
+[node name="Text Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1226s")
+}

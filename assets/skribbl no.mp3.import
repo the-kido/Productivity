@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7yaaob3bvfow"
+path="res://.godot/imported/skribbl no.mp3-8d77d6e36e1290ad05afdc716dabb310.mp3str"
+
+[deps]
+
+source_file="res://assets/skribbl no.mp3"
+dest_files=["res://.godot/imported/skribbl no.mp3-8d77d6e36e1290ad05afdc716dabb310.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

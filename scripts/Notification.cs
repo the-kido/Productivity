@@ -10,7 +10,5 @@ public partial class Notification : Control {
     public void Play() {
 		GetParent<Window>().Visible = true;
 		animationPlayer.Play("Show");
-		GD.Print("hello");
-		
 	}
 }

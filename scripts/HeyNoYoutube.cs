@@ -16,45 +16,38 @@ public partial class HeyNoYoutube : Control
 	[Export]
 	Button btnUp, btnDown, btnLeft, btnRight;
 	[Export]
-	AnimationPlayer animationPlayer, angryAnimation, cycleThroughSuggestions;
+	AnimationPlayer movementAnimation, angryAnimation, cycleThroughSuggestionAnimation;
 	[Export]
 	Label suggestionText;
-
+	[Export]
+	AudioStreamPlayer2D yesAudioPlayer, noAudioPlayer;
 	Window parent;
 
-	int commitedTimeSeconds = (int) (1.5 * 3600); // Default is 1.5 hours
+	int commitedTimeSeconds = (int) (1.0 * 3600); // Default is 1 hour
 
 
-	Vector2I left = new(30, 930), right = new(3510, 930), up = new(1770, 30), down = new(1770, 1830);
+	Vector2 left = new(30, 930), right = new(3510, 930), up = new(1770, 30), down = new(1770, 1830);
 
 
 	ChromeTabDetector detector;
 	
-	private void Associate(Button button, Vector2I direction) {
+	private void Associate(Button button, Vector2 direction) {
 		button.Pressed += () => {
-			parent.Position = direction;
+			// parent.Position = direction;
 			// idk why this isn't working :( 
 
-			// var anim = animationPlayer.GetAnimation("move");
+			var anim = movementAnimation.GetAnimation("move");
 			
-			// anim.TrackSetKeyValue(0, 0, parent.Position);
-			// anim.TrackSetKeyValue(0, 1, direction);
-			// anim.TrackSetKeyValue(0, 2, direction);
+			anim.TrackSetKeyValue(0, 0, (Vector2) parent.Position);
+			anim.TrackSetKeyValue(0, 1, direction);
+			anim.TrackSetKeyValue(0, 2, direction);
 			
-			// GD.Print("After");
-			// GD.Print(anim.TrackGetKeyValue(0, 0));
-			// GD.Print(anim.TrackGetKeyValue(0, 1));
-			// GD.Print(anim.TrackGetKeyValue(0, 2));
-			// GD.Print(anim.ValueTrackGetUpdateMode(0));
-
-			// GD.Print("huhuh", button.Name);
-
-			// CallDeferred("PlayAnimation");
+			CallDeferred("PlayAnimation");
 		};
 	}
 
 	private void PlayAnimation() {
-		animationPlayer.Play("move");
+		movementAnimation.Play("move");
 	}
 
 	public override async void _Ready() {
@@ -88,11 +81,20 @@ public partial class HeyNoYoutube : Control
 	bool showingWindow = false;
 	public override void _Process(double delta)
 	{
-		if (detector.OnYoutube) {
-			if (!parent.Visible) animationPlayer.Play("Open");
-			timeSpent += delta;
-		} else
-			if (parent.Visible) animationPlayer.PlayBackwards("Open");
+		if (detector.OnYoutube) 
+		{
+			if (!parent.Visible) 
+			{
+				movementAnimation.Play("Open");
+				noAudioPlayer.Play();
+			}
+			else timeSpent += delta;
+		} 
+		else if (parent.Visible && !movementAnimation.IsPlaying()) 
+		{
+			movementAnimation.PlayBackwards("Open");
+			yesAudioPlayer.Play();
+		}
 
 		int timeSpentSeconds = (int) timeSpent;
 
@@ -102,7 +104,7 @@ public partial class HeyNoYoutube : Control
 		// Switch text every 10 seconds
 		if (timeSpentSeconds % 10 == 0)
 		{
-			cycleThroughSuggestions.Play("suggest");
+			cycleThroughSuggestionAnimation.Play("suggest");
 		}
 
 		if (slider.Value >= 0.85 && !warnIsPlaying)

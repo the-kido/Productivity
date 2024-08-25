@@ -894,6 +894,7 @@ libraries = {
 auto_translate_mode = 1
 transparent_bg = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 position = Vector2i(1770, 30)
 size = Vector2i(300, 300)
 visible = false
@@ -902,17 +903,17 @@ borderless = true
 always_on_top = true
 transparent = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Hey no youtube"]
+[node name="Movement Animation" type="AnimationPlayer" parent="Hey no youtube"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_mp532")
 }
 
-[node name="Control" parent="Hey no youtube" node_paths=PackedStringArray("animationPlayer") instance=ExtResource("21_s4qdw")]
+[node name="Control" parent="Hey no youtube" node_paths=PackedStringArray("movementAnimation") instance=ExtResource("21_s4qdw")]
 offset_right = 0.0
 offset_bottom = 0.0
 pivot_offset = Vector2(150, 150)
-animationPlayer = NodePath("../AnimationPlayer")
+movementAnimation = NodePath("../Movement Animation")
 
 [node name="Routine Do" type="Window" parent="."]
 auto_translate_mode = 1
@@ -924,6 +925,7 @@ unresizable = true
 borderless = true
 always_on_top = true
 transparent = true
+script = ExtResource("16_ro2jh")
 
 [node name="Control" parent="Routine Do" instance=ExtResource("22_tkxvv")]
 offset_right = 0.0
