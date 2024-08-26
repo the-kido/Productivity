@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Fleck;
 using Godot;
 
@@ -7,6 +8,7 @@ partial class ChromeTabDetector
     public bool OnYoutube { get; private set; }
 
     readonly WebSocketServer server;
+    readonly List<IWebSocketConnection> connections = new();
     public ChromeTabDetector()
     {
         server = new("ws://0.0.0.0:8080");
@@ -14,14 +16,23 @@ partial class ChromeTabDetector
         server.Start(
             connection => 
             {
+                connections.Add(connection);
                 connection.OnMessage = OnMessage;
+                connection.OnMessage += (msg) => 
+                {
+                    if (msg == "Reset Cooldown") 
+                    {
+                        connections.ForEach(conection => conection.Send("Reset Cooldown"));
+                    }
+                };
             }
         );
     }
 
     private void OnMessage(string msg) 
     {
-        OnYoutube = msg.Substr(0,23) == "https://www.youtube.com";
+        if (msg == "On Youtube") OnYoutube = true;
+        if (msg == "Not On Youtube") OnYoutube = false;
+        OnYoutube = msg == "On Youtube";
     }
-
 }

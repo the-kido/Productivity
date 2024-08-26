@@ -144,6 +144,8 @@ grow_horizontal = 2
 disabled = true
 
 [node name="Window" parent="." instance=ExtResource("1_0lcee")]
+handle_input_locally = false
+mode = 0
 position = Vector2i(995, 185)
 size = Vector2i(220, 150)
 visible = false
