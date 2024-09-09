@@ -190,7 +190,7 @@ _data = {
 "increase": SubResource("Animation_f08q2")
 }
 
-[node name="Do Routine" type="Control" node_paths=PackedStringArray("progress", "checkboxParent", "progressText", "barAnimation", "textAnimation")]
+[node name="Do Routine" type="Control" node_paths=PackedStringArray("progress", "checkboxParent", "progressText", "barAnimation", "textAnimation", "doWorkoutInMorning", "checkBoxes")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -205,6 +205,8 @@ checkboxParent = NodePath("Panel/Panel/All things to do")
 progressText = NodePath("Panel/Panel/All things to do/Progress")
 barAnimation = NodePath("Bar Animation")
 textAnimation = NodePath("Text Animation")
+doWorkoutInMorning = NodePath("Panel/Panel/All things to do/Control/Do At Noon")
+checkBoxes = [NodePath("Panel/Panel/All things to do/1"), NodePath("Panel/Panel/All things to do/Control/2"), NodePath("Panel/Panel/All things to do/3"), NodePath("Panel/Panel/All things to do/4")]
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -249,14 +251,39 @@ custom_minimum_size = Vector2(195.745, 0)
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_font_sizes/font_size = 26
-text = "Agreement to not waste time doing useless things"
+text = "Agree to not waste time"
 autowrap_mode = 3
 
-[node name="2" type="CheckBox" parent="Panel/Panel/All things to do"]
+[node name="Control" type="Control" parent="Panel/Panel/All things to do"]
+custom_minimum_size = Vector2(390, 44)
 layout_mode = 2
+
+[node name="2" type="CheckBox" parent="Panel/Panel/All things to do/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -22.0
+offset_right = 186.0
+offset_bottom = 22.0
+grow_vertical = 2
 theme_override_constants/h_separation = 15
 theme_override_font_sizes/font_size = 26
 text = "Worked out"
+
+[node name="Do At Noon" type="Button" parent="Panel/Panel/All things to do/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -15.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Do At Noon"
 
 [node name="3" type="CheckBox" parent="Panel/Panel/All things to do"]
 layout_mode = 2

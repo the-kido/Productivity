@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Security.AccessControl;
 using Godot;
 
 public partial class DoRoutine : Control
@@ -13,8 +11,11 @@ public partial class DoRoutine : Control
 
 	[Export]
 	AnimationPlayer barAnimation, textAnimation;
+	[Export]
+	Button doWorkoutInMorning;
 
-	readonly List<CheckBox> checkBoxes = new();
+	[Export]
+	Godot.Collections.Array<CheckBox> checkBoxes = new();
 
 	private string GetProgressText(int progress) => $"{progress}/{checkBoxes.Count}";
 	public override void _Ready()
@@ -38,16 +39,17 @@ public partial class DoRoutine : Control
 			if (progress.Ratio >= 1) GetParent<Window>().Visible = false;
 		};
 
-		foreach (var child in checkboxParent.GetChildren())
+		foreach (var checkBox in checkBoxes)
 		{
-			if (child is CheckBox checkBox) 
-			{
-				checkBox.Toggled += Toggled; 
-				checkBoxes.Add(checkBox);
-			}
+			checkBox.Toggled += Toggled; 	
 		}
 
 		progress.MaxValue = checkBoxes.Count;
+
+		doWorkoutInMorning.Pressed += () => {
+			checkBoxes[1].Disabled = !checkBoxes[1].Disabled; 
+			checkBoxes[1].ButtonPressed = true;
+		};
 	}
 
 	Color increase = new("c8ff88"), decrease = new("eda4b4");

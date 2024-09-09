@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=56 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -20,7 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://cj7sqr2f0k56x" path="res://scenes/take_a_break.tscn" id="18_2j8ep"]
 [ext_resource type="Script" path="res://scenes/TakeABreak.cs" id="18_s6xs5"]
 [ext_resource type="PackedScene" uid="uid://ch0gd7852i2e4" path="res://scenes/no_youtube.tscn" id="21_s4qdw"]
+[ext_resource type="Script" path="res://scenes/Follower.cs" id="22_mnjk7"]
 [ext_resource type="PackedScene" uid="uid://msfr2g3i6l3s" path="res://scenes/do_routine.tscn" id="22_tkxvv"]
+[ext_resource type="Texture2D" uid="uid://b74xoteupxltl" path="res://assets/arrow.png" id="23_jdvmd"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -218,6 +220,21 @@ _data = {
 "spin": SubResource("Animation_uwqve")
 }
 
+[sub_resource type="Animation" id="Animation_5rp5v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Pivot:anchors_preset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
 [sub_resource type="Animation" id="Animation_7a0tl"]
 resource_name = "open"
 length = 0.8
@@ -292,21 +309,6 @@ tracks/2/path = NodePath("../Pivot:anchors_preset")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
-[sub_resource type="Animation" id="Animation_5rp5v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Pivot:anchors_preset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -542,6 +544,42 @@ _data = {
 "move": SubResource("Animation_k6icn")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vdch"]
+atlas = ExtResource("23_jdvmd")
+region = Rect2(0, 0, 85, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2eo62"]
+atlas = ExtResource("23_jdvmd")
+region = Rect2(85, 0, 85, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r12jh"]
+atlas = ExtResource("23_jdvmd")
+region = Rect2(0, 162, 85, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvjdj"]
+atlas = ExtResource("23_jdvmd")
+region = Rect2(85, 162, 85, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u8r07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vdch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2eo62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r12jh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvjdj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Main" type="Control" node_paths=PackedStringArray("minimize", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
@@ -569,6 +607,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Animation" parent="Ambience" instance=ExtResource("3_p2uf3")]
+visible = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Ambience"]
 visible = false
@@ -608,7 +647,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 text = "–"
 
 [node name="Main background" type="TextureRect" parent="."]
-modulate = Color(0.65098, 0.670588, 0.701961, 1)
+modulate = Color(0.576, 0.64, 0.599467, 1)
 texture_filter = 2
 layout_mode = 1
 anchors_preset = -1
@@ -648,6 +687,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Routine Check" parent="." instance=ExtResource("7_lb3v0")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -664,6 +704,7 @@ enabled = true
 afternoonHour = 21
 
 [node name="Goals" parent="." instance=ExtResource("9_i1xnj")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -739,6 +780,7 @@ Exercise more
 [/ul]"
 
 [node name="Activity Ideas" parent="." instance=ExtResource("9_u8pnu")]
+modulate = Color(0.64, 0.608, 0.608, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -959,6 +1001,34 @@ script = ExtResource("16_ro2jh")
 [node name="Control" parent="Routine Do" instance=ExtResource("22_tkxvv")]
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="Follower" type="Window" parent="." node_paths=PackedStringArray("followingWindow", "arrow")]
+transparent_bg = true
+position = Vector2i(0, 36)
+size = Vector2i(162, 162)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+unfocusable = true
+script = ExtResource("22_mnjk7")
+followingWindow = NodePath("../Routine Do")
+arrow = NodePath("AnimatedSprite2D")
+
+[node name="ColorRect" type="ColorRect" parent="Follower"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Follower"]
+position = Vector2(78.59, 75.61)
+sprite_frames = SubResource("SpriteFrames_u8r07")
+autoplay = "default"
+frame_progress = 0.392192
 
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]
