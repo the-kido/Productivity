@@ -1,0 +1,9 @@
+POST http://localhost:11434/api/chat
+
+{
+    "model": "Modelfile",
+    "messages": [{
+        "role": "user",
+        "content": "Hello world"
+    }]
+}

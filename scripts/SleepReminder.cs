@@ -26,12 +26,13 @@ public partial class SleepReminder : Panel
 	const string
 		REMINDER_1_TEXT = "[center][pulse freq=1]Get ready to sleep!", 
 		REMINDER_2_TEXT = "[center][shake rate=20.0 level=5 connected=1][pulse freq=1]Get ready to sleep!",
-		REMINDER_3_TEXT = @"[center][rainbow freq=1 sat=0.2 val=0.9][tornado radius=10.0 freq=3.0 connected=1]G o   t o 
-s l e e p ! !",
-		REMINDER_4_TEXT = @"[shake][center][rainbow freq=3 sat=0.9 val=3][tornado radius=10.0 freq=10.0 connected=0]G o   t o 
-s l e e p ! !"; 
+		REMINDER_3_TEXT = @"[center][rainbow freq=1 sat=0.2 val=0.9][tornado radius=10.0 freq=3.0 connected=1]D o   n i g h t 
+r o u t i n e !",
+		REMINDER_4_TEXT = @"[shake][center][rainbow freq=3 sat=0.9 val=3][tornado radius=10.0 freq=10.0 connected=0]D o   n i g h t
+r o u t i n e !"; 
 
-	const int SLEEP_HOUR = 20, SLEEP_MIN = 0; // 8:00
+	// const int SLEEP_HOUR = 20, SLEEP_MIN = 0; // 8:00
+	const int SLEEP_HOUR = 20, SLEEP_MIN = 15; // 8:00
 
 	const int 
 		REMINDER_1_MINS = SLEEP_HOUR * 60 + SLEEP_MIN,

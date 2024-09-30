@@ -10,10 +10,7 @@ public partial class Follower : Window
 
 	public override void _Ready()
 	{
-		followingWindow.VisibilityChanged += () => 
-		{
-			Visible = followingWindow.Visible;
-		};
+		followingWindow.VisibilityChanged += () => Visible = followingWindow.Visible;
 	}
 
 	[Export]
@@ -24,6 +21,15 @@ public partial class Follower : Window
 	{
 		Vector2 currentPosition = Position + Size / 2;
 		Vector2 otherPosition = followingWindow.Position + followingWindow.Size / 2; 
+		Vector2 direction = (otherPosition - currentPosition).Normalized();
+		
+		Move(currentPosition, otherPosition, direction, delta);
+		
+		Rotate(direction);
+	}
+
+	private void Move(Vector2 currentPosition, Vector2 otherPosition, Vector2 direction, double delta)
+	{
 		float distance = currentPosition.DistanceTo(otherPosition);
 
 		int sign = distance > followDistance ? 1 : -1;
@@ -32,15 +38,12 @@ public partial class Follower : Window
 
 		if (double.IsNaN(speedMultiplier)) speedMultiplier = 0;
 
-		Vector2 direction = (otherPosition - currentPosition).Normalized();
-
 		Position += (Vector2I) (sign * direction * (float) (delta * speedMultiplier));
+	}
 
-
-
-
-		arrow.LookAt(otherPosition - currentPosition);
-		arrow.Rotate((float) Math.PI * 3.0f / 2.0f);
-		// GD.Print(arrow.Rotation);
+	private void Rotate(Vector2 direction)
+	{
+		// Tween.InterpolateValue()
+		arrow.Rotation = direction.Angle() - Mathf.Pi / 2;
 	}
 }

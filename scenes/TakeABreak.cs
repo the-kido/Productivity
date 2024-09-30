@@ -16,7 +16,6 @@ public partial class TakeABreak : Window
 	{
 		await Task.Delay(1000 * 60 * 60); // each hour
 		animationPlayer.Play("fly");
-		Visible = true;	
 		Remind();
 	}
     public override void _Process(double delta)

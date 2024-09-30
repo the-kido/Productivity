@@ -289,7 +289,7 @@ text = "Do At Noon"
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_font_sizes/font_size = 26
-text = "Read Through Routine"
+text = "Did EVERY step of the routine"
 
 [node name="4" type="CheckBox" parent="Panel/Panel/All things to do"]
 layout_mode = 2
