@@ -1,11 +1,16 @@
+using System;
 using Godot;
 
-public partial class TestSideMenu : Control
+public partial class TestSideMenu : Node
 {
 	[Export]
 	AnimationPlayer openAnimation;
 	[Export]
 	Panel panel;
+	[Export]
+	Window window;
+	[Export]
+	Control menuHitbox;
 	[Export]
 	TestCopyable template;
 	[Export]
@@ -21,8 +26,11 @@ public partial class TestSideMenu : Control
 	int hits = 0;
 	const float COOLDOWN = 0.3f;
 
+	Vector2I windowSize;
+
     public override void _Ready()
     {
+		windowSize = window.Size;
 		foreach (string copypaste in copypastes)
 		{
 			if (copypaste == "sep")
@@ -39,24 +47,31 @@ public partial class TestSideMenu : Control
 		}
 		openAnimation.Play("reset_manually");
 
-		GetParent<Window>().Visible = false;
+		window.Visible = false;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
 	Vector2 lastHitPosition;
     public override void _Process(double delta)
 	{
-		if (GetRect().HasPoint(GetGlobalMousePosition()))
+		Vector2 mousePosition = menuHitbox.GetGlobalMousePosition();
+		
+		if (Input.IsActionPressed("Windows") && Input.IsActionJustPressed("C"))
+		{
+			ToggleMenu(mousePosition);
+		}
+
+		if (menuHitbox.GetRect().HasPoint(mousePosition))
 		{
 			if (!mouseInside)
 			{ 
 				if (hits == 0) hits++;
-				else if (lastHitPosition.DistanceTo(GetGlobalMousePosition()) < 100) hits++;
+				else if (lastHitPosition.DistanceTo(mousePosition) < 100) hits++;
 			}
 
 			if (timer <= 0) {
 				timer = COOLDOWN;
-				lastHitPosition = GetGlobalMousePosition();
+				lastHitPosition = mousePosition;
 			}
 			mouseInside = true;
 		}
@@ -68,19 +83,19 @@ public partial class TestSideMenu : Control
 		if (hits == 2)
 		{
 			hits = 0;
-			ToggleMenu();
+			ToggleMenu(mousePosition);
 		}
-		GD.Print(hits);
 	}
 	public bool isMenuOpened = false;
 
-	public void ToggleMenu()
+	public void ToggleMenu(Vector2 mousePosition)
 	{
 		// When opening, update where the menu opens from.
 		if (!isMenuOpened)
 		{
-			float yDiff = GetGlobalMousePosition().Y - panel.Size.Y / 2;
-			panel.Position = new(panel.Position.X, yDiff);
+			int yDiff = (int)(mousePosition.Y - windowSize.Y / 2.0f);
+			yDiff = Mathf.Clamp(yDiff, 0, GetTree().Root.Size.Y - windowSize.Y);
+			window.Position = new(window.Position.X, yDiff);
 		}
 		// panel.PivotOffset = new(panel.PivotOffset.X, (panel.Size.Y / 2 + yDiff) * 1.15f);
 

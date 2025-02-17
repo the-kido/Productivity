@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=64 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://msfr2g3i6l3s" path="res://scenes/do_routine.tscn" id="22_tkxvv"]
 [ext_resource type="Texture2D" uid="uid://b74xoteupxltl" path="res://assets/arrow.png" id="23_jdvmd"]
 [ext_resource type="PackedScene" uid="uid://chhfed0pi6jr0" path="res://scenes/ai_thingys.tscn" id="25_0fb72"]
+[ext_resource type="Script" path="res://scenes/TestSideMenu.cs" id="26_r2gfp"]
 [ext_resource type="PackedScene" uid="uid://buxo2lar8bsyf" path="res://scenes/fancy_menu_poc.tscn" id="26_xwhsl"]
 [ext_resource type="Script" path="res://scenes/AIWindow.cs" id="27_qudbj"]
 
@@ -607,6 +608,119 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_cldii"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Window/Fancy Menu POC:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Window:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Window:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(590, 640)]
+}
+
+[sub_resource type="Animation" id="Animation_6hctg"]
+resource_name = "open"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Window:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Window/Fancy Menu POC:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Window:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(590, 640), Vector2i(590, 640)]
+}
+
+[sub_resource type="Animation" id="Animation_5ofcs"]
+resource_name = "reset_manually"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Window:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Window/Fancy Menu POC:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fsm31"]
+_data = {
+"RESET": SubResource("Animation_cldii"),
+"open": SubResource("Animation_6hctg"),
+"reset_manually": SubResource("Animation_5ofcs")
+}
+
 [node name="Main" type="Control" node_paths=PackedStringArray("minimize", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
@@ -1097,9 +1211,31 @@ openAI = NodePath("../AI Pivot/Open AI")
 
 [node name="AI thingys" parent="AI" instance=ExtResource("25_0fb72")]
 
-[node name="Window" type="Window" parent="."]
+[node name="Emoji Menu" type="Node" parent="." node_paths=PackedStringArray("openAnimation", "panel", "window", "menuHitbox", "template", "container", "hSeparatorTemplate")]
+script = ExtResource("26_r2gfp")
+openAnimation = NodePath("Emoji Menu Animations")
+panel = NodePath("Window/Fancy Menu POC")
+window = NodePath("Window")
+menuHitbox = NodePath("Menu Hitbox")
+template = NodePath("Window/Fancy Menu POC/HFlowContainer/Copyable Template")
+container = NodePath("Window/Fancy Menu POC/HFlowContainer")
+hSeparatorTemplate = NodePath("Window/Fancy Menu POC/HFlowContainer/Seperator")
+copypastes = Array[String](["¯\\_(ツ)_/¯", "(●'◡'●)", "ಠ_ಠ", "( ͡° ͜ʖ ͡°)", "〒▽〒", "ಠಿ_ಠ", "sep", " 🤨 ", " 🥹 ", " ✨ ", " ✅ ", " 😐 "])
+
+[node name="Emoji Menu Animations" type="AnimationPlayer" parent="Emoji Menu"]
+libraries = {
+"": SubResource("AnimationLibrary_fsm31")
+}
+
+[node name="Menu Hitbox" type="Control" parent="Emoji Menu"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 30.0
+offset_bottom = 2090.0
+
+[node name="Window" type="Window" parent="Emoji Menu"]
 transparent_bg = true
-size = Vector2i(600, 2000)
+size = Vector2i(590, 640)
 visible = false
 unresizable = true
 borderless = true
@@ -1108,10 +1244,11 @@ transparent = true
 unfocusable = true
 mouse_passthrough = true
 
-[node name="Fancy Menu POC" parent="Window" instance=ExtResource("26_xwhsl")]
+[node name="Fancy Menu POC" parent="Emoji Menu/Window" instance=ExtResource("26_xwhsl")]
+theme = ExtResource("1_pdcsv")
 
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]
 [editable path="Hourly Checkup/Hourly Checkup Gui"]
 [editable path="Sleep Reminder/Control"]
-[editable path="Window/Fancy Menu POC"]
+[editable path="Emoji Menu/Window/Fancy Menu POC"]

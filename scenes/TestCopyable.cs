@@ -32,8 +32,8 @@ public partial class TestCopyable : MarginContainer
 	double timer = 0;
 	public override void _Process(double delta)
 	{
-		
-		if (testSideMenu.isMenuOpened && GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+		Vector2 mousePosition = GetGlobalMousePosition();
+		if (testSideMenu.isMenuOpened && GetGlobalRect().HasPoint(mousePosition))
 		{
 			timer += delta / SELECTION_TIME;
 		}
@@ -45,7 +45,7 @@ public partial class TestCopyable : MarginContainer
 		if (timer >= 1) 
 		{
 			DisplayServer.ClipboardSet(label.Text); 
-			testSideMenu.ToggleMenu();
+			testSideMenu.ToggleMenu(mousePosition);
 
 			inputSimulator.Keyboard.ModifiedKeyStroke(WindowsInput.Native.VirtualKeyCode.CONTROL, WindowsInput.Native.VirtualKeyCode.VK_V);
 		}
