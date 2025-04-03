@@ -31,6 +31,7 @@ partial class ChromeTabDetector
 
     private void OnMessage(string msg) 
     {
+        GD.Print(msg);
         if (msg == "On Youtube") OnYoutube = true;
         if (msg == "Not On Youtube") OnYoutube = false;
         OnYoutube = msg == "On Youtube";

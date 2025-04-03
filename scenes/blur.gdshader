@@ -33,4 +33,3 @@ void fragment() {
 	//vec4 text = textureLod(img, UV, 10.0);
 	//COLOR = text;	// Called for every pixel the material is visible on.
 }
-

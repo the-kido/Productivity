@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmf55ew05u5xv"]
+
+[ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_sd6pc"]
+[ext_resource type="PackedScene" uid="uid://dewdrfmvm7s6b" path="res://scenes/bored menu/copyable_idea.tscn" id="2_4ou2i"]
+
+[node name="Bored Menu" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sd6pc")
+
+[node name="Copyable Idea" parent="." instance=ExtResource("2_4ou2i")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_right = 144.0
+grow_horizontal = 1
+
+[node name="HFlowContainer" type="FlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -375.0
+offset_top = 10.0
+offset_right = 375.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_constants/h_separation = 750
+theme_override_constants/v_separation = 10
+alignment = 1

@@ -47,8 +47,13 @@ public partial class TestSideMenu : Node
 		}
 		openAnimation.Play("reset_manually");
 
-		window.Visible = false;
+		CallDeferred("test");
     }
+	private void test()
+	{
+		window.Visible = false;
+
+	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
 	Vector2 lastHitPosition;
