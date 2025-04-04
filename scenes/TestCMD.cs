@@ -13,7 +13,7 @@ public partial class TestCMD : Node
         var ollama = new OllamaApiClient(uri)
         {
             // select a model which should be used for further operations
-            SelectedModel = "Modelfile"
+            SelectedModel = "dolphin-mixtral"
         };
 
 		ongoingChat = new Chat(ollama);
