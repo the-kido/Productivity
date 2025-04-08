@@ -101,6 +101,7 @@ _data = {
 
 [node name="Panel" type="Panel" node_paths=PackedStringArray("pause", "close", "time", "switchBetweenPeriods", "shrinkExpandAnimations", "fade", "progress")]
 modulate = Color(1, 1, 1, 0.643137)
+self_modulate = Color(1, 1, 1, 0)
 offset_right = 260.0
 offset_bottom = 150.0
 pivot_offset = Vector2(130, 75)

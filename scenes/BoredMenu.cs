@@ -1,7 +1,5 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 public partial class BoredMenu : Node
 {
@@ -9,6 +7,7 @@ public partial class BoredMenu : Node
 
 	PackedScene copyableIdea = ResourceLoader.Load<PackedScene>("res://scenes/bored menu/copyable_idea.tscn");
 	[Export] Panel boredMenu;
+	[Export] Label copyableHeader;
 	[Export] AnimationPlayer menuAnimations;
 	[Export] Control menuHitbox;
 	[Export] Container container;
@@ -29,6 +28,11 @@ public partial class BoredMenu : Node
             string copypaste = ideas[i];
             if (copypaste[0] == '*')
 			{
+				var dup = copyableHeader.Duplicate() as Label;
+				dup.Visible = true;
+				dup.Text = copypaste.Right(1);
+				copiedItems.Add(dup);
+				container.AddChild(dup);
 				continue;
 			}
 
@@ -39,8 +43,8 @@ public partial class BoredMenu : Node
 			container.AddChild(dupeCopyable);
 		}
 
-		// Vector2 newMenuSize = new(boredMenu.Size.X, copiedItems.Count * 70 + 10);
 		CallDeferred("UpdateSizes");
+		CopyableIdea.OutOfIdeas += Close;
 	}
 
 	private void UpdateSizes()
@@ -56,12 +60,13 @@ public partial class BoredMenu : Node
 
 	double time = 2.5;
 	bool playingAnimation = false;
-
 	private void Open()
 	{
 		playingAnimation = true;
 		time = 2.5;
 		shown = 0;
+
+		CopyableIdea.MenuOpened?.Invoke();
 
 		menuAnimations.Play("Open");
 
@@ -91,18 +96,13 @@ public partial class BoredMenu : Node
 		{
 			var toShow = copiedItems[shown++];
 			if (toShow is CopyableIdea copyableIdea && copyableIdea.Visible == false) copyableIdea.Open();
+			else toShow.Visible = true;
 		}
 	}
 
 	private /*async*/ void Close()
 	{
 		menuAnimations.Play("Close");
-		// await Task.Delay(1000);
-
-		// foreach(var copyedItem in copiedItems)
-		// {
-		// 	copyedItem.Visible = false;
-		// }
 	}
 
 	double timer = 0;

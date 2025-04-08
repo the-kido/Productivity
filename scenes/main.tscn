@@ -1352,10 +1352,11 @@ mouse_passthrough = true
 [node name="Fancy Menu POC" parent="Emoji Menu/Window" instance=ExtResource("26_xwhsl")]
 theme = ExtResource("1_pdcsv")
 
-[node name="Bored Menu" type="Node" parent="." node_paths=PackedStringArray("boredMenu", "menuAnimations", "menuHitbox", "container", "menuWindow")]
+[node name="Bored Menu" type="Node" parent="." node_paths=PackedStringArray("boredMenu", "copyableHeader", "menuAnimations", "menuHitbox", "container", "menuWindow")]
 script = ExtResource("28_vcdau")
-ideas = Array[String](["Clean up my area", "Listen to relaxed music", "Listen to a Podcast", "Go outside / take a 10 min walk", "Read a webtoon", "Finish some small / time burner tasks on Todoist", "Clean my computer files", "Message friends", "Take a nap", "Prepare for another task", "Organize my Calendar and Todoist", "Clean up my stuff (desk, bag, binder, etc)", "Model / Draw something for fun."])
+ideas = Array[String](["*🏃Outside things!", "Go outside / take a 10 min walk", "*📂Organizing", "Clean up my stuff (desk, bag, binder, etc)", "Plan what tomorrow might look like", "Prepare for another task", "Clean up my area", "Clean my computer files", "Organize my Calendar and Todoist", "*😎 Fun", "Listen to relaxed music", "Listen to a Podcast", "Read a webtoon", "Message friends", "Take a nap", "*⚒️Productivity", "Finish some small / time burner tasks on Todoist", "Model / Draw something for fun."])
 boredMenu = NodePath("Bored Window/Bored Menu")
+copyableHeader = NodePath("Bored Window/Bored Menu/CopyableHSeparator")
 menuAnimations = NodePath("Bored Animations")
 menuHitbox = NodePath("Bored Hitbox")
 container = NodePath("Bored Window/Bored Menu/HFlowContainer")
@@ -1376,14 +1377,13 @@ libraries = {
 [node name="Bored Window" type="Window" parent="Bored Menu"]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(750, 1190)
+size = Vector2i(750, 1500)
 unresizable = true
 borderless = true
 always_on_top = true
 transparent = true
 
 [node name="Bored Menu" parent="Bored Menu/Bored Window" instance=ExtResource("29_wrdhp")]
-offset_bottom = -1190.0
 
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]
@@ -1391,3 +1391,7 @@ offset_bottom = -1190.0
 [editable path="Sleep Reminder/Control"]
 [editable path="Emoji Menu/Window/Fancy Menu POC"]
 [editable path="Bored Menu/Bored Window/Bored Menu"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea2"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea3"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea4"]
