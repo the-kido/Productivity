@@ -12,7 +12,7 @@ public partial class TestCMD : Node
 		var uri = new Uri("http://localhost:11434");
         var ollama = new OllamaApiClient(uri)
         {
-            SelectedModel = "don't change this"
+            SelectedModel = "don't change this."
         };
 
 		ongoingChat = new Chat(ollama);

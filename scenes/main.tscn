@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=68 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -23,10 +23,8 @@
 [ext_resource type="Script" path="res://scenes/Follower.cs" id="22_mnjk7"]
 [ext_resource type="PackedScene" uid="uid://msfr2g3i6l3s" path="res://scenes/do_routine.tscn" id="22_tkxvv"]
 [ext_resource type="Texture2D" uid="uid://b74xoteupxltl" path="res://assets/arrow.png" id="23_jdvmd"]
-[ext_resource type="PackedScene" uid="uid://chhfed0pi6jr0" path="res://scenes/ai_thingys.tscn" id="25_0fb72"]
 [ext_resource type="Script" path="res://scenes/TestSideMenu.cs" id="26_r2gfp"]
 [ext_resource type="PackedScene" uid="uid://buxo2lar8bsyf" path="res://scenes/fancy_menu_poc.tscn" id="26_xwhsl"]
-[ext_resource type="Script" path="res://scenes/AIWindow.cs" id="27_qudbj"]
 [ext_resource type="Script" path="res://scenes/BoredMenu.cs" id="28_vcdau"]
 [ext_resource type="PackedScene" uid="uid://dmf55ew05u5xv" path="res://scenes/bored_menu.tscn" id="29_wrdhp"]
 
@@ -1150,34 +1148,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 text = "Open
 Settings"
 
-[node name="AI Pivot" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -164.0
-offset_right = 164.0
-grow_vertical = 0
-
-[node name="Open AI" type="Button" parent="AI Pivot"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -42.0
-offset_right = 42.0
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/hover = SubResource("StyleBoxFlat_2ashe")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2ashe")
-theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
-text = "Open
-AI"
-
 [node name="Notification" type="Window" parent="."]
 transparent_bg = true
 position = Vector2i(1700, 910)
@@ -1304,18 +1274,6 @@ position = Vector2(78.59, 75.61)
 sprite_frames = SubResource("SpriteFrames_u8r07")
 autoplay = "default"
 frame_progress = 0.392192
-
-[node name="AI" type="Window" parent="." node_paths=PackedStringArray("openAI")]
-transparent_bg = true
-position = Vector2i(545, 166)
-size = Vector2i(500, 1000)
-visible = false
-transparent = true
-min_size = Vector2i(500, 1000)
-script = ExtResource("27_qudbj")
-openAI = NodePath("../AI Pivot/Open AI")
-
-[node name="AI thingys" parent="AI" instance=ExtResource("25_0fb72")]
 
 [node name="Emoji Menu" type="Node" parent="." node_paths=PackedStringArray("openAnimation", "panel", "window", "menuHitbox", "template", "container", "hSeparatorTemplate")]
 script = ExtResource("26_r2gfp")
