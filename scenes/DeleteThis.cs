@@ -4,6 +4,7 @@
 using Godot;
 using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 public partial class DeleteThis : Node
 {
@@ -71,9 +72,15 @@ public partial class DeleteThis : Node
 
     // --- Godot Lifecycle Method ---
 
-	private bool applied = false;
-    public void Apply()
+    public override void _Ready()
     {
+        (GetParent() as Window).AboutToPopup += Apply;
+    }
+
+	private bool applied = false;
+    public async void Apply()
+    {
+        await Task.Delay(100);
         // Ensure this only runs on Windows
         if (OS.GetName() != "Windows")
         {

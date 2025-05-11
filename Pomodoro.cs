@@ -33,6 +33,7 @@ public partial class Pomodoro : Panel
 
 		progress.Value = 0f;
 		
+		parentWindow.Popup();
 		openCloseAnimations.Play("open");
 		
 		workTimeMinutes = workTime;
@@ -41,8 +42,8 @@ public partial class Pomodoro : Panel
 		UpdateEndTime();
 		
 		// One of these guys are redundant but also why should I care.
-		await Task.Delay(1000);
-		CallDeferred(nameof(ApplyAcrylic));		
+		// await Task.Delay(1000);
+		// CallDeferred(nameof(ApplyAcrylic));		
 	}
 	
 	private void ApplyAcrylic() => deleteThis.Apply();

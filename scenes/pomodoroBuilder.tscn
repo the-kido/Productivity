@@ -212,7 +212,7 @@ libraries = {
 
 [node name="Node" type="Node" parent="Window"]
 script = ExtResource("4_qvkc3")
-AcrylicTintColor = Color(0.1633, 0.23, 0.198873, 0.898039)
+AcrylicTintColor = Color(0.1633, 0.23, 0.198873, 0.831373)
 
 [node name="Params" type="Panel" parent="."]
 layout_mode = 1

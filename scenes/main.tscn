@@ -1326,7 +1326,7 @@ menuHitbox = NodePath("Menu Hitbox")
 template = NodePath("Window/Fancy Menu POC/HFlowContainer/Copyable Template")
 container = NodePath("Window/Fancy Menu POC/HFlowContainer")
 hSeparatorTemplate = NodePath("Window/Fancy Menu POC/HFlowContainer/Seperator")
-copypastes = Array[String](["¯\\_(ツ)_/¯", "(●'◡'●)", "ಠ_ಠ", "( ͡° ͜ʖ ͡°)", "〒▽〒", "ಠಿ_ಠ", "sep", " 🤨 ", " 🥹 ", " ✨ ", " ✅ ", " 😐 "])
+copypastes = Array[String](["¯\\_(ツ)_/¯", "〒▽〒", "ಠ_ಠ", "ಠಿ_ಠ", "sep", " 🤨 ", " 🥹 ", " ✨ ", " ✅ ", " 😐 ", " 💀", " ❌", "sep", "৻(˵ •̀ ᴗ - ˵ ) ✧", "(●'◡'●)", "( ͡° ͜ʖ ͡°)", "(¬`‸´¬)", "( •̀ ⤙ •́ )", "(˶ ¬`‸´¬ ˶) ", "(˵ •̀ ᴗ - ) 👍"])
 
 [node name="Emoji Menu Animations" type="AnimationPlayer" parent="Emoji Menu"]
 libraries = {

@@ -12,8 +12,7 @@ public partial class TestCMD : Node
 		var uri = new Uri("http://localhost:11434");
         var ollama = new OllamaApiClient(uri)
         {
-            // select a model which should be used for further operations
-            SelectedModel = "dolphin-mixtral"
+            SelectedModel = "don't change this"
         };
 
 		ongoingChat = new Chat(ollama);
