@@ -25,6 +25,7 @@ public partial class BoredMenu : Node
     {
 		if (!enabled)
 		{
+			menuWindow.Visible = false;
 			ProcessMode = ProcessModeEnum.Disabled;
 			return;
 		}

@@ -1383,6 +1383,7 @@ menuAnimations = NodePath("Bored Animations")
 menuHitbox = NodePath("Bored Hitbox")
 container = NodePath("Bored Window/Bored Menu/HFlowContainer")
 menuWindow = NodePath("Bored Window")
+enabled = true
 
 [node name="Bored Hitbox" type="Control" parent="Bored Menu"]
 layout_mode = 3
@@ -1406,6 +1407,7 @@ always_on_top = true
 transparent = true
 
 [node name="Bored Menu" parent="Bored Menu/Bored Window" instance=ExtResource("29_wrdhp")]
+offset_bottom = -1500.0
 
 [node name="Grayscale" type="Node" parent="."]
 script = ExtResource("28_h34bu")
