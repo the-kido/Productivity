@@ -19,8 +19,16 @@ public partial class BoredMenu : Node
 
 	Vector2 defaultSize;
 
+	[Export] bool enabled;
+
     public override void _Ready()
     {
+		if (!enabled)
+		{
+			ProcessMode = ProcessModeEnum.Disabled;
+			return;
+		}
+
 		enoughDistanceCoefficient = 6.0 * menuHitbox.Size.Y / DisplayServer.ScreenGetRefreshRate();
 
         for (int i = 0; i < ideas.Count; i++)
@@ -53,7 +61,6 @@ public partial class BoredMenu : Node
 		menuAnimations.GetAnimation("Open").TrackSetKeyValue(2, 1, newMenuSize);
 
         for (int i = 0; i < ideas.Count; i++) if (copiedItems[i] is CopyableIdea copyableIdea) copyableIdea.UpdatePivot();
-
 
 		menuWindow.Visible = false;
 	}
@@ -109,7 +116,6 @@ public partial class BoredMenu : Node
 	int clicks = 0;
 
 	Vector2 mousePos, previousPos;
-
 
     public override void _Process(double delta)
     {
