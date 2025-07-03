@@ -65,7 +65,6 @@ layout_mode = 2
 text = "🤩  I'll get off early and do something else!"
 
 [node name="Bad" type="Button" parent="VBoxContainer/HBoxContainer"]
-modulate = Color(1, 1, 1, 0.203922)
 layout_mode = 2
 text = "😔 I won't be able to chill today!"
 

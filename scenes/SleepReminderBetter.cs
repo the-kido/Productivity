@@ -9,6 +9,9 @@ public partial class SleepReminderBetter : Panel
 	[Export] TextEdit reason;
 	[Export] Button finish;
 
+	const string PLACEHOLDER_WHY_NOT = "Why not!? Are you sure?";
+	const string PLACEHOLDER_WHATCHA_DOING = "Great! What will you be doing?";
+
 	// Called when the node enters the scene tree for the first time.
 	Color gray = new("ffffff30");
 	public override void _Ready()
@@ -20,7 +23,17 @@ public partial class SleepReminderBetter : Panel
 			{
 				arr.Where((item) => item != button).ToList().ForEach((item) => item.Modulate = gray);
 				foreach (Button _button in arr) _button.Disabled = true;
-				reason.Visible = true;
+
+				if (button.Name == buttonGreat.Name)
+				{
+					// Skip that
+					finish.Visible = true;
+				}
+				else
+				{
+					reason.Visible = true;
+					reason.PlaceholderText = button.Name == buttonGood.Name ? PLACEHOLDER_WHATCHA_DOING : PLACEHOLDER_WHY_NOT;
+                }
 			};
 		}
 
