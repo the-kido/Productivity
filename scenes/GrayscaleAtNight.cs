@@ -1,3 +1,5 @@
+using System;
+using System.Text.RegularExpressions;
 using Godot;
 using Microsoft.VisualBasic;
 using WindowsInput;
@@ -6,6 +8,8 @@ public partial class GrayscaleAtNight : Node
 {
 	const int HOUR = 12 + 8; // 8:30 PM is when we grayscale.
 	const int MIN = 30;
+
+	static bool IsLate() => DateAndTime.Now.Hour >= HOUR && DateAndTime.Now.Minute >= MIN;
 
 	static System.Diagnostics.Process StartProcess(int val)
 	{
@@ -19,25 +23,29 @@ public partial class GrayscaleAtNight : Node
 		return System.Diagnostics.Process.Start(psi);
 	}
 
-	const string GRAYSCALED = "Did grayscale", DIDNT = "Didn't grayscale";
+	const string GRAYSCALED = "Grayscaled", NOT_GRAYSCALED = "Not Grayscaled";
 	const string FILE_PATH = "user://grayscaled.txt";
-	
+
+	bool isGrayscaled = false;
 	public override void _Ready()
 	{
 		using var r = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Read);
 		var prev = r.GetLine();
-		GD.Print(prev);
+		if (string.IsNullOrEmpty(prev)) prev = "Not Grayscaled";
 		r.Close();
-		if (prev == GRAYSCALED)
-		{
-			Toggle();
-			using var w = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Write);
-			w.StoreLine(DIDNT);
-		}
+
+		GD.Print(prev);
+		isGrayscaled = prev == GRAYSCALED;
+
+		// Aka if it's the morning and we needa toggle it, toggle it!
+		if (isGrayscaled && !IsLate()) Toggle(false);
 	}
 
-	void Toggle()
+	void Toggle(bool on)
 	{
+		// Nothing to toggle if the state is already what we wanted!
+		if (isGrayscaled == on) return;
+
 		var a = StartProcess(1);
 		a.EnableRaisingEvents = true;
 		a.Exited += (_, _) =>
@@ -49,20 +57,19 @@ public partial class GrayscaleAtNight : Node
 			);
 
 			StartProcess(0);
-
 		};
-		ProcessMode = ProcessModeEnum.Disabled;
+
+		using var w = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Write);
+		w.StoreLine(on ? GRAYSCALED : NOT_GRAYSCALED);
+		isGrayscaled = !isGrayscaled;
 	}
 
 	public override void _Process(double delta)
 	{
-		if (DateAndTime.Now.Hour >= HOUR && DateAndTime.Now.Minute >= MIN)
+		if (IsLate())
 		{
-			Toggle();
-
-			using var w = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Write);
-			w.StoreLine(GRAYSCALED);
-			return;
+			Toggle(true);
+			ProcessMode = ProcessModeEnum.Disabled;
 		}
 	}
 }
