@@ -38,7 +38,6 @@ partial class ChromeTabDetector
                     {
                         connections.ForEach(conection => conection.Send("Reset Cooldown"));
                     }
-                    GD.Print("???", msg);
                 };
             }
         );

@@ -30,6 +30,12 @@ public partial class GrayscaleAtNight : Node
 	public override void _Ready()
 	{
 		using var r = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Read);
+		if (!FileAccess.FileExists(FILE_PATH))
+		{
+			using var w = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Write);
+			w.StoreLine(NOT_GRAYSCALED);
+		}
+
 		var prev = r.GetLine();
 		if (string.IsNullOrEmpty(prev)) prev = "Not Grayscaled";
 		r.Close();
