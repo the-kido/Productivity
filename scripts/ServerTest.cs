@@ -28,12 +28,17 @@ partial class ChromeTabDetector
             {
                 connections.Add(connection);
                 connection.OnMessage = OnMessage;
-                connection.OnMessage += (msg) => 
+                connection.OnMessage += (msg) =>
                 {
-                    if (msg == "Reset Cooldown") 
+                    if (msg == "Reset Cooldown Less")
+                    {
+                        connections.ForEach(conection => conection.Send("Reset Cooldown Less"));
+                    }
+                    if (msg == "Reset Cooldown")
                     {
                         connections.ForEach(conection => conection.Send("Reset Cooldown"));
                     }
+                    GD.Print("???", msg);
                 };
             }
         );
