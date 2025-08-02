@@ -27,7 +27,19 @@ public partial class HeyNoYoutube : Control
 
 
 	Vector2 left = new(30, 930), right = new(3510, 930), up = new(1770, 30), down = new(1770, 1830);
+	
+	void InitMovePoints()
+	{
+		int x = GetTree().Root.Size.X;
+		int y = GetTree().Root.Size.Y;
+		
+		int windowX = parent.Size.X, windowY = parent.Size.Y;
 
+		left = new(30, y/2 - windowY / 2);
+		right = new(x - 30 - windowX, y/2 - windowY / 2);
+		up = new(x/2 - windowX / 2, 30);
+		down = new(x/2 - windowX / 2, y - 30 - windowY);
+	}
 
 	ChromeTabDetector detector;
 	
@@ -51,9 +63,11 @@ public partial class HeyNoYoutube : Control
 	}
 
 	public override async void _Ready() {
+		parent = GetParent<Window>();
+		InitMovePoints();
+
 		ChooseNewText();
 		
-		parent = GetParent<Window>();
 		
 		Associate(btnLeft, left);
 		Associate(btnRight, right);
