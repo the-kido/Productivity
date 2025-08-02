@@ -44,11 +44,11 @@ public partial class Main : Control {
 
 	bool focused = true;
 	public override void _Notification(int what) {
-        if (what == MainLoop.NotificationApplicationFocusIn) {
+		if (what == MainLoop.NotificationApplicationFocusIn) {
 			CallDeferred("temp");
 		}
 		if (what == MainLoop.NotificationApplicationFocusOut) {
 			
 		}
-    }
+	}
 }

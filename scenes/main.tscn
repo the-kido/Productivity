@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cgrhei5yvp5dj"]
+[gd_scene load_steps=74 format=3 uid="uid://cgrhei5yvp5dj"]
 
 [ext_resource type="Texture2D" uid="uid://c3odne562pk0a" path="res://assets/background.png" id="1_fgmo7"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_pdcsv"]
@@ -23,10 +23,13 @@
 [ext_resource type="Script" path="res://scenes/Follower.cs" id="22_mnjk7"]
 [ext_resource type="PackedScene" uid="uid://msfr2g3i6l3s" path="res://scenes/do_routine.tscn" id="22_tkxvv"]
 [ext_resource type="Texture2D" uid="uid://b74xoteupxltl" path="res://assets/arrow.png" id="23_jdvmd"]
-[ext_resource type="PackedScene" uid="uid://chhfed0pi6jr0" path="res://scenes/ai_thingys.tscn" id="25_0fb72"]
 [ext_resource type="Script" path="res://scenes/TestSideMenu.cs" id="26_r2gfp"]
 [ext_resource type="PackedScene" uid="uid://buxo2lar8bsyf" path="res://scenes/fancy_menu_poc.tscn" id="26_xwhsl"]
-[ext_resource type="Script" path="res://scenes/AIWindow.cs" id="27_qudbj"]
+[ext_resource type="Script" path="res://scenes/GrayscaleAtNight.cs" id="28_h34bu"]
+[ext_resource type="Script" path="res://scenes/BoredMenu.cs" id="28_vcdau"]
+[ext_resource type="PackedScene" uid="uid://b35sf7hgkeye4" path="res://scenes/sleep_reminder_better.tscn" id="29_v8rru"]
+[ext_resource type="PackedScene" uid="uid://dmf55ew05u5xv" path="res://scenes/bored_menu.tscn" id="29_wrdhp"]
+[ext_resource type="PackedScene" uid="uid://cemxgk7s4e0lr" path="res://scenes/sleep_consequences.tscn" id="30_lnq04"]
 
 [sub_resource type="Animation" id="Animation_vxf55"]
 resource_name = "Minimize"
@@ -632,7 +635,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -719,6 +722,169 @@ _data = {
 "RESET": SubResource("Animation_cldii"),
 "open": SubResource("Animation_6hctg"),
 "reset_manually": SubResource("Animation_5ofcs")
+}
+
+[sub_resource type="Animation" id="Animation_xip17"]
+resource_name = "Close"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bored Window:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bored Window/Bored Menu:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f2sap"]
+resource_name = "Open"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bored Window:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bored Window/Bored Menu:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bored Window/Bored Menu:size")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(750, 0), Vector2(750, 730)]
+}
+
+[sub_resource type="Animation" id="Animation_s518c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bored Window:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bored Window/Bored Menu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jt5i6"]
+_data = {
+"Close": SubResource("Animation_xip17"),
+"Open": SubResource("Animation_f2sap"),
+"RESET": SubResource("Animation_s518c")
+}
+
+[sub_resource type="Animation" id="Animation_uw2gl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [76.26]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar/Explanation:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ed76x"]
+resource_name = "new_animation"
+length = 300.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.43333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar/Explanation:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 3.86667, 7.33333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bh30x"]
+_data = {
+"RESET": SubResource("Animation_uw2gl"),
+"play": SubResource("Animation_ed76x")
 }
 
 [node name="Main" type="Control" node_paths=PackedStringArray("minimize", "animationPlayer")]
@@ -1046,34 +1212,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
 text = "Open
 Settings"
 
-[node name="AI Pivot" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -164.0
-offset_right = 164.0
-grow_vertical = 0
-
-[node name="Open AI" type="Button" parent="AI Pivot"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -42.0
-offset_right = 42.0
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/hover = SubResource("StyleBoxFlat_2ashe")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2ashe")
-theme_override_styles/normal = SubResource("StyleBoxFlat_2ashe")
-text = "Open
-AI"
-
 [node name="Notification" type="Window" parent="."]
 transparent_bg = true
 position = Vector2i(1700, 910)
@@ -1159,8 +1297,9 @@ movementAnimation = NodePath("../Movement Animation")
 auto_translate_mode = 1
 transparent_bg = true
 handle_input_locally = false
-position = Vector2i(2116, 359)
+position = Vector2i(528, 0)
 size = Vector2i(450, 540)
+visible = false
 unresizable = true
 borderless = true
 always_on_top = true
@@ -1173,8 +1312,9 @@ offset_bottom = 0.0
 
 [node name="Follower" type="Window" parent="." node_paths=PackedStringArray("followingWindow", "arrow")]
 transparent_bg = true
-position = Vector2i(2404, 196)
+position = Vector2i(816, 91)
 size = Vector2i(162, 162)
+visible = false
 unresizable = true
 borderless = true
 always_on_top = true
@@ -1199,18 +1339,6 @@ sprite_frames = SubResource("SpriteFrames_u8r07")
 autoplay = "default"
 frame_progress = 0.392192
 
-[node name="AI" type="Window" parent="." node_paths=PackedStringArray("openAI")]
-transparent_bg = true
-position = Vector2i(545, 166)
-size = Vector2i(500, 1000)
-visible = false
-transparent = true
-min_size = Vector2i(500, 1000)
-script = ExtResource("27_qudbj")
-openAI = NodePath("../AI Pivot/Open AI")
-
-[node name="AI thingys" parent="AI" instance=ExtResource("25_0fb72")]
-
 [node name="Emoji Menu" type="Node" parent="." node_paths=PackedStringArray("openAnimation", "panel", "window", "menuHitbox", "template", "container", "hSeparatorTemplate")]
 script = ExtResource("26_r2gfp")
 openAnimation = NodePath("Emoji Menu Animations")
@@ -1220,7 +1348,7 @@ menuHitbox = NodePath("Menu Hitbox")
 template = NodePath("Window/Fancy Menu POC/HFlowContainer/Copyable Template")
 container = NodePath("Window/Fancy Menu POC/HFlowContainer")
 hSeparatorTemplate = NodePath("Window/Fancy Menu POC/HFlowContainer/Seperator")
-copypastes = Array[String](["¯\\_(ツ)_/¯", "(●'◡'●)", "ಠ_ಠ", "( ͡° ͜ʖ ͡°)", "〒▽〒", "ಠಿ_ಠ", "sep", " 🤨 ", " 🥹 ", " ✨ ", " ✅ ", " 😐 "])
+copypastes = Array[String](["¯\\_(ツ)_/¯", "〒▽〒", "ಠ_ಠ", "ಠಿ_ಠ", "sep", " 🤨 ", " 🥹 ", " ✨ ", " ✅ ", " 😐 ", " 💀", " ❌", "sep", "৻(˵ •̀ ᴗ - ˵ ) ✧", "(●'◡'●)", "( ͡° ͜ʖ ͡°)", "(¬`‸´¬)", "( •̀ ⤙ •́ )", "(˶ ¬`‸´¬ ˶) ", "(˵ •̀ ᴗ - ) 👍"])
 
 [node name="Emoji Menu Animations" type="AnimationPlayer" parent="Emoji Menu"]
 libraries = {
@@ -1236,7 +1364,6 @@ offset_bottom = 2090.0
 [node name="Window" type="Window" parent="Emoji Menu"]
 transparent_bg = true
 size = Vector2i(590, 640)
-visible = false
 unresizable = true
 borderless = true
 always_on_top = true
@@ -1247,8 +1374,113 @@ mouse_passthrough = true
 [node name="Fancy Menu POC" parent="Emoji Menu/Window" instance=ExtResource("26_xwhsl")]
 theme = ExtResource("1_pdcsv")
 
+[node name="Bored Menu" type="Node" parent="." node_paths=PackedStringArray("boredMenu", "copyableHeader", "menuAnimations", "menuHitbox", "container", "menuWindow")]
+script = ExtResource("28_vcdau")
+ideas = Array[String](["*🏃Outside things!", "Go outside / take a 10 min walk", "*📂Organizing", "Clean up my stuff (desk, bag, binder, etc)", "Plan what tomorrow might look like", "Prepare for another task", "Clean up my area", "Clean my computer files", "Organize my Calendar and Todoist", "*😎 Fun", "Listen to relaxed music", "Listen to a Podcast", "Read a webtoon", "Message friends", "Take a nap", "*⚒️Productivity", "Finish some small / time burner tasks on Todoist", "Model / Draw something for fun."])
+boredMenu = NodePath("Bored Window/Bored Menu")
+copyableHeader = NodePath("Bored Window/Bored Menu/CopyableHSeparator")
+menuAnimations = NodePath("Bored Animations")
+menuHitbox = NodePath("Bored Hitbox")
+container = NodePath("Bored Window/Bored Menu/HFlowContainer")
+menuWindow = NodePath("Bored Window")
+
+[node name="Bored Hitbox" type="Control" parent="Bored Menu"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 5.0
+grow_vertical = 2
+
+[node name="Bored Animations" type="AnimationPlayer" parent="Bored Menu"]
+libraries = {
+"": SubResource("AnimationLibrary_jt5i6")
+}
+
+[node name="Bored Window" type="Window" parent="Bored Menu"]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(750, 1500)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+
+[node name="Bored Menu" parent="Bored Menu/Bored Window" instance=ExtResource("29_wrdhp")]
+offset_bottom = -1500.0
+
+[node name="Grayscale" type="Node" parent="."]
+script = ExtResource("28_h34bu")
+
+[node name="Sleep!" type="Node" parent="."]
+
+[node name="Reminder" type="Window" parent="Sleep!"]
+initial_position = 1
+size = Vector2i(900, 900)
+visible = false
+unresizable = true
+always_on_top = true
+
+[node name="SleepReminderBetter" parent="Sleep!/Reminder" instance=ExtResource("29_v8rru")]
+
+[node name="Consequeces" type="Window" parent="Sleep!"]
+initial_position = 1
+size = Vector2i(2000, 1300)
+visible = false
+unresizable = true
+always_on_top = true
+
+[node name="SleepConsequences" parent="Sleep!/Consequeces" node_paths=PackedStringArray("snoozeBarWindow", "snoozeBarAnimation") instance=ExtResource("30_lnq04")]
+snoozeBarWindow = NodePath("../../Snooze Bar So I don\'t get Jumpscared")
+snoozeBarAnimation = NodePath("../../Snooze Bar So I don\'t get Jumpscared/AnimationPlayer")
+
+[node name="Snooze Bar So I don\'t get Jumpscared" type="Window" parent="Sleep!"]
+transparent_bg = true
+position = Vector2i(1536, 12)
+size = Vector2i(768, 40)
+visible = false
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+
+[node name="ProgressBar" type="ProgressBar" parent="Sleep!/Snooze Bar So I don\'t get Jumpscared"]
+self_modulate = Color(1, 1, 1, 0.545098)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pdcsv")
+value = 76.26
+show_percentage = false
+
+[node name="Explanation" type="Label" parent="Sleep!/Snooze Bar So I don\'t get Jumpscared/ProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Prepare to go to sleep!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sleep!/Snooze Bar So I don\'t get Jumpscared"]
+libraries = {
+"": SubResource("AnimationLibrary_bh30x")
+}
+
 [editable path="Ambience/Animation"]
 [editable path="Hourly Checkup"]
 [editable path="Hourly Checkup/Hourly Checkup Gui"]
 [editable path="Sleep Reminder/Control"]
 [editable path="Emoji Menu/Window/Fancy Menu POC"]
+[editable path="Bored Menu/Bored Window/Bored Menu"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea2"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea3"]
+[editable path="Bored Menu/Bored Window/Bored Menu/HFlowContainer/Copyable Idea4"]

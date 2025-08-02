@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmf55ew05u5xv"]
+
+[ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="1_sd6pc"]
+[ext_resource type="PackedScene" uid="uid://dewdrfmvm7s6b" path="res://scenes/bored menu/copyable_idea.tscn" id="2_4ou2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_by2ba"]
+bg_color = Color(0.0418, 0.19, 0.19, 1)
+border_width_left = 2
+border_width_top = 2
+border_color = Color(0.4002, 0.58, 0.514073, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="FontVariation" id="FontVariation_fx3si"]
+spacing_glyph = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_pilx6"]
+font = SubResource("FontVariation_fx3si")
+font_size = 40
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 12
+shadow_color = Color(0.0255, 0.129058, 0.17, 0.431373)
+shadow_offset = Vector2(0, 3.15)
+
+[node name="Bored Menu" type="Panel"]
+self_modulate = Color(1, 1, 1, 0.509804)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sd6pc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_by2ba")
+
+[node name="CopyableHSeparator" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 60)
+layout_mode = 2
+offset_left = 1620.0
+offset_top = 80.0
+offset_right = 2220.0
+offset_bottom = 140.0
+text = "🏃Outside things!"
+label_settings = SubResource("LabelSettings_pilx6")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Copyable Idea" parent="." instance=ExtResource("2_4ou2i")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_right = 144.0
+grow_horizontal = 1
+
+[node name="HFlowContainer" type="FlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -375.0
+offset_top = 10.0
+offset_right = 375.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_constants/h_separation = 750
+theme_override_constants/v_separation = 10
+alignment = 1
+
+[node name="Copyable Idea" parent="HFlowContainer" instance=ExtResource("2_4ou2i")]
+layout_mode = 2
+
+[node name="Copyable Idea2" parent="HFlowContainer" instance=ExtResource("2_4ou2i")]
+layout_mode = 2
+
+[node name="Copyable Idea3" parent="HFlowContainer" instance=ExtResource("2_4ou2i")]
+layout_mode = 2
+
+[node name="Copyable Idea4" parent="HFlowContainer" instance=ExtResource("2_4ou2i")]
+layout_mode = 2
+
+[editable path="HFlowContainer/Copyable Idea"]
+[editable path="HFlowContainer/Copyable Idea2"]
+[editable path="HFlowContainer/Copyable Idea3"]
+[editable path="HFlowContainer/Copyable Idea4"]

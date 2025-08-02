@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://owrdrgxs20h7"]
+[gd_scene load_steps=10 format=3 uid="uid://owrdrgxs20h7"]
 
 [ext_resource type="StyleBox" uid="uid://bewk8rbpxbaym" path="res://assets/dark_panel.tres" id="1_1oqdn"]
 [ext_resource type="Script" path="res://scenes/PomodoroBuilder.cs" id="1_mha8w"]
 [ext_resource type="PackedScene" uid="uid://r5q1gq7lqg6r" path="res://scenes/pomodoro.tscn" id="3_0yjk4"]
 [ext_resource type="Script" path="res://scripts/Focus Mode/DraggableWindow.cs" id="3_tymrl"]
 [ext_resource type="Theme" uid="uid://bg8sxkf0tmo0b" path="res://assets/MainMenu.tres" id="4_3ne7i"]
+[ext_resource type="Script" path="res://scenes/DeleteThis.cs" id="4_qvkc3"]
 
 [sub_resource type="Animation" id="Animation_o66qh"]
 resource_name = "close"
@@ -191,22 +192,27 @@ audio_listener_enable_2d = true
 size = Vector2i(257, 154)
 visible = false
 unresizable = true
-borderless = true
 always_on_top = true
 transparent = true
+extend_to_title = true
 script = ExtResource("3_tymrl")
 
-[node name="Pomodoro" parent="Window" node_paths=PackedStringArray("openCloseAnimations") instance=ExtResource("3_0yjk4")]
+[node name="Pomodoro" parent="Window" node_paths=PackedStringArray("openCloseAnimations", "deleteThis") instance=ExtResource("3_0yjk4")]
 visible = false
 modulate = Color(1, 1, 1, 0)
 rotation = 0.174533
 scale = Vector2(0.7, 0.7)
 openCloseAnimations = NodePath("../AnimationPlayer")
+deleteThis = NodePath("../Node")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Window"]
 libraries = {
 "": SubResource("AnimationLibrary_4krlb")
 }
+
+[node name="Node" type="Node" parent="Window"]
+script = ExtResource("4_qvkc3")
+AcrylicTintColor = Color(0.1633, 0.23, 0.198873, 0.831373)
 
 [node name="Params" type="Panel" parent="."]
 layout_mode = 1

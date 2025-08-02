@@ -6,7 +6,7 @@ public partial class SleepReminder : Panel
 {
 	[Export]
 	RichTextLabel label;
-	[Export]
+	[Export]	
 	AnimationPlayer bigify;
 	Window parent;
 

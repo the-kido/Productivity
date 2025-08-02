@@ -24,7 +24,6 @@ public partial class TestCopyable : MarginContainer
 	public void SetPivot()
 	{
 		label.PivotOffset = new(label.Size.X / 2, label.Size.Y / 2);
-		GD.Print(label.Size);
 	}
 
 	const float SELECTION_TIME = 0.5f;
@@ -50,7 +49,7 @@ public partial class TestCopyable : MarginContainer
 			inputSimulator.Keyboard.ModifiedKeyStroke(WindowsInput.Native.VirtualKeyCode.CONTROL, WindowsInput.Native.VirtualKeyCode.VK_V);
 		}
 		else {
-			bar.Scale = new((float) timer, 1);
+			bar.Scale = new((float) (timer*timer*timer*timer), 1);
 			getRotation();
 		}
 	}

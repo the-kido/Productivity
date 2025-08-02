@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Godot;
 
 public partial class Pomodoro : Panel
@@ -12,6 +13,8 @@ public partial class Pomodoro : Panel
 	AnimationPlayer openCloseAnimations, shrinkExpandAnimations, fade;
 	[Export]
 	HSlider progress;
+	[Export]
+	DeleteThis deleteThis;
 
 
 	const string PLAY_TEXT = "▶";
@@ -22,16 +25,28 @@ public partial class Pomodoro : Panel
 
 	int workTimeMinutes, breakTimeMinutes;
 
-	public void Open(int workTime, int breakTime) {
+	public async void Open(int workTime, int breakTime) {
+		Window parentWindow = GetParent() as Window;
+		
+		parentWindow.RequestAttention();
+		parentWindow.GrabFocus();
+
 		progress.Value = 0f;
 		
+		parentWindow.Popup();
 		openCloseAnimations.Play("open");
 		
 		workTimeMinutes = workTime;
 		breakTimeMinutes = breakTime;
 		
 		UpdateEndTime();
+		
+		// One of these guys are redundant but also why should I care.
+		// await Task.Delay(1000);
+		// CallDeferred(nameof(ApplyAcrylic));		
 	}
+	
+	private void ApplyAcrylic() => deleteThis.Apply();
 
 	bool paused = false;
 	bool inWorkPeriod = true; // We will start the thing during the work period.
@@ -107,5 +122,6 @@ public partial class Pomodoro : Panel
 		}
 
 		time.Text = Utils.TimerText(0, timeLeftSeconds / 60, timeLeftSeconds % 60);
+		// (GetParent() as Window).Title = Utils.TimerText(0, timeLeftSeconds / 60, timeLeftSeconds % 60);
 	}
 }

@@ -41,7 +41,7 @@ public partial class HeyNoYoutube : Control
 		down = new(x/2 - windowX / 2, y - 30 - windowY);
 	}
 
-	ChromeTabDetector detector;
+    readonly ChromeTabDetector detector = ChromeTabDetector.instance;
 	
 	private void Associate(Button button, Vector2 direction) {
 		button.Pressed += () => {
@@ -74,7 +74,8 @@ public partial class HeyNoYoutube : Control
 		Associate(btnUp, up);
 		Associate(btnDown, down);
 
-		detector = new();
+		// detector = new();
+		GD.Print(detector.OnYoutube);
 		ProcessMode = ProcessModeEnum.Disabled;
 		await Task.Delay(10);
 		ProcessMode = ProcessModeEnum.Always;
